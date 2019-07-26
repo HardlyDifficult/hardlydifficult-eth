@@ -1,5 +1,5 @@
 const daiJson = require("./dai.json");
-const { constants } = require("../helpers");
+const constants = require("../constants");
 
 module.exports = {
   deploy: async (web3, owner) => {

@@ -1,4 +1,4 @@
-const testHelpers = require("../..");
+const { tokens } = require("../..");
 
 contract("tokens / USDC", accounts => {
   const proxyOwner = accounts[9]; // must be different from the tokenOwner
@@ -6,7 +6,7 @@ contract("tokens / USDC", accounts => {
   let token;
 
   before(async () => {
-    token = await testHelpers.tokens.usdc.deploy(web3, proxyOwner, tokenOwner);
+    token = await tokens.usdc.deploy(web3, proxyOwner, tokenOwner);
   });
 
   it("Can mint from owner account", async () => {
