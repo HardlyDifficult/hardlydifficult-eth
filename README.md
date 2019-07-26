@@ -15,7 +15,7 @@ Using these will give you an accurate representation of gas costs, error conditi
 
 Usage example:
 
-```
+```javascript
 const testHelpers = require("hardlydifficult-test-helpers");
 const daiOwner = accounts[0];
 const dai = await testHelpers.tokens.dai.deploy(web3, proxyOwner, daiOwner);
@@ -33,8 +33,35 @@ This helper will deploy the Unlock contract for testing using the bytecode from 
 
 Usage example:
 
-```
+```javascript
 const testHelpers = require("hardlydifficult-test-helpers");
+const unlockProtocol = await testHelpers.protocols.unlock.deploy(
+  web3,
+  unlockOwner
+);
 
-TODO
+const tx = await unlockProtocol.methods
+  .createLock(
+    60 * 60 * 24, // expirationDuration (in seconds) of 1 day
+    web3.utils.padLeft(0, 40), // tokenAddress for ETH
+    web3.utils.toWei("0.01", "ether"), // keyPrice
+    100, // maxNumberOfKeys
+    "Test Lock" // lockName
+  )
+  .send({
+    from: accounts[1],
+    gas: constants.MAX_GAS
+  });
+const lock = testHelpers.protocols.unlock.getLock(
+  tx.events.NewLock.returnValues.newLockAddress
+);
+
+await lock.methods.purchaseFor(accounts[2]).send({
+  from: accounts[2],
+  value: await lock.methods.keyPrice().call(),
+  gas: constants.MAX_GAS
+});
+
+const hasKey = await lock.methods.getHasValidKey(accounts[2]).call();
+assert.equal(hasKey, true);
 ```
