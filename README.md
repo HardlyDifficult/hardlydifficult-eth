@@ -38,7 +38,7 @@ This helper will deploy the Unlock contract for testing using the bytecode from 
 Usage example:
 
 ```javascript
-const { constants, protocols } = require("../..");
+const { constants, protocols } = require("hardlydifficult-test-helpers");
 
 const unlockOwner = accounts[0];
 let unlockProtocol;
