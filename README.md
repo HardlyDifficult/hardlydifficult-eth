@@ -18,11 +18,11 @@ Usage example:
 ```javascript
 const { tokens } = require("hardlydifficult-test-helpers");
 const daiOwner = accounts[0];
+// Deploy a DAI contract for testingerface
+const dai = await tokens.dai.deploy(web3, daiOwn
 
-// Deploy a DAI contract for testing
-const dai = await tokens.dai.deploy(web3, daiOwner);
+// Mint tokens, then interact via the ERC-20 inter);
 
-// Mint tokens, then interact via the ERC-20 interface
 await dai.methods.mint(accounts[1], 100).send({ from: daiOwner });
 ```
 
