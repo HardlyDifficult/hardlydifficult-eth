@@ -16,7 +16,6 @@ jobs:
           paths: .
 
   publish:
-    context: docker-hub-credentials
     docker:
       - image: circleci/node:10
     working_directory: ~/repo
