@@ -1,5 +1,5 @@
 const usdcJson = require("./usdc.json");
-const { constants } = require("../helpers");
+const constants = require("../constants");
 
 module.exports = {
   deploy: async (web3, proxyOwner, tokenOwner) => {

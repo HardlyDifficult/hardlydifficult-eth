@@ -1,15 +1,11 @@
-const testHelpers = require("../..");
-const constants = require("../../src/helpers/constants");
+const { constants, protocols } = require("../..");
 
 contract("protocols / unlock", accounts => {
   const unlockOwner = accounts[0];
   let unlockProtocol;
 
   before(async () => {
-    unlockProtocol = await testHelpers.protocols.unlock.deploy(
-      web3,
-      unlockOwner
-    );
+    unlockProtocol = await protocols.unlock.deploy(web3, unlockOwner);
   });
 
   it("Can create a lock and buy a key", async () => {
@@ -26,7 +22,7 @@ contract("protocols / unlock", accounts => {
         gas: constants.MAX_GAS
       });
 
-    const lock = testHelpers.protocols.unlock.getLock(
+    const lock = protocols.unlock.getLock(
       tx.events.NewLock.returnValues.newLockAddress
     );
 

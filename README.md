@@ -13,12 +13,16 @@ Using these will give you an accurate representation of gas costs, error conditi
  - DAI: ERC-20 with 18 decimals and a mint function
  - USDC: an upgradable ERC-20 with 6 decimals and mint and blacklist functions
 
-Usage example:
+Usage example: 
 
 ```javascript
-const testHelpers = require("hardlydifficult-test-helpers");
+const { tokens } = require("hardlydifficult-test-helpers");
 const daiOwner = accounts[0];
-const dai = await testHelpers.tokens.dai.deploy(web3, proxyOwner, daiOwner);
+
+// Deploy a DAI contract for testing
+const dai = await tokens.dai.deploy(web3, proxyOwner, daiOwner);
+
+// Mint tokens, then interact via the ERC-20 interface
 await dai.methods.mint(accounts[1], 100).send({ from: daiOwner });
 ```
 
@@ -34,13 +38,12 @@ This helper will deploy the Unlock contract for testing using the bytecode from 
 Usage example:
 
 ```javascript
-const testHelpers = require("hardlydifficult-test-helpers");
+const { constants, protocols } = require("../..");
 
-const unlockProtocol = await testHelpers.protocols.unlock.deploy(
-  web3,
-  unlockOwner
-);
+const unlockOwner = accounts[0];
+let unlockProtocol;
 
+unlockProtocol = await protocols.unlock.deploy(web3, unlockOwner);
 const tx = await unlockProtocol.methods
   .createLock(
     60 * 60 * 24, // expirationDuration (in seconds) of 1 day
@@ -53,7 +56,8 @@ const tx = await unlockProtocol.methods
     from: accounts[1],
     gas: constants.MAX_GAS
   });
-const lock = testHelpers.protocols.unlock.getLock(
+
+const lock = protocols.unlock.getLock(
   tx.events.NewLock.returnValues.newLockAddress
 );
 

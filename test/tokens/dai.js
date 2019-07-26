@@ -1,11 +1,11 @@
-const testHelpers = require("../..");
+const { tokens } = require("../..");
 
 contract("tokens / DAI", accounts => {
   const tokenOwner = accounts[0];
   let token;
 
   before(async () => {
-    token = await testHelpers.tokens.dai.deploy(web3, tokenOwner);
+    token = await tokens.dai.deploy(web3, tokenOwner);
   });
 
   it("Can mint from owner account", async () => {

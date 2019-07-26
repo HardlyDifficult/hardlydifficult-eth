@@ -1,6 +1,6 @@
 const unlockAbi = require("unlock-abi-1-1");
 const unlockJson = require("./unlock.json");
-const { constants } = require("../helpers");
+const constants = require("../constants");
 
 module.exports = {
   deploy: async (web3, owner) => {
@@ -9,7 +9,6 @@ module.exports = {
     // Deploy proxyAdmin
     // proxy.changeAdmin(address proxyAdmin._address)
     // proxy.initialize(address _owner)
-
     const unlockContract = await new web3.eth.Contract(unlockAbi.Unlock.abi)
       .deploy({
         data: unlockAbi.Unlock.bytecode
