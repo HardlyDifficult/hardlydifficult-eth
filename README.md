@@ -35,6 +35,7 @@ Usage example:
 
 ```javascript
 const testHelpers = require("hardlydifficult-test-helpers");
+
 const unlockProtocol = await testHelpers.protocols.unlock.deploy(
   web3,
   unlockOwner
