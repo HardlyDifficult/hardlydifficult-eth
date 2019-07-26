@@ -36,13 +36,13 @@
     "eslint-plugin-json": "1.4.0",
     "eslint-plugin-markdown": "1.0.0",
     "eslint-plugin-prettier": "3.1.0",
-    "eth-gas-reporter": "^0.2.6",
+    "eth-gas-reporter": "0.2.6",
     "openzeppelin-solidity": "2.3.0",
     "openzeppelin-test-helpers": "0.4.0",
     "prettier": "1.18.2",
     "solium": "1.2.4",
     "truffle": "5.0.28",
     "truffle-assertions": "0.9.1",
-    "unlock-abi-1-1": "^1.0.0"
+    "unlock-abi-1-1": "1.0.0"
   }
 }
