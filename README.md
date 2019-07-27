@@ -42,12 +42,10 @@ Usage example:
 
 ```javascript
 const { constants, protocols } = require("hardlydifficult-test-helpers");
-
 const unlockOwner = accounts[0];
-let unlockProtocol;
 
 // Deploy the protocol
-unlockProtocol = await protocols.unlock.deploy(web3, unlockOwner);
+const unlockProtocol = await protocols.unlock.deploy(web3, unlockOwner);
 
 // Create a new Lock
 const tx = await unlockProtocol.methods
