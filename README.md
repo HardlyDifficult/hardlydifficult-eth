@@ -18,11 +18,11 @@ Usage example:
 ```javascript
 const { tokens } = require("hardlydifficult-test-helpers");
 const daiOwner = accounts[0];
-// Deploy a DAI contract for testingerface
+
+// Deploy a DAI contract for testing
 const dai = await tokens.dai.deploy(web3, daiOwner);
 
-// Mint tokens, then interact via the ERC-20 inter);
-
+// Mint tokens
 await dai.methods.mint(accounts[1], 100).send({ from: daiOwner });
 ```
 
@@ -44,7 +44,10 @@ const { constants, protocols } = require("hardlydifficult-test-helpers");
 const unlockOwner = accounts[0];
 let unlockProtocol;
 
+// Deploy the protocol
 unlockProtocol = await protocols.unlock.deploy(web3, unlockOwner);
+
+// Create a new Lock
 const tx = await unlockProtocol.methods
   .createLock(
     60 * 60 * 24, // expirationDuration (in seconds) of 1 day
@@ -57,17 +60,18 @@ const tx = await unlockProtocol.methods
     from: accounts[1],
     gas: constants.MAX_GAS
   });
-
 const lock = protocols.unlock.getLock(
   tx.events.NewLock.returnValues.newLockAddress
 );
 
+// Buy a Key to that Lock
 await lock.methods.purchaseFor(accounts[2]).send({
   from: accounts[2],
   value: await lock.methods.keyPrice().call(),
   gas: constants.MAX_GAS
 });
 
+// Confirm
 const hasKey = await lock.methods.getHasValidKey(accounts[2]).call();
 assert.equal(hasKey, true);
 ```
