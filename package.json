@@ -44,7 +44,6 @@
     "eth-gas-reporter": "0.2.6",
     "prettier": "1.18.2",
     "solium": "1.2.4",
-    "truffle": "5.0.29",
-    "truffle-assertions": "0.9.1"
+    "truffle": "5.0.29"
   }
 }
