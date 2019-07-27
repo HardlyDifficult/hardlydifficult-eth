@@ -43,7 +43,7 @@
     "openzeppelin-test-helpers": "0.4.0",
     "prettier": "1.18.2",
     "solium": "1.2.4",
-    "truffle": "5.0.28",
+    "truffle": "5.0.29",
     "truffle-assertions": "0.9.1",
     "unlock-abi-1-1": "1.0.0"
   }
