@@ -40,7 +40,7 @@
     "eslint-plugin-prettier": "3.1.0",
     "eth-gas-reporter": "0.2.6",
     "openzeppelin-solidity": "2.3.0",
-    "openzeppelin-test-helpers": "0.4.0",
+    "openzeppelin-test-helpers": "0.4.1",
     "prettier": "1.18.2",
     "solium": "1.2.4",
     "truffle": "5.0.29",
