@@ -28,9 +28,6 @@ const dai = await tokens.dai.deploy(web3, daiOwner);
 await dai.methods.mint(accounts[1], 100).send({ from: daiOwner });
 ```
 
-You can use these while testing your smart-contracts by deploying in your Truffle test and then interacting with the tokens using the ERC-20 interface from [OpenZeppelin-Solidity](https://www.npmjs.com/package/openzeppelin-solidity).
-
-
 ### Protocols 
 
 #### Unlock-Protocol
