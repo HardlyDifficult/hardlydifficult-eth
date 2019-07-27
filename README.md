@@ -28,7 +28,10 @@ await dai.methods.mint(accounts[1], 100).send({ from: daiOwner });
 
 You can use these while testing your smart-contracts by deploying in your Truffle test and then interacting with the tokens using the ERC-20 interface from [OpenZeppelin-Solidity](https://www.npmjs.com/package/openzeppelin-solidity).
 
-## Unlock-Protocol
+
+## Protocols 
+
+### Unlock-Protocol
 
 [unlock-protocol.com](https://unlock-protocol.com):
 > Unlock is a membership protocol, built on a blockchain. It enables creators to monetize their content or software without relying on a middleman. It lets consumers manage all of their subscriptions in a consistent way, as well as earn discounts when they share the best content and applications they use.
@@ -69,4 +72,48 @@ await lock.methods.purchaseFor(accounts[2]).send({
 
 const hasKey = await lock.methods.getHasValidKey(accounts[2]).call();
 assert.equal(hasKey, true);
+```
+
+### Fairmint continous organizations (not yet launched)
+
+[Fairmint.co](https://fairmint.co):
+
+> The continuous financing model enables organizations to finance themselves in a permission-less and non-dilutive way by continuously issuing tokens called FAIR while aligning stakeholders to their financial success.
+
+Usage example:
+
+```javascript
+const { constants, protocols } = require("../..");
+
+const beneficiary = accounts[0];
+const control = accounts[1];
+const feeCollector = accounts[2];
+
+const [dat, fair] = await protocols.cOrg.deploy(web3, {
+  initReserve: "42000000000000000000",
+  currency: web3.utils.padLeft(0, 40),
+  initGoal: "0",
+  buySlopeNum: "1",
+  buySlopeDen: "100000000000000000000",
+  investmentReserveBasisPoints: "1000",
+  revenueCommitementBasisPoints: "1000",
+  feeBasisPoints: "0",
+  burnThresholdBasisPoints: "0",
+  minInvestment: "1",
+  openUntilAtLeast: "0",
+  name: "FAIR token",
+  symbol: "FAIR",
+  control,
+  beneficiary,
+  feeCollector
+});
+
+await dat.methods.buy(accounts[3], "10000000000000", 1).send({
+  from: accounts[3],
+  value: "10000000000000",
+  gas: constants.MAX_GAS
+});
+
+const balance = await fair.methods.balanceOf(accounts[3]).call();
+assert.equal(balance.toString(), "23809500000000");
 ```

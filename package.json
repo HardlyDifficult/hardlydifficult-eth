@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-test-helpers",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Test helpers for Ethereum.",
   "scripts": {
     "test": "truffle test",
@@ -30,7 +30,9 @@
   "dependencies": {
     "babel-eslint": "10.0.2",
     "bignumber.js": "9.0.0",
+    "c-org-abi": "^0.1.0",
     "chai": "4.2.0",
+    "erc1820": "0.0.2",
     "eslint": "6.1.0",
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-json": "1.4.0",
