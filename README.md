@@ -71,7 +71,7 @@ await lock.methods.purchaseFor(accounts[2]).send({
   gas: constants.MAX_GAS
 });
 
-// Confirm
+// And confirm
 const hasKey = await lock.methods.getHasValidKey(accounts[2]).call();
 assert.equal(hasKey, true);
 ```
@@ -87,35 +87,19 @@ Usage example:
 ```javascript
 const { constants, protocols } = require("hardlydifficult-test-helpers");
 
-const beneficiary = accounts[0];
-const control = accounts[1];
-const feeCollector = accounts[2];
-
+// Deploy a new c-org (see test for complete list of call options)
 const [dat, fair] = await protocols.cOrg.deploy(web3, {
-  initReserve: "42000000000000000000",
-  currency: web3.utils.padLeft(0, 40),
-  initGoal: "0",
-  buySlopeNum: "1",
-  buySlopeDen: "100000000000000000000",
-  investmentReserveBasisPoints: "1000",
-  revenueCommitementBasisPoints: "1000",
-  feeBasisPoints: "0",
-  burnThresholdBasisPoints: "0",
-  minInvestment: "1",
-  openUntilAtLeast: "0",
-  name: "FAIR token",
-  symbol: "FAIR",
-  control,
-  beneficiary,
-  feeCollector
+  control: accounts[0]
 });
 
+// Test buying FAIR tokens
 await dat.methods.buy(accounts[3], "10000000000000", 1).send({
   from: accounts[3],
   value: "10000000000000",
   gas: constants.MAX_GAS
 });
 
+// And confirm
 const balance = await fair.methods.balanceOf(accounts[3]).call();
 assert.equal(balance.toString(), "23809500000000");
 ```
