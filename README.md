@@ -20,7 +20,7 @@ const { tokens } = require("hardlydifficult-test-helpers");
 const daiOwner = accounts[0];
 
 // Deploy a DAI contract for testing
-const dai = await tokens.dai.deploy(web3, proxyOwner, daiOwner);
+const dai = await tokens.dai.deploy(web3, daiOwner);
 
 // Mint tokens, then interact via the ERC-20 interface
 await dai.methods.mint(accounts[1], 100).send({ from: daiOwner });
