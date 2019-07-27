@@ -2,13 +2,15 @@
 
 Test helpers for Ethereum.
 
+## Test Contracts
+
 These helpers which will deploy contracts for testing using the exact bytecode and configuration as they have on mainnet, with the exception that you are the owner to enable privileged actions such as `mint`.
 
 You can deploy these to Ganache or any network for testing. The scripts simply use your current web3 configuration.
 
 Using these will give you an accurate representation of gas costs, error conditions, and any oddities to their specific implementation.
 
-## Tokens
+### Tokens
 
  - DAI: ERC-20 with 18 decimals and a mint function
  - USDC: an upgradable ERC-20 with 6 decimals and mint and blacklist functions
@@ -29,9 +31,9 @@ await dai.methods.mint(accounts[1], 100).send({ from: daiOwner });
 You can use these while testing your smart-contracts by deploying in your Truffle test and then interacting with the tokens using the ERC-20 interface from [OpenZeppelin-Solidity](https://www.npmjs.com/package/openzeppelin-solidity).
 
 
-## Protocols 
+### Protocols 
 
-### Unlock-Protocol
+#### Unlock-Protocol
 
 [unlock-protocol.com](https://unlock-protocol.com):
 > Unlock is a membership protocol, built on a blockchain. It enables creators to monetize their content or software without relying on a middleman. It lets consumers manage all of their subscriptions in a consistent way, as well as earn discounts when they share the best content and applications they use.
@@ -76,7 +78,7 @@ const hasKey = await lock.methods.getHasValidKey(accounts[2]).call();
 assert.equal(hasKey, true);
 ```
 
-### Fairmint continous organizations (not yet launched)
+#### Fairmint continous organizations (not yet launched)
 
 [Fairmint.co](https://fairmint.co):
 
@@ -120,7 +122,7 @@ const balance = await fair.methods.balanceOf(accounts[3]).call();
 assert.equal(balance.toString(), "23809500000000");
 ```
 
-### Uniswap DEX
+#### Uniswap DEX
 
 [docs.Uniswap.io](https://docs.uniswap.io/):
 
