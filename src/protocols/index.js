@@ -1,3 +1,5 @@
 module.exports = {
-  unlock: require("./unlock")
+  cOrg: require("./c-org"),
+  unlock: require("./unlock"),
+  uniswap: require("./uniswap")
 };

@@ -7,7 +7,6 @@ module.exports = {
     // Deploy contract
     // Deploy proxy(address _implementation)
     // Deploy proxyAdmin
-    // proxy.changeAdmin(address proxyAdmin._address)
     // proxy.initialize(address _owner)
     const unlockContract = await new web3.eth.Contract(unlockAbi.Unlock.abi)
       .deploy({
