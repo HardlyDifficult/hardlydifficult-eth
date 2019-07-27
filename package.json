@@ -30,7 +30,7 @@
   "dependencies": {
     "babel-eslint": "10.0.2",
     "bignumber.js": "9.0.0",
-    "c-org-abi": "^0.1.0",
+    "c-org-abi": "0.1.0",
     "chai": "4.2.0",
     "erc1820": "0.0.2",
     "eslint": "6.1.0",
