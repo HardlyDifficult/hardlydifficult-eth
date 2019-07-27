@@ -28,23 +28,23 @@
   },
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-test-helpers#readme",
   "dependencies": {
-    "babel-eslint": "10.0.2",
     "bignumber.js": "9.0.0",
     "c-org-abi": "0.1.0",
-    "chai": "4.2.0",
     "erc1820": "0.0.2",
+    "unlock-abi-1-1": "1.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "10.0.2",
+    "chai": "4.2.0",
     "eslint": "6.1.0",
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-json": "1.4.0",
     "eslint-plugin-markdown": "1.0.0",
     "eslint-plugin-prettier": "3.1.0",
     "eth-gas-reporter": "0.2.6",
-    "openzeppelin-solidity": "2.3.0",
-    "openzeppelin-test-helpers": "0.4.1",
     "prettier": "1.18.2",
     "solium": "1.2.4",
     "truffle": "5.0.29",
-    "truffle-assertions": "0.9.1",
-    "unlock-abi-1-1": "1.0.0"
+    "truffle-assertions": "0.9.1"
   }
 }
