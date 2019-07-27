@@ -67,10 +67,6 @@ await lock.methods.purchaseFor(accounts[2]).send({
   value: await lock.methods.keyPrice().call(),
   gas: constants.MAX_GAS
 });
-
-// And confirm
-const hasKey = await lock.methods.getHasValidKey(accounts[2]).call();
-assert.equal(hasKey, true);
 ```
 
 #### Fairmint continous organizations (not yet launched)
@@ -89,16 +85,12 @@ const [dat, fair] = await protocols.cOrg.deploy(web3, {
   control: accounts[0]
 });
 
-// Test buying FAIR tokens
+// Buy FAIR tokens
 await dat.methods.buy(accounts[3], "10000000000000", 1).send({
   from: accounts[3],
   value: "10000000000000",
   gas: constants.MAX_GAS
 });
-
-// And confirm
-const balance = await fair.methods.balanceOf(accounts[3]).call();
-assert.equal(balance.toString(), "23809500000000");
 ```
 
 #### Uniswap DEX
