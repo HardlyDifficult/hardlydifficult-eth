@@ -1,3 +1,4 @@
+const truffleContract = require("truffle-contract");
 const usdcJson = require("./usdc.json");
 const constants = require("../constants");
 
@@ -46,6 +47,12 @@ module.exports = {
     await token.methods
       .configureMinter(tokenOwner, -1)
       .send({ from: tokenOwner });
-    return token;
+
+    const contract = truffleContract({
+      abi: usdcJson.abi
+    });
+    contract.setProvider(web3.currentProvider);
+
+    return await contract.at(token._address);
   }
 };

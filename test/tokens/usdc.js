@@ -10,8 +10,8 @@ contract("tokens / USDC", accounts => {
   });
 
   it("Can mint from owner account", async () => {
-    await token.methods.mint(accounts[1], 100).send({ from: tokenOwner });
-    const balance = await token.methods.balanceOf(accounts[1]).call();
+    await token.mint(accounts[1], 100, { from: tokenOwner });
+    const balance = await token.balanceOf(accounts[1]);
     assert.equal(balance.toString(), 100);
   });
 });

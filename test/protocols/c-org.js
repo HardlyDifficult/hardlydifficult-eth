@@ -1,4 +1,4 @@
-const { constants, protocols } = require("../..");
+const { protocols } = require("../..");
 
 contract("protocols / c-org", accounts => {
   const beneficiary = accounts[0];
@@ -28,13 +28,12 @@ contract("protocols / c-org", accounts => {
   });
 
   it("Can buy fair", async () => {
-    await dat.methods.buy(accounts[3], "10000000000000", 1).send({
+    await dat.buy(accounts[3], "10000000000000", 1, {
       from: accounts[3],
-      value: "10000000000000",
-      gas: constants.MAX_GAS
+      value: "10000000000000"
     });
 
-    const balance = await fair.methods.balanceOf(accounts[3]).call();
+    const balance = await fair.balanceOf(accounts[3]);
     assert.equal(balance.toString(), "23809500000000");
   });
 });

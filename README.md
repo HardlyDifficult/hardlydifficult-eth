@@ -1,4 +1,4 @@
-# hardlydifficult-test-helpers
+# HardlyDifficult Truffle Test Helpers
 
 Test helpers for Ethereum.
 
@@ -25,7 +25,7 @@ const daiOwner = accounts[0];
 const dai = await tokens.dai.deploy(web3, daiOwner);
 
 // Mint tokens
-await dai.methods.mint(accounts[1], 100).send({ from: daiOwner });
+await dai.mint(accounts[1], 100, { from: daiOwner });
 ```
 
 ### Protocols 
@@ -38,34 +38,31 @@ await dai.methods.mint(accounts[1], 100).send({ from: daiOwner });
 Usage example:
 
 ```javascript
-const { constants, protocols } = require("hardlydifficult-test-helpers");
+const { protocols } = require("hardlydifficult-test-helpers");
 const unlockOwner = accounts[0];
 
 // Deploy the protocol
 const unlockProtocol = await protocols.unlock.deploy(web3, unlockOwner);
 
 // Create a new Lock
-const tx = await unlockProtocol.methods
-  .createLock(
-    60 * 60 * 24, // expirationDuration (in seconds) of 1 day
-    web3.utils.padLeft(0, 40), // tokenAddress for ETH
-    web3.utils.toWei("0.01", "ether"), // keyPrice
-    100, // maxNumberOfKeys
-    "Test Lock" // lockName
-  )
-  .send({
-    from: accounts[1],
-    gas: constants.MAX_GAS
+const tx = await unlockProtocol.createLock(
+  60 * 60 * 24, // expirationDuration (in seconds) of 1 day
+  web3.utils.padLeft(0, 40), // tokenAddress for ETH
+  web3.utils.toWei("0.01", "ether"), // keyPrice
+  100, // maxNumberOfKeys
+  "Test Lock", // lockName
+  {
+    from: accounts[1]
   });
-const lock = protocols.unlock.getLock(
-  tx.events.NewLock.returnValues.newLockAddress
+const lock = await protocols.unlock.getLock(
+  web3,
+  tx.logs[1].args.newLockAddress
 );
 
 // Buy a Key to that Lock
-await lock.methods.purchaseFor(accounts[2]).send({
+await lock.purchaseFor(accounts[2], {
   from: accounts[2],
-  value: await lock.methods.keyPrice().call(),
-  gas: constants.MAX_GAS
+  value: await lock.keyPrice()
 });
 ```
 
@@ -78,7 +75,7 @@ await lock.methods.purchaseFor(accounts[2]).send({
 Usage example:
 
 ```javascript
-const { constants, protocols } = require("hardlydifficult-test-helpers");
+const { protocols } = require("hardlydifficult-test-helpers");
 
 // Deploy a new c-org (see test for complete list of call options)
 const [dat, fair] = await protocols.cOrg.deploy(web3, {
@@ -86,10 +83,9 @@ const [dat, fair] = await protocols.cOrg.deploy(web3, {
 });
 
 // Buy FAIR tokens
-await dat.methods.buy(accounts[3], "10000000000000", 1).send({
+await dat.buy(accounts[3], "10000000000000", 1, {
   from: accounts[3],
-  value: "10000000000000",
-  gas: constants.MAX_GAS
+  value: "10000000000000"
 });
 ```
 
@@ -102,7 +98,7 @@ await dat.methods.buy(accounts[3], "10000000000000", 1).send({
 Usage example:
 
 ```javascript
-const { constants, tokens, protocols } = require("hardlydifficult-test-helpers");
+const { tokens, protocols } = require("hardlydifficult-test-helpers");
 const protocolOwner = accounts[0];
 
 // Deploy uniswap
@@ -111,29 +107,25 @@ const uniswap = await protocols.uniswap.deploy(web3, protocolOwner);
 const dai = await tokens.dai.deploy(web3, protocolOwner);
 
 // Create an exchange
-const tx = await uniswap.methods
-  .createExchange(dai._address)
-  .send({ from: protocolOwner, gas: constants.MAX_GAS });
+const tx = await uniswap.createExchange(dai.address, { from: protocolOwner });
 const exchange = protocols.uniswap.getExchange(
-  tx.events.NewExchange.returnValues.exchange
+  tx.logs[0].args.exchange
 );
 
 // Mint some tokens for testing and approve the exchange
-await dai.methods
-  .mint(protocolOwner, "10000000000")
-  .send({ from: protocolOwner });
-await dai.methods
-  .approve(exchange._address, -1)
-  .send({ from: protocolOwner });
+await dai.mint(protocolOwner, "10000000000", { from: protocolOwner });
+await dai.approve(exchange.address, -1, { from: protocolOwner });
 
 // Add liquidity to the exchange
-await exchange.methods
-  .addLiquidity("1", "10000000000", Math.round(Date.now() / 1000) + 60)
-  .send({
+await exchange.addLiquidity(
+  "1",
+  "10000000000",
+  Math.round(Date.now() / 1000) + 60,
+  {
     from: protocolOwner,
-    value: "10000000000",
-    gas: constants.MAX_GAS
-  });
+    value: "10000000000"
+  }
+);
 
 // ...now you can trade!
 ```

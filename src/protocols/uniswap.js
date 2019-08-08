@@ -1,37 +1,38 @@
+const truffleContract = require("truffle-contract");
 const uniswapJson = require("./uniswap.json");
-const constants = require("../constants");
 
 module.exports = {
   deploy: async (web3, owner) => {
     // Deploy exchange template
     // Deploy factory
     // initializeFactory(template: address)
-    const exchangeTemplate = await new web3.eth.Contract(
-      uniswapJson.exchange.abi
-    )
-      .deploy({
-        data: uniswapJson.exchange.bytecode
-      })
-      .send({
-        from: owner,
-        gas: constants.MAX_GAS
-      });
-    const factory = await new web3.eth.Contract(uniswapJson.abi)
-      .deploy({
-        data: uniswapJson.bytecode
-      })
-      .send({
-        from: owner,
-        gas: constants.MAX_GAS
-      });
-    await factory.methods.initializeFactory(exchangeTemplate._address).send({
-      from: owner,
-      gas: constants.MAX_GAS
+    const exchangeTemplateContract = truffleContract({
+      abi: uniswapJson.exchange.abi,
+      bytecode: uniswapJson.exchange.bytecode
+    });
+    exchangeTemplateContract.setProvider(web3.currentProvider);
+    const exchangeTemplate = await exchangeTemplateContract.new({
+      from: owner
+    });
+
+    const contract = truffleContract({
+      abi: uniswapJson.abi,
+      bytecode: uniswapJson.bytecode
+    });
+    contract.setProvider(web3.currentProvider);
+    const factory = await contract.new({ from: owner });
+    await factory.initializeFactory(exchangeTemplate.address, {
+      from: owner
     });
 
     return factory;
   },
-  getExchange: exchangeAddress => {
-    return new web3.eth.Contract(uniswapJson.exchange.abi, exchangeAddress);
+  getExchange: async (web3, exchangeAddress) => {
+    const exchangeTemplateContract = truffleContract({
+      abi: uniswapJson.exchange.abi,
+      bytecode: uniswapJson.exchange.bytecode
+    });
+    exchangeTemplateContract.setProvider(web3.currentProvider);
+    return await exchangeTemplateContract.at(exchangeAddress);
   }
 };
