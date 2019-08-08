@@ -1,8 +1,21 @@
+const truffleContract = require("truffle-contract");
 const cOrgAbi = require("c-org-abi/abi.json");
 const cOrgBytecode = require("c-org-abi/bytecode.json");
 const cOrgStaticBytecode = require("c-org-abi/static_bytecode.json");
 const constants = require("../constants");
 const erc1820 = require("erc1820");
+
+async function getDat(web3, datAddress) {
+  const contract = truffleContract({ abi: cOrgAbi.dat });
+  contract.setProvider(web3.currentProvider);
+  return await contract.at(datAddress);
+}
+
+async function getFair(web3, fairAddress) {
+  const contract = truffleContract({ abi: cOrgAbi.fair });
+  contract.setProvider(web3.currentProvider);
+  return await contract.at(fairAddress);
+}
 
 module.exports = {
   deploy: async (web3, options) => {
@@ -65,7 +78,7 @@ module.exports = {
         from: callOptions.control,
         gas: constants.MAX_GAS
       });
-    const fair = new web3.eth.Contract(cOrgAbi.fair, fairProxy._address);
+    const fair = await getFair(web3, fairProxy._address);
 
     const bigDiv = await new web3.eth.Contract(cOrgAbi.bigDiv)
       .deploy({
@@ -93,21 +106,20 @@ module.exports = {
         from: callOptions.control,
         gas: constants.MAX_GAS
       });
-    const dat = new web3.eth.Contract(cOrgAbi.dat, datProxy._address);
+    const dat = await getDat(web3, datProxy._address);
 
-    await dat.methods
-      .initialize(
-        bigDiv._address,
-        fair._address,
-        callOptions.initReserve,
-        callOptions.currency,
-        callOptions.initGoal,
-        callOptions.buySlopeNum,
-        callOptions.buySlopeDen,
-        callOptions.investmentReserveBasisPoints,
-        callOptions.revenueCommitementBasisPoints
-      )
-      .send({ from: callOptions.control, gas: constants.MAX_GAS });
+    await dat.initialize(
+      bigDiv._address,
+      fair.address,
+      callOptions.initReserve,
+      callOptions.currency,
+      callOptions.initGoal,
+      callOptions.buySlopeNum,
+      callOptions.buySlopeDen,
+      callOptions.investmentReserveBasisPoints,
+      callOptions.revenueCommitementBasisPoints,
+      { from: callOptions.control }
+    );
 
     const erc1404 = await new web3.eth.Contract([])
       .deploy({
@@ -118,30 +130,24 @@ module.exports = {
         gas: constants.MAX_GAS
       });
 
-    await dat.methods
-      .updateConfig(
-        erc1404._address,
-        callOptions.beneficiary,
-        callOptions.control,
-        callOptions.feeCollector,
-        callOptions.feeBasisPoints,
-        callOptions.burnThresholdBasisPoints,
-        callOptions.minInvestment,
-        callOptions.openUntilAtLeast,
-        callOptions.name,
-        callOptions.symbol
-      )
-      .send({
-        from: callOptions.control,
-        gas: constants.MAX_GAS
-      });
+    await dat.updateConfig(
+      erc1404._address,
+      callOptions.beneficiary,
+      callOptions.control,
+      callOptions.feeCollector,
+      callOptions.feeBasisPoints,
+      callOptions.burnThresholdBasisPoints,
+      callOptions.minInvestment,
+      callOptions.openUntilAtLeast,
+      callOptions.name,
+      callOptions.symbol,
+      {
+        from: callOptions.control
+      }
+    );
 
     return [dat, fair];
   },
-  getDat: datAddress => {
-    return new web3.eth.Contract(cOrgAbi.dat, datAddress);
-  },
-  getFair: fairAddress => {
-    return new web3.eth.Contract(cOrgAbi.fair, fairAddress);
-  }
+  getDat,
+  getFair
 };

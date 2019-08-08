@@ -1,16 +1,13 @@
+const truffleContract = require("truffle-contract");
 const daiJson = require("./dai.json");
-const constants = require("../constants");
 
 module.exports = {
   deploy: async (web3, owner) => {
-    return await new web3.eth.Contract(daiJson.abi)
-      .deploy({
-        data: daiJson.bytecode,
-        arguments: daiJson.args
-      })
-      .send({
-        from: owner,
-        gas: constants.MAX_GAS
-      });
+    const contract = truffleContract({
+      abi: daiJson.abi,
+      bytecode: daiJson.bytecode
+    });
+    contract.setProvider(web3.currentProvider);
+    return await contract.new(daiJson.args[0], { from: owner });
   }
 };

@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-test-helpers",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Test helpers for Ethereum.",
   "scripts": {
     "test": "truffle test",
@@ -30,6 +30,8 @@
   "dependencies": {
     "c-org-abi": "0.2.0",
     "erc1820": "0.0.2",
+    "truffle": "5.0.30",
+    "truffle-contract": "4.0.27",
     "unlock-abi-1-1": "1.0.0"
   },
   "devDependencies": {
@@ -42,7 +44,6 @@
     "eslint-plugin-prettier": "3.1.0",
     "eth-gas-reporter": "0.2.9",
     "prettier": "1.18.2",
-    "solium": "1.2.4",
-    "truffle": "5.0.30"
+    "solium": "1.2.4"
   }
 }

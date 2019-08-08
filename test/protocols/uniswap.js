@@ -1,4 +1,4 @@
-const { constants, tokens, protocols } = require("../..");
+const { tokens, protocols } = require("../..");
 
 contract("protocols / uniswap", accounts => {
   const protocolOwner = accounts[0];
@@ -11,24 +11,23 @@ contract("protocols / uniswap", accounts => {
   });
 
   it("Can create an exchange and add liquidity", async () => {
-    const tx = await uniswap.methods
-      .createExchange(dai._address)
-      .send({ from: protocolOwner, gas: constants.MAX_GAS });
-    const exchange = protocols.uniswap.getExchange(
-      tx.events.NewExchange.returnValues.exchange
+    const tx = await uniswap.createExchange(dai.address, {
+      from: protocolOwner
+    });
+    const exchange = await protocols.uniswap.getExchange(
+      web3,
+      tx.logs[0].args.exchange
     );
-    await dai.methods
-      .mint(protocolOwner, "10000000000")
-      .send({ from: protocolOwner });
-    await dai.methods
-      .approve(exchange._address, -1)
-      .send({ from: protocolOwner });
-    await exchange.methods
-      .addLiquidity("1", "10000000000", Math.round(Date.now() / 1000) + 60)
-      .send({
+    await dai.mint(protocolOwner, "10000000000", { from: protocolOwner });
+    await dai.approve(exchange.address, -1, { from: protocolOwner });
+    await exchange.addLiquidity(
+      "1",
+      "10000000000",
+      Math.round(Date.now() / 1000) + 60,
+      {
         from: protocolOwner,
-        value: "10000000000",
-        gas: constants.MAX_GAS
-      });
+        value: "10000000000"
+      }
+    );
   });
 });
