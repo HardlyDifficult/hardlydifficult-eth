@@ -10,6 +10,7 @@ jobs:
       - run: npm i
       - run: npm run test
       - run: npm run lintNoFix
+      - run: npx codechecks
 
       - persist_to_workspace:
           root: ~/repo
