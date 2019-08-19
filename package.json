@@ -39,7 +39,7 @@
     "@codechecks/client": "0.1.6",
     "chai": "4.2.0",
     "eslint": "6.2.0",
-    "eslint-config-prettier": "6.0.0",
+    "eslint-config-prettier": "6.1.0",
     "eslint-plugin-json": "1.4.0",
     "eslint-plugin-markdown": "1.0.0",
     "eslint-plugin-prettier": "3.1.0",
