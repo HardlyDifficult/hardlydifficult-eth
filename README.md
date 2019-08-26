@@ -10,6 +10,8 @@ You can deploy these to Ganache or any network for testing. The scripts simply u
 
 Using these will give you an accurate representation of gas costs, error conditions, and any oddities to their specific implementation.
 
+**Take a look at the tests for a more complete example of each use case**
+
 ### Tokens
 
  - DAI: ERC-20 with 18 decimals and a mint function
@@ -76,15 +78,19 @@ Usage example:
 
 ```javascript
 const { protocols } = require("hardlydifficult-test-helpers");
+const control = accounts[1];
 
 // Deploy a new c-org (see test for complete list of call options)
-const [dat, fair] = await protocols.cOrg.deploy(web3, {
+const contracts = await protocols.cOrg.deploy(web3, {
   control: accounts[0]
 });
 
+// You must simulate KYC for to enable new accounts
+await contracts.erc1404.approve(accounts[9], true, { from: control })
+
 // Buy FAIR tokens
-await dat.buy(accounts[3], "10000000000000", 1, {
-  from: accounts[3],
+await dat.buy(accounts[9], "10000000000000", 1, {
+  from: accounts[9],
   value: "10000000000000"
 });
 ```
