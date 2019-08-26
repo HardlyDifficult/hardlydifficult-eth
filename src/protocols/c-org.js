@@ -17,6 +17,12 @@ async function getFair(web3, fairAddress) {
   return await contract.at(fairAddress);
 }
 
+async function getErc1404(web3, erc1404Address) {
+  const contract = truffleContract({ abi: cOrgAbi.erc1404 });
+  contract.setProvider(web3.currentProvider);
+  return await contract.at(erc1404Address);
+}
+
 module.exports = {
   deploy: async (web3, options) => {
     // deploy erc1820
@@ -26,8 +32,10 @@ module.exports = {
     // deploy bigDiv
     // deploy dat
     // deploy dat proxy(implementation, admin)
-    // deploy test erc1404
-    // dat.initialize
+    // deploy erc1404
+    // deploy erc1404 proxy(implementation, admin)
+    // erc1404.initialize
+    // dat.initialize (which calls fair.initialize)
     // dat.updateConfig
 
     await erc1820.deploy(web3); // no harm in calling this multiple times
@@ -121,17 +129,33 @@ module.exports = {
       { from: callOptions.control }
     );
 
-    const erc1404 = await new web3.eth.Contract([])
+    const erc1404Contract = await new web3.eth.Contract(cOrgAbi.erc1404)
       .deploy({
-        data: cOrgStaticBytecode.testErc1404
+        data: cOrgBytecode.erc1404
       })
       .send({
         from: callOptions.control,
         gas: constants.MAX_GAS
       });
+    const erc1404Proxy = await new web3.eth.Contract(cOrgAbi.proxy)
+      .deploy({
+        data: cOrgBytecode.proxy,
+        arguments: [erc1404Contract._address, proxyAdmin._address, "0x"]
+      })
+      .send({
+        from: callOptions.control,
+        gas: constants.MAX_GAS
+      });
+      
+    const erc1404 = await getErc1404(web3, erc1404Proxy._address)
+    await erc1404.initialize({ from: callOptions.control });
+    await erc1404.approve(dat.address, true, {from: callOptions.control})
+    await erc1404.approve(callOptions.beneficiary, true, {from: callOptions.control})
+    await erc1404.approve(callOptions.control, true, {from: callOptions.control})
+    await erc1404.approve(callOptions.feeCollector, true, {from: callOptions.control})
 
     await dat.updateConfig(
-      erc1404._address,
+      erc1404.address,
       callOptions.beneficiary,
       callOptions.control,
       callOptions.feeCollector,
@@ -146,8 +170,9 @@ module.exports = {
       }
     );
 
-    return [dat, fair];
+    return {dat, fair, erc1404};
   },
   getDat,
-  getFair
+  getFair,
+  getErc1404
 };
