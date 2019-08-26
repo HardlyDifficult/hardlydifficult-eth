@@ -1,5 +1,5 @@
 const { protocols } = require("../..");
-const truffleAssert = require('truffle-assertions');
+const truffleAssert = require("truffle-assertions");
 
 contract("protocols / c-org", accounts => {
   const beneficiary = accounts[0];
@@ -29,23 +29,26 @@ contract("protocols / c-org", accounts => {
   });
 
   it("Buy should fail if not approved", async () => {
-    await truffleAssert.fails(contracts.dat.buy(accounts[9], "10000000000000", 1, {
-      from: accounts[9],
-      value: "10000000000000"
-    }), "revert");
+    await truffleAssert.fails(
+      contracts.dat.buy(accounts[9], "10000000000000", 1, {
+        from: accounts[9],
+        value: "10000000000000"
+      }),
+      "revert"
+    );
   });
 
-  describe('once approved', async () => {
+  describe("once approved", async () => {
     before(async () => {
-      await contracts.erc1404.approve(accounts[9], true, { from: control })
-    })
+      await contracts.erc1404.approve(accounts[9], true, { from: control });
+    });
 
     it("Can buy fair", async () => {
       await contracts.dat.buy(accounts[9], "10000000000000", 1, {
         from: accounts[9],
         value: "10000000000000"
       });
-      
+
       const balance = await contracts.fair.balanceOf(accounts[9]);
       assert.equal(balance.toString(), "23809500000000");
     });

@@ -146,13 +146,19 @@ module.exports = {
         from: callOptions.control,
         gas: constants.MAX_GAS
       });
-      
-    const erc1404 = await getErc1404(web3, erc1404Proxy._address)
+
+    const erc1404 = await getErc1404(web3, erc1404Proxy._address);
     await erc1404.initialize({ from: callOptions.control });
-    await erc1404.approve(dat.address, true, {from: callOptions.control})
-    await erc1404.approve(callOptions.beneficiary, true, {from: callOptions.control})
-    await erc1404.approve(callOptions.control, true, {from: callOptions.control})
-    await erc1404.approve(callOptions.feeCollector, true, {from: callOptions.control})
+    await erc1404.approve(dat.address, true, { from: callOptions.control });
+    await erc1404.approve(callOptions.beneficiary, true, {
+      from: callOptions.control
+    });
+    await erc1404.approve(callOptions.control, true, {
+      from: callOptions.control
+    });
+    await erc1404.approve(callOptions.feeCollector, true, {
+      from: callOptions.control
+    });
 
     await dat.updateConfig(
       erc1404.address,
@@ -170,7 +176,7 @@ module.exports = {
       }
     );
 
-    return {dat, fair, erc1404};
+    return { dat, fair, erc1404 };
   },
   getDat,
   getFair,
