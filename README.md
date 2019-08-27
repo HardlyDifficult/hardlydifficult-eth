@@ -82,7 +82,7 @@ const control = accounts[1];
 
 // Deploy a new c-org (see test for complete list of call options)
 const contracts = await protocols.cOrg.deploy(web3, {
-  control: accounts[0]
+  control
 });
 
 // You must simulate KYC for to enable new accounts
