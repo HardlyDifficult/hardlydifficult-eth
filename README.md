@@ -114,7 +114,7 @@ const dai = await tokens.dai.deploy(web3, protocolOwner);
 
 // Create an exchange
 const tx = await uniswap.createExchange(dai.address, { from: protocolOwner });
-const exchange = protocols.uniswap.getExchange(
+const exchange = await protocols.uniswap.getExchange(
   web3,
   tx.logs[0].args.exchange
 );
