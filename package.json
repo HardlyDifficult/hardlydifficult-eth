@@ -30,7 +30,7 @@
   "dependencies": {
     "c-org-abi": "1.0.1",
     "erc1820": "0.0.2",
-    "truffle": "5.0.34",
+    "truffle": "5.0.35",
     "truffle-assertions": "0.9.1",
     "truffle-contract": "4.0.31",
     "unlock-abi-1-1": "1.0.0"
