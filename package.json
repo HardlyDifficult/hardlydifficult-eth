@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "babel-eslint": "10.0.3",
-    "@codechecks/client": "0.1.7",
+    "@codechecks/client": "0.1.8",
     "chai": "4.2.0",
     "eslint": "6.3.0",
     "eslint-config-prettier": "6.2.0",
