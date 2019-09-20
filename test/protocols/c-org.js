@@ -40,7 +40,7 @@ contract("protocols / c-org", accounts => {
 
   describe("once approved", async () => {
     before(async () => {
-      await contracts.erc1404.approve(accounts[9], true, { from: control });
+      await contracts.whitelist.approve(accounts[9], true, { from: control });
     });
 
     it("Can buy fair", async () => {
@@ -49,7 +49,7 @@ contract("protocols / c-org", accounts => {
         value: "10000000000000"
       });
 
-      const balance = await contracts.fair.balanceOf(accounts[9]);
+      const balance = await contracts.dat.balanceOf(accounts[9]);
       assert.equal(balance.toString(), "23809500000000");
     });
   });
