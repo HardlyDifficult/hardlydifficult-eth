@@ -3,7 +3,6 @@ const cOrgAbi = require("c-org-abi/abi.json");
 const cOrgBytecode = require("c-org-abi/bytecode.json");
 const cOrgStaticBytecode = require("c-org-abi/static_bytecode.json");
 const constants = require("../constants");
-const erc1820 = require("erc1820");
 
 async function getDat(web3, datAddress) {
   const contract = truffleContract({ abi: cOrgAbi.dat });
@@ -11,34 +10,23 @@ async function getDat(web3, datAddress) {
   return await contract.at(datAddress);
 }
 
-async function getFair(web3, fairAddress) {
-  const contract = truffleContract({ abi: cOrgAbi.fair });
+async function getWhitelist(web3, whitelistAddress) {
+  const contract = truffleContract({ abi: cOrgAbi.whitelist });
   contract.setProvider(web3.currentProvider);
-  return await contract.at(fairAddress);
-}
-
-async function getErc1404(web3, erc1404Address) {
-  const contract = truffleContract({ abi: cOrgAbi.erc1404 });
-  contract.setProvider(web3.currentProvider);
-  return await contract.at(erc1404Address);
+  return await contract.at(whitelistAddress);
 }
 
 module.exports = {
   deploy: async (web3, options) => {
-    // deploy erc1820
     // deploy proxy admin
-    // deploy fair
-    // deploy fair proxy(implementation, admin)
-    // deploy bigDiv
+    // deploy bigMath
     // deploy dat
     // deploy dat proxy(implementation, admin)
-    // deploy erc1404
-    // deploy erc1404 proxy(implementation, admin)
-    // erc1404.initialize
-    // dat.initialize (which calls fair.initialize)
+    // deploy whitelist
+    // deploy whitelist proxy(implementation, admin)
+    // whitelist.initialize
+    // dat.initialize
     // dat.updateConfig
-
-    await erc1820.deploy(web3); // no harm in calling this multiple times
 
     const callOptions = Object.assign(
       {
@@ -69,28 +57,9 @@ module.exports = {
         from: callOptions.control,
         gas: constants.MAX_GAS
       });
-    const fairContract = await new web3.eth.Contract(cOrgAbi.fair)
+    const bigMath = await new web3.eth.Contract(cOrgAbi.bigMath)
       .deploy({
-        data: cOrgBytecode.fair
-      })
-      .send({
-        from: callOptions.control,
-        gas: constants.MAX_GAS
-      });
-    const fairProxy = await new web3.eth.Contract(cOrgAbi.proxy)
-      .deploy({
-        data: cOrgBytecode.proxy,
-        arguments: [fairContract._address, proxyAdmin._address, "0x"]
-      })
-      .send({
-        from: callOptions.control,
-        gas: constants.MAX_GAS
-      });
-    const fair = await getFair(web3, fairProxy._address);
-
-    const bigDiv = await new web3.eth.Contract(cOrgAbi.bigDiv)
-      .deploy({
-        data: cOrgStaticBytecode.bigDiv
+        data: cOrgStaticBytecode.bigMath
       })
       .send({
         from: callOptions.control,
@@ -117,8 +86,6 @@ module.exports = {
     const dat = await getDat(web3, datProxy._address);
 
     await dat.initialize(
-      bigDiv._address,
-      fair.address,
       callOptions.initReserve,
       callOptions.currency,
       callOptions.initGoal,
@@ -129,39 +96,40 @@ module.exports = {
       { from: callOptions.control }
     );
 
-    const erc1404Contract = await new web3.eth.Contract(cOrgAbi.erc1404)
+    const whitelistContract = await new web3.eth.Contract(cOrgAbi.whitelist)
       .deploy({
-        data: cOrgBytecode.erc1404
+        data: cOrgBytecode.whitelist
       })
       .send({
         from: callOptions.control,
         gas: constants.MAX_GAS
       });
-    const erc1404Proxy = await new web3.eth.Contract(cOrgAbi.proxy)
+    const whitelistProxy = await new web3.eth.Contract(cOrgAbi.proxy)
       .deploy({
         data: cOrgBytecode.proxy,
-        arguments: [erc1404Contract._address, proxyAdmin._address, "0x"]
+        arguments: [whitelistContract._address, proxyAdmin._address, "0x"]
       })
       .send({
         from: callOptions.control,
         gas: constants.MAX_GAS
       });
 
-    const erc1404 = await getErc1404(web3, erc1404Proxy._address);
-    await erc1404.initialize({ from: callOptions.control });
-    await erc1404.approve(dat.address, true, { from: callOptions.control });
-    await erc1404.approve(callOptions.beneficiary, true, {
+    const whitelist = await getWhitelist(web3, whitelistProxy._address);
+    await whitelist.initialize(dat.address, { from: callOptions.control });
+    await whitelist.approve(dat.address, true, { from: callOptions.control });
+    await whitelist.approve(callOptions.beneficiary, true, {
       from: callOptions.control
     });
-    await erc1404.approve(callOptions.control, true, {
+    await whitelist.approve(callOptions.control, true, {
       from: callOptions.control
     });
-    await erc1404.approve(callOptions.feeCollector, true, {
+    await whitelist.approve(callOptions.feeCollector, true, {
       from: callOptions.control
     });
 
     await dat.updateConfig(
-      erc1404.address,
+      bigMath._address,
+      whitelist.address,
       callOptions.beneficiary,
       callOptions.control,
       callOptions.feeCollector,
@@ -176,9 +144,8 @@ module.exports = {
       }
     );
 
-    return { dat, fair, erc1404 };
+    return { dat, whitelist };
   },
   getDat,
-  getFair,
-  getErc1404
+  getWhitelist
 };

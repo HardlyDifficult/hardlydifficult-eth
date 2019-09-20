@@ -86,7 +86,7 @@ const contracts = await protocols.cOrg.deploy(web3, {
 });
 
 // You must simulate KYC for to enable new accounts
-await contracts.erc1404.approve(accounts[9], true, { from: control })
+await contracts.whitelist.approve(accounts[9], true, { from: control })
 
 // Buy FAIR tokens
 await dat.buy(accounts[9], "10000000000000", 1, {
