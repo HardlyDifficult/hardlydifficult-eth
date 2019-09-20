@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-test-helpers#readme",
   "dependencies": {
-    "c-org-abi": "1.0.1",
+    "c-org-abi": "1.1.1",
     "erc1820": "0.0.2",
     "truffle": "5.0.37",
     "truffle-assertions": "0.9.1",
