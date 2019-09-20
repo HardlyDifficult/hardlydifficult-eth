@@ -4,8 +4,8 @@
   "description": "Test helpers for Ethereum.",
   "scripts": {
     "test": "truffle test",
-    "lint": "solium -d contracts --fix && eslint . --fix",
-    "lintNoFix": "solium -d contracts && eslint ."
+    "lint": "eslint . --fix",
+    "lintNoFix": "eslint ."
   },
   "files": [
     "src",
