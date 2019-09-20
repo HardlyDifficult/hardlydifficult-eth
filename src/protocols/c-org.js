@@ -3,18 +3,11 @@ const cOrgAbi = require("c-org-abi/abi.json");
 const cOrgBytecode = require("c-org-abi/bytecode.json");
 const cOrgStaticBytecode = require("c-org-abi/static_bytecode.json");
 const constants = require("../constants");
-const erc1820 = require("erc1820");
 
 async function getDat(web3, datAddress) {
   const contract = truffleContract({ abi: cOrgAbi.dat });
   contract.setProvider(web3.currentProvider);
   return await contract.at(datAddress);
-}
-
-async function getFair(web3, fairAddress) {
-  const contract = truffleContract({ abi: cOrgAbi.fair });
-  contract.setProvider(web3.currentProvider);
-  return await contract.at(fairAddress);
 }
 
 async function getErc1404(web3, erc1404Address) {
@@ -25,11 +18,8 @@ async function getErc1404(web3, erc1404Address) {
 
 module.exports = {
   deploy: async (web3, options) => {
-    // deploy erc1820
     // deploy proxy admin
-    // deploy fair
-    // deploy fair proxy(implementation, admin)
-    // deploy bigDiv
+    // deploy bigMath
     // deploy dat
     // deploy dat proxy(implementation, admin)
     // deploy erc1404
@@ -37,8 +27,6 @@ module.exports = {
     // erc1404.initialize
     // dat.initialize (which calls fair.initialize)
     // dat.updateConfig
-
-    await erc1820.deploy(web3); // no harm in calling this multiple times
 
     const callOptions = Object.assign(
       {
@@ -69,28 +57,9 @@ module.exports = {
         from: callOptions.control,
         gas: constants.MAX_GAS
       });
-    const fairContract = await new web3.eth.Contract(cOrgAbi.fair)
+    const bigMath = await new web3.eth.Contract(cOrgAbi.bigMath)
       .deploy({
-        data: cOrgBytecode.fair
-      })
-      .send({
-        from: callOptions.control,
-        gas: constants.MAX_GAS
-      });
-    const fairProxy = await new web3.eth.Contract(cOrgAbi.proxy)
-      .deploy({
-        data: cOrgBytecode.proxy,
-        arguments: [fairContract._address, proxyAdmin._address, "0x"]
-      })
-      .send({
-        from: callOptions.control,
-        gas: constants.MAX_GAS
-      });
-    const fair = await getFair(web3, fairProxy._address);
-
-    const bigDiv = await new web3.eth.Contract(cOrgAbi.bigDiv)
-      .deploy({
-        data: cOrgStaticBytecode.bigDiv
+        data: cOrgStaticBytecode.bigMath
       })
       .send({
         from: callOptions.control,
@@ -117,8 +86,7 @@ module.exports = {
     const dat = await getDat(web3, datProxy._address);
 
     await dat.initialize(
-      bigDiv._address,
-      fair.address,
+      bigMath._address,
       callOptions.initReserve,
       callOptions.currency,
       callOptions.initGoal,
@@ -176,9 +144,8 @@ module.exports = {
       }
     );
 
-    return { dat, fair, erc1404 };
+    return { dat, erc1404 };
   },
   getDat,
-  getFair,
   getErc1404
 };
