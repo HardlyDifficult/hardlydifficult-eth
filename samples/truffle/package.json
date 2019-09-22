@@ -1,7 +1,9 @@
 {
   "name": "truffle-example",
   "version": "0.0.1",
-  "scripts": {},
+  "scripts": {
+    "test": "truffle test"
+  },
   "license": "MIT",
   "dependencies": {
     "hardlydifficult-ethereum-contracts": "^0.4.1",
