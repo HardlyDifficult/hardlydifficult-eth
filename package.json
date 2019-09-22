@@ -1,5 +1,5 @@
 {
-  "name": "hardlydifficult-test-helpers",
+  "name": "hardlydifficult-ethereum-contracts",
   "version": "0.4.1",
   "description": "Test helpers for Ethereum.",
   "scripts": {
