@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-ethereum-contracts",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Test helpers for Ethereum.",
   "scripts": {
     "compile": "truffle compile",
