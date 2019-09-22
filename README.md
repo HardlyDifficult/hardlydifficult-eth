@@ -20,7 +20,7 @@ Using these will give you an accurate representation of gas costs, error conditi
 Usage example: 
 
 ```javascript
-const { tokens } = require("hardlydifficult-test-helpers");
+const { tokens } = require("hardlydifficult-ethereum-contracts");
 const daiOwner = accounts[0];
 
 // Deploy a DAI contract for testing
@@ -40,7 +40,7 @@ await dai.mint(accounts[1], 100, { from: daiOwner });
 Usage example:
 
 ```javascript
-const { protocols } = require("hardlydifficult-test-helpers");
+const { protocols } = require("hardlydifficult-ethereum-contracts");
 const unlockOwner = accounts[0];
 
 // Deploy the protocol
@@ -77,7 +77,7 @@ await lock.purchaseFor(accounts[2], {
 Usage example:
 
 ```javascript
-const { protocols } = require("hardlydifficult-test-helpers");
+const { protocols } = require("hardlydifficult-ethereum-contracts");
 const control = accounts[1];
 
 // Deploy a new c-org (see test for complete list of call options)
@@ -104,7 +104,7 @@ await dat.buy(accounts[9], "10000000000000", 1, {
 Usage example:
 
 ```javascript
-const { tokens, protocols } = require("hardlydifficult-test-helpers");
+const { tokens, protocols } = require("hardlydifficult-ethereum-contracts");
 const protocolOwner = accounts[0];
 
 // Deploy uniswap
