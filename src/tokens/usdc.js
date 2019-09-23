@@ -59,17 +59,31 @@ module.exports = {
 
     const result = await contract.at(token._address);
 
-    if(useAntiOwner) {
-      const antiOwnerProxy = await utils.antiOwnerProxy.deploy(web3, tokenOwner);
-      await result.configureMinter(antiOwnerProxy.address, -1, { from: tokenOwner });
-      await result.updateMasterMinter(antiOwnerProxy.address, { from: tokenOwner });
+    if (useAntiOwner) {
+      const antiOwnerProxy = await utils.antiOwnerProxy.deploy(
+        web3,
+        tokenOwner
+      );
+      await result.configureMinter(antiOwnerProxy.address, -1, {
+        from: tokenOwner
+      });
+      await result.updateMasterMinter(antiOwnerProxy.address, {
+        from: tokenOwner
+      });
       await result.updatePauser(antiOwnerProxy.address, { from: tokenOwner });
-      await result.updateBlacklister(antiOwnerProxy.address, { from: tokenOwner });
-      await result.transferOwnership(antiOwnerProxy.address, { from: tokenOwner });
+      await result.updateBlacklister(antiOwnerProxy.address, {
+        from: tokenOwner
+      });
+      await result.transferOwnership(antiOwnerProxy.address, {
+        from: tokenOwner
+      });
       result.mint = async (to, amount, options) => {
-        const callData = web3.eth.abi.encodeFunctionCall(usdcJson.abi.find(e => e.name === 'mint'), [to, amount])
+        const callData = web3.eth.abi.encodeFunctionCall(
+          usdcJson.abi.find(e => e.name === "mint"),
+          [to, amount]
+        );
         await antiOwnerProxy.proxyCall(result.address, callData, options);
-      }
+      };
     }
 
     return result;

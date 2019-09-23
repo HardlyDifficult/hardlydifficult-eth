@@ -14,13 +14,16 @@ module.exports = {
     contract.setProvider(web3.currentProvider);
     const result = await contract.new(daiJson.args[0], { from });
 
-    if(useAntiOwner) {
+    if (useAntiOwner) {
       const antiOwnerProxy = await utils.antiOwnerProxy.deploy(web3, from);
       await result.setOwner(antiOwnerProxy.address, { from });
       result.mint = async (to, amount, options) => {
-        const callData = web3.eth.abi.encodeFunctionCall(daiJson.abi.find(e => e.name === 'mint'), [to, amount])
+        const callData = web3.eth.abi.encodeFunctionCall(
+          daiJson.abi.find(e => e.name === "mint"),
+          [to, amount]
+        );
         await antiOwnerProxy.proxyCall(result.address, callData, options);
-      }
+      };
     }
 
     return result;

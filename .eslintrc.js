@@ -33,6 +33,7 @@ module.exports = {
     "no-unused-vars": "warn",
     "no-case-declarations": 0,
     "no-empty": 0,
+    "require-atomic-updates": "warn",
     quotes: ["error", "double"]
   }
 };
