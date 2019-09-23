@@ -1,4 +1,4 @@
-const { truffleContract }  = require('../helpers')
+const { truffleContract } = require("../helpers");
 const usdcJson = require("./usdc.json");
 const constants = require("../constants");
 const utils = require("../utils");

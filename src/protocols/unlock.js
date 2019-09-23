@@ -1,4 +1,4 @@
-const { truffleContract }  = require('../helpers');
+const { truffleContract } = require("../helpers");
 const unlockAbi = require("unlock-abi-1-1");
 const unlockJson = require("./unlock.json");
 const constants = require("../constants");
@@ -35,7 +35,11 @@ module.exports = {
         gas: constants.MAX_GAS
       });
 
-    const contractInstance = await truffleContract.at(web3, unlockAbi.Unlock.abi, proxy._address);
+    const contractInstance = await truffleContract.at(
+      web3,
+      unlockAbi.Unlock.abi,
+      proxy._address
+    );
     await contractInstance.initialize(owner, { from: owner });
 
     return contractInstance;
