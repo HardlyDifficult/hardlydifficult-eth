@@ -1,4 +1,4 @@
-const truffleContract = require("@truffle/contract");
+const { truffleContract }  = require('../helpers')
 const daiJson = require("./dai.json");
 const utils = require("../utils");
 
@@ -7,12 +7,7 @@ module.exports = {
    * @param useAntiOwner true to use a proxy contract allowing any account to call `mint`.
    */
   deploy: async (web3, from, useAntiOwner) => {
-    const contract = truffleContract({
-      abi: daiJson.abi,
-      bytecode: daiJson.bytecode
-    });
-    contract.setProvider(web3.currentProvider);
-    const result = await contract.new(daiJson.args[0], { from });
+    const result = await truffleContract.new(web3, daiJson.abi, daiJson.bytecode, from, daiJson.args[0]);
 
     if (useAntiOwner) {
       const antiOwnerProxy = await utils.antiOwnerProxy.deploy(web3, from);

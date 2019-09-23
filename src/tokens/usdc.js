@@ -1,4 +1,4 @@
-const truffleContract = require("@truffle/contract");
+const { truffleContract }  = require('../helpers')
 const usdcJson = require("./usdc.json");
 const constants = require("../constants");
 const utils = require("../utils");
@@ -52,12 +52,7 @@ module.exports = {
       .configureMinter(tokenOwner, -1)
       .send({ from: tokenOwner });
 
-    const contract = truffleContract({
-      abi: usdcJson.abi
-    });
-    contract.setProvider(web3.currentProvider);
-
-    const result = await contract.at(token._address);
+    const result = await truffleContract.at(web3, usdcJson.abi, token._address);
 
     if (useAntiOwner) {
       const antiOwnerProxy = await utils.antiOwnerProxy.deploy(

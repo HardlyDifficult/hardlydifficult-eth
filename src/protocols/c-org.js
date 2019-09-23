@@ -1,19 +1,15 @@
-const truffleContract = require("@truffle/contract");
+const { truffleContract }  = require('../helpers');
 const cOrgAbi = require("c-org-abi/abi.json");
 const cOrgBytecode = require("c-org-abi/bytecode.json");
 const cOrgStaticBytecode = require("c-org-abi/static_bytecode.json");
 const constants = require("../constants");
 
 async function getDat(web3, datAddress) {
-  const contract = truffleContract({ abi: cOrgAbi.dat });
-  contract.setProvider(web3.currentProvider);
-  return await contract.at(datAddress);
+  return await truffleContract.at(web3, cOrgAbi.dat, datAddress);
 }
 
 async function getWhitelist(web3, whitelistAddress) {
-  const contract = truffleContract({ abi: cOrgAbi.whitelist });
-  contract.setProvider(web3.currentProvider);
-  return await contract.at(whitelistAddress);
+  return await truffleContract.at(web3, cOrgAbi.whitelist, whitelistAddress);
 }
 
 module.exports = {
