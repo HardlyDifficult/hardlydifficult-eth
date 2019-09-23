@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-ethereum-contracts",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A collection of reusable contracts and Javascript helpers for Ethereum.",
   "scripts": {
     "compile": "truffle compile",
@@ -9,6 +9,7 @@
     "lintNoFix": "solium -d contracts && eslint ."
   },
   "files": [
+    "build",
     "src",
     "index.js"
   ],
