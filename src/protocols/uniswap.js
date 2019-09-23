@@ -1,4 +1,4 @@
-const truffleContract = require("@truffle/contract");
+const { truffleContract } = require("../helpers");
 const uniswapJson = require("./uniswap.json");
 
 module.exports = {
@@ -6,21 +6,18 @@ module.exports = {
     // Deploy exchange template
     // Deploy factory
     // initializeFactory(template: address)
-    const exchangeTemplateContract = truffleContract({
-      abi: uniswapJson.exchange.abi,
-      bytecode: uniswapJson.exchange.bytecode
-    });
-    exchangeTemplateContract.setProvider(web3.currentProvider);
-    const exchangeTemplate = await exchangeTemplateContract.new({
-      from: owner
-    });
-
-    const contract = truffleContract({
-      abi: uniswapJson.abi,
-      bytecode: uniswapJson.bytecode
-    });
-    contract.setProvider(web3.currentProvider);
-    const factory = await contract.new({ from: owner });
+    const exchangeTemplate = await truffleContract.new(
+      web3,
+      uniswapJson.exchange.abi,
+      uniswapJson.exchange.bytecode,
+      owner
+    );
+    const factory = await truffleContract.new(
+      web3,
+      uniswapJson.abi,
+      uniswapJson.bytecode,
+      owner
+    );
     await factory.initializeFactory(exchangeTemplate.address, {
       from: owner
     });
@@ -28,11 +25,10 @@ module.exports = {
     return factory;
   },
   getExchange: async (web3, exchangeAddress) => {
-    const exchangeTemplateContract = truffleContract({
-      abi: uniswapJson.exchange.abi,
-      bytecode: uniswapJson.exchange.bytecode
-    });
-    exchangeTemplateContract.setProvider(web3.currentProvider);
-    return await exchangeTemplateContract.at(exchangeAddress);
+    return await truffleContract.at(
+      web3,
+      uniswapJson.exchange.abi,
+      exchangeAddress
+    );
   }
 };
