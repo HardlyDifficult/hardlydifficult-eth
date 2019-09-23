@@ -1,4 +1,4 @@
-const truffleContract = require("truffle-contract");
+const truffleContract = require("@truffle/contract");
 const uniswapJson = require("./uniswap.json");
 
 module.exports = {

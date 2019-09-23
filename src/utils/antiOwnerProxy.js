@@ -1,4 +1,4 @@
-const truffleContract = require("truffle-contract");
+const truffleContract = require("@truffle/contract");
 const antiOwnerProxy = require("../../build/contracts/AntiOwnerProxy.json");
 
 module.exports = {

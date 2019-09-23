@@ -1,4 +1,4 @@
-const truffleContract = require("truffle-contract");
+const truffleContract = require("@truffle/contract");
 const cOrgAbi = require("c-org-abi/abi.json");
 const cOrgBytecode = require("c-org-abi/bytecode.json");
 const cOrgStaticBytecode = require("c-org-abi/static_bytecode.json");

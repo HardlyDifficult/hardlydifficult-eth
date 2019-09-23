@@ -1,4 +1,4 @@
-const truffleContract = require("truffle-contract");
+const truffleContract = require("@truffle/contract");
 const daiJson = require("./dai.json");
 const utils = require("../utils");
 

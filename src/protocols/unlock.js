@@ -1,4 +1,4 @@
-const truffleContract = require("truffle-contract");
+const truffleContract = require("@truffle/contract");
 const unlockAbi = require("unlock-abi-1-1");
 const unlockJson = require("./unlock.json");
 const constants = require("../constants");
