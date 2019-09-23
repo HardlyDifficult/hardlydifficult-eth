@@ -27,13 +27,13 @@ Usage example:
 
 ```javascript
 const { tokens } = require("hardlydifficult-ethereum-contracts");
-const daiOwner = accounts[0];
+const from = accounts[0];
 
 // Deploy a DAI contract for testing
-const dai = await tokens.dai.deploy(web3, daiOwner);
+const dai = await tokens.dai.deploy(web3, from);
 
 // Mint tokens
-await dai.mint(accounts[1], 100, { from: daiOwner });
+await dai.mint(accounts[1], 100, { from });
 ```
 
 ### Protocols 
