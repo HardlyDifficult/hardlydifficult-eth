@@ -32,11 +32,11 @@
   },
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-test-helpers#readme",
   "dependencies": {
+    "@truffle/contract": "4.0.33",
     "c-org-abi": "1.1.1",
     "erc1820": "0.0.2",
     "truffle": "5.0.37",
     "truffle-assertions": "0.9.1",
-    "truffle-contract": "4.0.31",
     "unlock-abi-1-1": "1.0.0"
   },
   "devDependencies": {
