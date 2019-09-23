@@ -16,7 +16,7 @@ You can deploy these to Ganache or any network for testing. The scripts simply u
 
 Using these will give you an accurate representation of gas costs, error conditions, and any oddities to their specific implementation.
 
-**Take a look at the [samples](/tree/master/samples) directory for examples**
+**Take a look at the [samples](samples) directory for examples**
 
 ### Tokens
 
