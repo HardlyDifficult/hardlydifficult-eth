@@ -1,7 +1,7 @@
 {
   "name": "hardlydifficult-ethereum-contracts",
-  "version": "0.4.2",
-  "description": "Test helpers for Ethereum.",
+  "version": "0.5.0",
+  "description": "A collection of reusable contracts and Javascript helpers for Ethereum.",
   "scripts": {
     "compile": "truffle compile",
     "test": "truffle test",
@@ -20,7 +20,9 @@
     "Solidity",
     "Vyper",
     "Ethereum",
-    "ETH"
+    "ETH",
+    "Truffle",
+    "Javascript"
   ],
   "author": "HardlyDifficult",
   "license": "MIT",
