@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-test-helpers#readme",
   "dependencies": {
-    "@truffle/contract": "4.0.33",
+    "@truffle/contract": "4.0.34",
     "c-org-abi": "1.1.1",
     "erc1820": "0.0.2",
     "truffle": "5.0.38",
