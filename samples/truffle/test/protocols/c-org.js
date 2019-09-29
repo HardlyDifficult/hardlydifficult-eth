@@ -53,4 +53,19 @@ contract("protocols / c-org", accounts => {
       assert.equal(balance.toString(), "23809500000000");
     });
   });
+
+  describe("after purchase", async () => {
+    before(async () => {
+      await contracts.whitelist.approve(accounts[9], true, { from: control });
+      await contracts.dat.buy(accounts[9], "10000000000000", 1, {
+        from: accounts[9],
+        value: "10000000000000"
+      });
+    });
+
+    it("totalSupply > 0", async () => {
+      const totalSupply = await contracts.dat.totalSupply();
+      assert.notEqual(totalSupply.toString(), "0");
+    });
+  });
 });
