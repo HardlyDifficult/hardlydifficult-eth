@@ -7,6 +7,6 @@
   "license": "MIT",
   "dependencies": {
     "hardlydifficult-ethereum-contracts": "0.5.1",
-    "truffle": "5.0.38"
+    "truffle": "5.0.39"
   }
 }
