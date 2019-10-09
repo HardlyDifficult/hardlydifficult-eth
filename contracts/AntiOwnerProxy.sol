@@ -1,5 +1,7 @@
 pragma solidity ^0.5.0;
 
+import './CallContract.sol';
+
 
 /**
  * @title Anti-Owner Proxy used to bypass existing owner checks (typically for testing).
@@ -7,25 +9,14 @@ pragma solidity ^0.5.0;
  * @dev If this contract is the owner / admin account for another, this contract allows
  * anyone to make owner only calls; bypassing the owner requirement.
  */
-contract AntiOwnerProxy
+contract AntiOwnerProxy is
+  CallContract
 {
   function proxyCall(
     address _contract,
     bytes memory _callData
-  ) public payable
+  ) public
   {
-    bool result;
-    assembly {
-      result := call(
-        gas,
-        _contract,
-        callvalue,
-        add(_callData, 32),
-        mload(_callData),
-        mload(0x40),
-        0
-      )
-    }
-    require(result, 'TX_FAILED');
+    _call(_contract, 0, _callData);
   }
 }

@@ -32,7 +32,9 @@
   },
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-test-helpers#readme",
   "dependencies": {
+    "@openzeppelin/contracts": "^2.3.0",
     "@truffle/contract": "4.0.35",
+    "bignumber.js": "^9.0.0",
     "c-org-abi": "1.1.1",
     "erc1820": "0.0.2",
     "truffle": "5.0.39",
