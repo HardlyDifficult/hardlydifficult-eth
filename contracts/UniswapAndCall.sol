@@ -42,7 +42,7 @@ contract UniswapAndCall is
 
     // Check for any unspent tokens, this is only applicable if the _contract is not predictable
     uint balance = IERC20(_token).balanceOf(address(this));
-    if(balance > 0)
+    if(balance > 0) // TODO change to >= minEstimatedGas * gasPrice
     {
       uint value = exchange.getTokenToEthInputPrice(balance);
       if(value > 0)
