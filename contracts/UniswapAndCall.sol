@@ -4,14 +4,12 @@ import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './interfaces/IUniswapFactory.sol';
 import './interfaces/IUniswapExchange.sol';
 import './CallContract.sol';
-import './Log.sol'; // TODO remove
 
 /**
  * @title Swaps tokens with Uniswap and then calls another contract.
  */
 contract UniswapAndCall is
-  CallContract,
-  Log
+  CallContract
 {
   IUniswapFactory public uniswapFactory;
 
