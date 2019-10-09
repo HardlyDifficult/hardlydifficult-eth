@@ -6,7 +6,8 @@ import './interfaces/IUniswapExchange.sol';
 import './CallContract.sol';
 
 /**
- * @title Swaps tokens with Uniswap and then calls another contract.
+ * @title Swaps tokens with Uniswap and then calls another contract and then 
+ * refunds anything remaining.
  */
 contract UniswapAndCall is
   CallContract
