@@ -3,5 +3,9 @@
     "config:base"
   ],
   "timezone": "America/Los_Angeles",
-  "schedule": ["after 4am and before 6am on monday"]
+  "schedule": ["after 4am and before 6am on monday"],
+  "patch": {
+    "groupName": "all dependencies patch updates",
+    "groupSlug": "all-patch"
+  }
 }
