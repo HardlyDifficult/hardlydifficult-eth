@@ -40,6 +40,7 @@ contract UniswapAndCall is
     _call(_contract, 0, _callData);
 
     // Check for any unspent tokens, this is only applicable if the _contract is not predictable
+    // or if tokens remain in the contract from a previous user
     uint balance = IERC20(_token).balanceOf(address(this));
     if(balance > 0)
     {
