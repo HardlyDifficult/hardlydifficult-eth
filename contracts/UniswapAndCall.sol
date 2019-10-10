@@ -21,6 +21,7 @@ contract UniswapAndCall is
     uniswapFactory = _uniswapFactory;
   }
 
+  // Accept funds from uniswap trades
   function() external payable {}
 
   function uniswapEthAndCall(
