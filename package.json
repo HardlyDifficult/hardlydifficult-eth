@@ -10,6 +10,7 @@
   },
   "files": [
     "build",
+    "contracts",
     "src",
     "index.js"
   ],
