@@ -1,7 +1,6 @@
 const { protocols, tokens } = require("../..");
 const UniswapAndCall = artifacts.require("UniswapAndCall.sol");
 const truffleAssert = require("truffle-assertions");
-const BigNumber = require("bignumber.js");
 
 contract("contracts / uniswapAndCall", accounts => {
   const owner = accounts[0];
