@@ -1,4 +1,4 @@
-const { protocols, tokens } = require("../..");
+const { protocols, tokens } = require("../../../..");
 const UniswapAndCall = artifacts.require("UniswapAndCall.sol");
 const truffleAssert = require("truffle-assertions");
 

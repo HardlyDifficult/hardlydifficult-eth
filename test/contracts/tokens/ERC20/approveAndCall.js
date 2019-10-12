@@ -1,4 +1,4 @@
-const { protocols, tokens } = require("../..");
+const { protocols, tokens } = require("../../../..");
 const ApproveAndCall = artifacts.require("ApproveAndCall.sol");
 
 contract("contracts / approveAndCall", accounts => {
