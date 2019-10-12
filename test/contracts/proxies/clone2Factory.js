@@ -17,11 +17,14 @@ contract("contracts / proxies / cloneFactory", () => {
     assert.equal(result, expectedMessage);
   });
 
-  describe("Deploy with Clone 1", () => {
+  describe("Deploy with Clone 2", () => {
     let helloWorld;
 
     beforeEach(async () => {
-      const tx = await cloneFactory.createClone(helloWorldTemplate.address);
+      const tx = await cloneFactory.createClone2(
+        helloWorldTemplate.address,
+        42
+      );
       helloWorld = await HelloWorld.at(tx.logs[0].args.proxyAddress);
     });
 
@@ -30,17 +33,18 @@ contract("contracts / proxies / cloneFactory", () => {
       assert.equal(result, expectedMessage);
     });
 
-    it("Should fail if there's not enough gas to deploy", async () => {
+    it("Should fail if a salt is re-used", async () => {
       await truffleAssert.fails(
-        cloneFactory.createClone(helloWorldTemplate.address, {
-          gas: 65000 // should be just shy of what we need
-        }),
-        "out of gas"
+        cloneFactory.createClone2(helloWorldTemplate.address, 42),
+        "revert"
       );
     });
 
-    it("Can create more clones", async () => {
-      const tx = await cloneFactory.createClone(helloWorldTemplate.address);
+    it("Can create more clones as long as the salt is unique", async () => {
+      const tx = await cloneFactory.createClone2(
+        helloWorldTemplate.address,
+        43
+      );
       assert.notEqual(tx.logs[0].args.proxyAddress, web3.utils.padLeft(0, 40));
     });
   });

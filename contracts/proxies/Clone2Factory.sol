@@ -2,16 +2,18 @@ pragma solidity ^0.5.0;
 
 
 // From https://github.com/optionality/clone-factory/blob/master/contracts/CloneFactory.sol
-// Updated to support Solidity 5
-contract CloneFactory
+// Updated to support Solidity 5 and switch to `create2`
+contract Clone2Factory
 {
   /**
-   * @notice Uses create to deploy a clone to a nonce-based address.
+   * @notice Uses create2 to deploy a clone to a pre-determined address.
    * @param target the address of the template contract, containing the logic for this contract.
+   * @param salt a random salt used to determine the contract address before the transaction is mined.
    * @return result the address of the newly deployed contract.
    */
-  function _createClone(
-    address target
+  function _createClone2(
+    address target,
+    uint salt
   ) internal
     returns (address result)
   {
@@ -23,7 +25,10 @@ contract CloneFactory
       mstore(clone, 0x3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000)
       mstore(add(clone, 0x14), targetBytes)
       mstore(add(clone, 0x28), 0x5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000)
-      result := create(0, clone, 0x37)
+      result := create2(0, clone, 0x37, salt)
     }
+
+    // Revert if the deployment fails (possible if salt was already used)
+    require(result != address(0), 'PROXY_DEPLOY_FAILED');
   }
 }

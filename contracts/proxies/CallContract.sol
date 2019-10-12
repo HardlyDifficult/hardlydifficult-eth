@@ -12,7 +12,9 @@ contract CallContract
   ) internal
   {
     bool result;
-    assembly {
+    // solium-disable-next-line
+    assembly
+    {
       result := call(
         gas,
         _contract,
