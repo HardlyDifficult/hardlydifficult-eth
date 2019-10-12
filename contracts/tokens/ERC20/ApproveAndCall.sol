@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import './CallContract.sol';
+import '../../proxies/CallContract.sol';
 
 /**
  * @title Approve this contract to spend your ERC-20 tokens, and then
