@@ -1,12 +1,10 @@
 const { protocols, tokens } = require("../..");
 const ApproveAndCall = artifacts.require("ApproveAndCall.sol");
-const truffleAssert = require("truffle-assertions");
 
 contract("contracts / approveAndCall", accounts => {
   const owner = accounts[0];
   const keyPrice = web3.utils.toWei("0.00042", "ether");
   let token;
-  let exchange;
   let lock1;
   let lock2;
   let approveAndCall;
