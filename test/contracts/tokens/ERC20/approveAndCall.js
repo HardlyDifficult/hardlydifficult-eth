@@ -1,7 +1,7 @@
 const { protocols, tokens } = require("../../../..");
 const ApproveAndCall = artifacts.require("ApproveAndCall.sol");
 
-contract("contracts / approveAndCall", accounts => {
+contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
   const owner = accounts[0];
   const keyPrice = web3.utils.toWei("0.00042", "ether");
   let token;

@@ -2,7 +2,7 @@ const CloneFactoryMock = artifacts.require("CloneFactoryMock.sol");
 const HelloWorld = artifacts.require("HelloWorld.sol");
 const truffleAssert = require("truffle-assertions");
 
-contract("contracts / cloneFactory", () => {
+contract("contracts / proxies / cloneFactory", () => {
   const expectedMessage = "Hello World o/";
   let cloneFactory;
   let helloWorldTemplate;

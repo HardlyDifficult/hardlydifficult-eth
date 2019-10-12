@@ -2,7 +2,7 @@ const { protocols, tokens } = require("../../../..");
 const UniswapAndCall = artifacts.require("UniswapAndCall.sol");
 const truffleAssert = require("truffle-assertions");
 
-contract("contracts / uniswapAndCall", accounts => {
+contract("contracts / tokens / ERC20 / uniswapAndCall", accounts => {
   const owner = accounts[0];
   const keyPrice = web3.utils.toWei("0.00042", "ether");
   let token;
