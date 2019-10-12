@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import '../CloneFactory.sol';
+import '../proxies/CloneFactory.sol';
 
 contract CloneFactoryMock is
   CloneFactory
