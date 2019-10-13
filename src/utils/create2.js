@@ -1,3 +1,4 @@
+const BigNumber = require("bignumber.js");
 const Web3Utils = require("web3-utils");
 
 /**
@@ -19,13 +20,15 @@ function buildCreate2Address(factoryAddress, saltHex, byteCodeHash) {
 
 module.exports = {
   buildCreate2Address,
-  buildClone2Address: (creatorAddress, templateAddress, account, saltHex) => {
+  buildClone2Address: (creatorAddress, templateAddress, account, salt) => {
     const byteCode = `0x3d602d80600a3d3981f3363d3d373d3d3d363d73${templateAddress.replace(
       /0x/,
       ""
     )}5af43d82803e903d91602b57fd5bf3`;
     const byteCodeHash = Web3Utils.keccak256(byteCode);
-    const create2Salt = account + saltHex.replace(/0x/, "");
-    return buildCreate2Address(creatorAddress, create2Salt, byteCodeHash);
+    let saltHex = new BigNumber(salt);
+    saltHex = saltHex.toString(16);
+    saltHex = `${account}${"0".repeat(24 - saltHex.length)}${saltHex}`;
+    return buildCreate2Address(creatorAddress, saltHex, byteCodeHash);
   }
 };

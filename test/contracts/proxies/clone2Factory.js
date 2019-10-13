@@ -18,7 +18,7 @@ contract("contracts / proxies / clone2Factory", accounts => {
     assert.equal(result, expectedMessage);
   });
 
-  describe("Deploy with Clone 2", () => {
+  describe("Deploy with Clone 2 with rng", () => {
     const salt = web3.utils.randomHex(12);
     let helloWorld;
 
@@ -71,5 +71,63 @@ contract("contracts / proxies / clone2Factory", accounts => {
       );
       assert.notEqual(tx.logs[0].args.proxyAddress, web3.utils.padLeft(0, 40));
     });
+  });
+
+  describe("Deploy with Clone 2 with salt only changing least or most significant bit", () => {
+    const testSalts = [
+      "0x000000000000000000000000",
+      "0x000000000000000000000001",
+      "0x000000000000000000000002",
+      "0xffffffffffffffffffffffff",
+      "0xefffffffffffffffffffffff",
+      "0xdfffffffffffffffffffffff"
+    ];
+    for (let i = 0; i < testSalts.length; i++) {
+      const salt = testSalts[i].toString(16);
+
+      describe(`Salt: ${salt}`, () => {
+        let helloWorld;
+
+        beforeEach(async () => {
+          const tx = await cloneFactory.createClone2(
+            helloWorldTemplate.address,
+            salt
+          );
+          helloWorld = await HelloWorld.at(
+            tx.logs.find(l => l.event === "CloneCreated").args.proxyAddress
+          );
+        });
+
+        it("Matches the JS calculated address", async () => {
+          const address = await utils.create2.buildClone2Address(
+            cloneFactory.address,
+            helloWorldTemplate.address,
+            accounts[0],
+            salt
+          );
+          assert.equal(address, helloWorld.address);
+        });
+
+        it("Should fail if a salt is re-used", async () => {
+          await truffleAssert.fails(
+            cloneFactory.createClone2(helloWorldTemplate.address, salt),
+            "revert",
+            "PROXY_DEPLOY_FAILED"
+          );
+        });
+
+        it("Can use the same salt if the account is different", async () => {
+          const tx = await cloneFactory.createClone2(
+            helloWorldTemplate.address,
+            salt,
+            { from: accounts[1] }
+          );
+          assert.notEqual(
+            tx.logs[0].args.proxyAddress,
+            web3.utils.padLeft(0, 40)
+          );
+        });
+      });
+    }
   });
 });
