@@ -1,4 +1,4 @@
-var Web3Utils = require("web3-utils");
+const Web3Utils = require("web3-utils");
 
 /**
  * @notice Returns the address for a create2 deployment without calling a node (JS only).
