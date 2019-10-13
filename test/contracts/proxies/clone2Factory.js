@@ -3,7 +3,7 @@ const HelloWorld = artifacts.require("HelloWorld.sol");
 const truffleAssert = require("truffle-assertions");
 const { utils } = require("../../../");
 
-contract("contracts / proxies / cloneFactory", accounts => {
+contract("contracts / proxies / clone2Factory", accounts => {
   const expectedMessage = "Hello World o/";
   let cloneFactory;
   let helloWorldTemplate;
