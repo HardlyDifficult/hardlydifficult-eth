@@ -11,6 +11,8 @@ contract Clone2Factory
    * @param salt a random salt used to determine the contract address before the transaction is mined.
    * @return proxyAddress the address of the newly deployed contract.
    * @dev Using `bytes12` for the salt saves 6 gas over using `uint96` (requires another shift).
+   * WARNING: if the salt has already been used this will consume all available gas in the transaction.
+   * You could avoid this by first checking availablility with `Clone2Probe`.
    */
   function _createClone2(
     address target,
