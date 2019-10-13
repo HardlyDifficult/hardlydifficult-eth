@@ -6,7 +6,7 @@ const Web3Utils = require("web3-utils");
  * @dev This accepts the byteCodeHash instead of byteCode to allow this to work
  * by caching the hash instead of passing the full bytecode each time.
  * Source: https://github.com/miguelmota/solidity-create2-example
- * modified to accept byteCodeHash and for readability
+ * modified to accept byteCodeHash, return the checksum address, and for readability
  */
 function buildCreate2Address(factoryAddress, saltHex, byteCodeHash) {
   const seed = ["ff", factoryAddress, saltHex, byteCodeHash]
