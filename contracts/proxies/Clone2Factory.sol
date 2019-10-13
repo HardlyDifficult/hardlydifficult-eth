@@ -13,11 +13,12 @@ contract Clone2Factory
    */
   function _createClone2(
     address target,
-    uint salt
+    uint96 salt
   ) internal
     returns (address result)
   {
     bytes20 targetBytes = bytes20(target);
+    bytes memory create2Salt = abi.encodePacked(msg.sender, salt);
     // solium-disable-next-line
     assembly
     {
@@ -25,7 +26,7 @@ contract Clone2Factory
       mstore(clone, 0x3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000)
       mstore(add(clone, 0x14), targetBytes)
       mstore(add(clone, 0x28), 0x5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000)
-      result := create2(0, clone, 0x37, salt)
+      result := create2(0, clone, 0x37, mload(add(create2Salt, 0x20)))
     }
 
     // Revert if the deployment fails (possible if salt was already used)

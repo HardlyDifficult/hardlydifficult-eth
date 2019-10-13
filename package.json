@@ -41,7 +41,8 @@
     "erc1820": "0.0.2",
     "truffle": "5.0.39",
     "truffle-assertions": "0.9.1",
-    "unlock-abi-1-1": "1.0.0"
+    "unlock-abi-1-1": "1.0.0",
+    "web3-utils": "^1.2.1"
   },
   "devDependencies": {
     "@codechecks/client": "0.1.10",

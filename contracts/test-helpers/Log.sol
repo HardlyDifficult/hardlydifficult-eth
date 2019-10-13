@@ -9,4 +9,5 @@ contract Log
 {
   event LogAddress(address _data);
   event LogUint(uint _data);
+  event LogBytes(bytes _data);
 }

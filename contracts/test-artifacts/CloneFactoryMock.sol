@@ -20,7 +20,7 @@ contract CloneFactoryMock is
 
   function createClone2(
     address target,
-    uint salt
+    uint96 salt
   ) external
   {
     address result = _createClone2(target, salt);
