@@ -10,5 +10,10 @@
   "patch": {
     "groupName": "all dependencies patch updates",
     "groupSlug": "all-patch"
+  },
+  {
+    "packageNames": ["hardlydifficult-ethereum-contracts"],
+    "schedule": ["at any time"],
+    "groupSlug": "hardlydifficult-ethereum-contracts"
   }
 }
