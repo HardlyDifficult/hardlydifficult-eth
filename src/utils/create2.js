@@ -23,7 +23,7 @@ module.exports = {
   /**
    * @notice Returns the address for a create2 deployment of a minimal proxy contract
    * (EIP-1167) without calling a node (JS only).
-   * @param salt A value <= 16 bytes which will be appended to the account's address
+   * @param salt A value <= 12 bytes which will be appended to the account's address
    * for the `create2` call.
    */
   buildClone2Address: (creatorAddress, templateAddress, account, salt) => {
