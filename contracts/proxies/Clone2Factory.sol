@@ -8,7 +8,8 @@ contract Clone2Factory
   /**
    * @notice Uses create2 to deploy a clone to a pre-determined address.
    * @param target the address of the template contract, containing the logic for this contract.
-   * @param salt a random salt used to determine the contract address before the transaction is mined.
+   * @param salt a salt used to determine the contract address before the transaction is mined,
+   * may be random or sequential.
    * @return proxyAddress the address of the newly deployed contract.
    * @dev Using `bytes12` for the salt saves 6 gas over using `uint96` (requires another shift).
    * Will revert on fail.
