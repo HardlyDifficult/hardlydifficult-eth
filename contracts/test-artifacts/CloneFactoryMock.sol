@@ -30,17 +30,4 @@ contract CloneFactoryMock is
     address result = _createClone2(target, salt);
     emit CloneCreated(result);
   }
-
-  function createClone2IfSafe(
-    address target,
-    bytes12 salt
-  ) external
-  {
-    address result = getClone2Address(target, salt);
-    if(isAddressAvailable(result))
-    {
-      _createClone2(target, salt);
-      emit CloneCreated(result);
-    }
-  }
 }

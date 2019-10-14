@@ -49,7 +49,7 @@ contract("contracts / proxies / clone2Factory", accounts => {
 
         describe("After creation", () => {
           beforeEach(async () => {
-            const tx = await cloneFactory.createClone2IfSafe(
+            const tx = await cloneFactory.createClone2(
               helloWorldTemplate.address,
               salt
             );
@@ -98,16 +98,6 @@ contract("contracts / proxies / clone2Factory", accounts => {
               "revert",
               "PROXY_DEPLOY_FAILED"
             );
-          });
-
-          it("createClone2IfSafe does not burn all my gas on failure", async () => {
-            const tx = await cloneFactory.createClone2IfSafe(
-              helloWorldTemplate.address,
-              salt
-            );
-            // This is both less than what we would need for a deploy and the cost of assert
-            // (createClone2 will assert on failure)
-            assert(new BigNumber(tx.receipt.gasUsed).lt(30000));
           });
 
           it("Can use the same account if the salt is different", async () => {
