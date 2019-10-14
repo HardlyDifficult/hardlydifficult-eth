@@ -15,7 +15,7 @@ contract Clone2Probe
     {
       let pointer := mload(0x40)
 
-      // Store the contract bytecode
+      // Create the bytecode for deployment based on the Minimal Proxy Standard (EIP-1167)
       mstore(pointer, 0x3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000)
       mstore(add(pointer, 0x14), shl(96, target))
       mstore(add(pointer, 0x28), 0x5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000)
