@@ -101,15 +101,19 @@ contract("contracts / proxies / clone2Factory", accounts => {
           });
 
           it("Can use the same account if the salt is different", async () => {
-            const tx = await cloneFactory.createClone2(
-              helloWorldTemplate.address,
-              web3.utils.randomHex(12),
-              { from: accounts[1] }
-            );
-            assert.notEqual(
-              tx.logs[0].args.proxyAddress,
-              web3.utils.padLeft(0, 40)
-            );
+            for (let j = 0; j < testSalts.length; j++) {
+              if (i != j) {
+                const tx = await cloneFactory.createClone2(
+                  helloWorldTemplate.address,
+                  testSalts[j],
+                  { from: accounts[1] }
+                );
+                assert.notEqual(
+                  tx.logs[0].args.proxyAddress,
+                  web3.utils.padLeft(0, 40)
+                );
+              }
+            }
           });
 
           it("Can use the same salt if the account is different", async () => {
