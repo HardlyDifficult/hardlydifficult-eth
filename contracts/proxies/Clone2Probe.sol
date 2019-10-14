@@ -5,7 +5,7 @@ pragma solidity ^0.5.0;
 contract Clone2Probe
 {
   function getClone2Address(
-    uint target,
+    address target,
     bytes12 salt
   ) public view
     returns (address cloneAddress)
