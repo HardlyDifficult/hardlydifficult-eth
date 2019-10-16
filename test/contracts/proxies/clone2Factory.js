@@ -31,7 +31,7 @@ contract("contracts / proxies / clone2Factory", accounts => {
       web3.utils.randomHex(12)
     ];
     for (let i = 0; i < testSalts.length; i++) {
-      const salt = testSalts[i].toString(16);
+      const salt = testSalts[i];
 
       describe(`Salt: ${salt}`, () => {
         let helloWorld;
