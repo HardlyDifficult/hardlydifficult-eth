@@ -1,7 +1,7 @@
+const cOrgAbi = require("@fairmint/c-org-abi/abi.json");
+const cOrgBytecode = require("@fairmint/c-org-abi/bytecode.json");
+const cOrgStaticBytecode = require("@fairmint/c-org-abi/static_bytecode.json");
 const { truffleContract } = require("../helpers");
-const cOrgAbi = require("c-org-abi/abi.json");
-const cOrgBytecode = require("c-org-abi/bytecode.json");
-const cOrgStaticBytecode = require("c-org-abi/static_bytecode.json");
 const constants = require("../constants");
 
 async function getDat(web3, datAddress) {
@@ -32,9 +32,9 @@ module.exports = {
         buySlopeNum: "1",
         buySlopeDen: "100000000000000000000",
         investmentReserveBasisPoints: "1000",
-        revenueCommitementBasisPoints: "1000",
+        revenueCommitmentBasisPoints: "1000",
         feeBasisPoints: "0",
-        burnThresholdBasisPoints: "0",
+        burnThresholdBasisPoints: false,
         minInvestment: "1",
         openUntilAtLeast: "0",
         name: "FAIR token",
@@ -88,7 +88,6 @@ module.exports = {
       callOptions.buySlopeNum,
       callOptions.buySlopeDen,
       callOptions.investmentReserveBasisPoints,
-      callOptions.revenueCommitementBasisPoints,
       { from: callOptions.control }
     );
 
@@ -130,7 +129,8 @@ module.exports = {
       callOptions.control,
       callOptions.feeCollector,
       callOptions.feeBasisPoints,
-      callOptions.burnThresholdBasisPoints,
+      callOptions.autoBurn,
+      callOptions.revenueCommitmentBasisPoints,
       callOptions.minInvestment,
       callOptions.openUntilAtLeast,
       callOptions.name,
