@@ -19,9 +19,9 @@
       }
     },
     {
-      "packageNames": ["hardlydifficult-ethereum-contracts"],
+      "packageNames": ["hardlydifficult-ethereum-contracts", "@fairmint/c-org-abi"],
       "schedule": ["at any time"],
-      "groupSlug": "hardlydifficult-ethereum-contracts"
+      "groupSlug": "key-packages"
     }
   ]
 }
