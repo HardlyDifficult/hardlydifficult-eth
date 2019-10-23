@@ -10,11 +10,6 @@
   "separateMinorPatch": true,
   "packageRules": [
     {
-      "packageNames": ["hardlydifficult-ethereum-contracts", "@fairmint/c-org-abi"],
-      "schedule": ["at any time"],
-      "groupSlug": "key-packages"
-    },
-    {
       "packagePatterns": [
         "*"
       ],
@@ -22,6 +17,12 @@
         "groupName": "all dependencies patch updates",
         "groupSlug": "all-patch"
       }
+    },
+    {
+      "packageNames": ["hardlydifficult-ethereum-contracts", "@fairmint/c-org-abi"],
+      "schedule": ["at any time"],
+      "groupName": "key package updates",
+      "groupSlug": "key-packages"
     }
   ]
 }
