@@ -2,6 +2,10 @@ const { truffleContract } = require("../helpers");
 const daiJson = require("./dai.json");
 const utils = require("../utils");
 
+async function getToken(web3, tokenAddress) {
+  return await truffleContract.at(web3, daiJson.abi, tokenAddress);
+}
+
 module.exports = {
   /**
    * @param useAntiOwner true to use a proxy contract allowing any account to call `mint`.
@@ -28,5 +32,6 @@ module.exports = {
     }
 
     return result;
-  }
+  },
+  getToken
 };

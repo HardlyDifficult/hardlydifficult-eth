@@ -3,6 +3,10 @@ const usdcJson = require("./usdc.json");
 const constants = require("../constants");
 const utils = require("../utils");
 
+async function getToken(web3, tokenAddress) {
+  return await truffleContract.at(web3, usdcJson.abi, tokenAddress);
+}
+
 module.exports = {
   /**
    * @param useAntiOwner true to use a proxy contract allowing any account to call `mint`.
@@ -52,7 +56,7 @@ module.exports = {
       .configureMinter(tokenOwner, -1)
       .send({ from: tokenOwner });
 
-    const result = await truffleContract.at(web3, usdcJson.abi, token._address);
+    const result = await getToken(web3, token._address);
 
     if (useAntiOwner) {
       const antiOwnerProxy = await utils.antiOwnerProxy.deploy(
@@ -82,5 +86,6 @@ module.exports = {
     }
 
     return result;
-  }
+  },
+  getToken
 };
