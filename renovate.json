@@ -8,22 +8,16 @@
   "timezone": "America/Los_Angeles",
   "schedule": ["after 2am and before 5am on monday"],
   "separateMinorPatch": true,
+  "patch": {
+    "groupName": "all dependencies patch updates",
+    "groupSlug": "all-patch"
+  }
   "packageRules": [
-    {
-      "packagePatterns": [
-        "*"
-      ],
-      "patch": {
-        "groupName": "all dependencies patch updates",
-        "groupSlug": "all-patch"
-      }
-    },
     {
       "packageNames": ["hardlydifficult-ethereum-contracts", "@fairmint/c-org-abi"],
       "schedule": ["at any time"],
       "groupName": "key package updates",
-      "groupSlug": "key-packages":
-      "patch": {}
+      "groupSlug": "key-packages"
     }
   ]
 }
