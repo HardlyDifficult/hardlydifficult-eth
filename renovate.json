@@ -11,7 +11,7 @@
   "patch": {
     "groupName": "all dependencies patch updates",
     "groupSlug": "all-patch"
-  }
+  },
   "packageRules": [
     {
       "packageNames": ["hardlydifficult-ethereum-contracts", "@fairmint/c-org-abi"],
