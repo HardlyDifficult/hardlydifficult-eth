@@ -16,8 +16,10 @@
     {
       "packageNames": ["hardlydifficult-ethereum-contracts", "@fairmint/c-org-abi"],
       "schedule": ["at any time"],
-      "groupName": "key package updates",
-      "groupSlug": "key-packages"
+      "patch": {
+        "groupName": null,
+        "groupSlug": null
+      }
     }
   ]
 }
