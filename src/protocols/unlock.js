@@ -10,7 +10,7 @@ const deploy = async (web3, owner) => {
   // proxy.initialize(address _owner)
   const unlockContract = await new web3.eth.Contract(unlockAbi.Unlock.abi)
     .deploy({
-      data: `0x${unlockAbi.Unlock.bytecode.replace(/0x/,"")}`
+      data: `0x${unlockAbi.Unlock.bytecode.replace(/0x/, "")}`
     })
     .send({
       from: owner,
@@ -18,7 +18,7 @@ const deploy = async (web3, owner) => {
     });
   const proxyAdmin = await new web3.eth.Contract(unlockJson.proxyAdmin.abi)
     .deploy({
-      data: `0x${unlockJson.proxyAdmin.bytecode.replace(/0x/,"")}`
+      data: `0x${unlockJson.proxyAdmin.bytecode.replace(/0x/, "")}`
     })
     .send({
       from: owner,
@@ -26,7 +26,7 @@ const deploy = async (web3, owner) => {
     });
   const proxy = await new web3.eth.Contract(unlockJson.proxy.abi)
     .deploy({
-      data: `0x${unlockJson.proxy.bytecode.replace(/0x/,"")}`,
+      data: `0x${unlockJson.proxy.bytecode.replace(/0x/, "")}`,
       arguments: [unlockContract._address, proxyAdmin._address, "0x"]
     })
     .send({

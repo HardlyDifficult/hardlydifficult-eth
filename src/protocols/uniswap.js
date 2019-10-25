@@ -9,13 +9,13 @@ module.exports = {
     const exchangeTemplate = await truffleContract.new(
       web3,
       uniswapJson.exchange.abi,
-      `0x${uniswapJson.exchange.bytecode.replace(/0x/,"")}`,
+      `0x${uniswapJson.exchange.bytecode.replace(/0x/, "")}`,
       owner
     );
     const factory = await truffleContract.new(
       web3,
       uniswapJson.abi,
-      `0x${uniswapJson.bytecode.replace(/0x/,"")}`,
+      `0x${uniswapJson.bytecode.replace(/0x/, "")}`,
       owner
     );
     await factory.initializeFactory(exchangeTemplate.address, {
