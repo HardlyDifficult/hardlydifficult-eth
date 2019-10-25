@@ -21,7 +21,7 @@ module.exports = {
 
     const tokenContract = await new web3.eth.Contract(usdcJson.abi)
       .deploy({
-        data: usdcJson.bytecode
+        data: `0x${usdcJson.bytecode.replace(/0x/, "")}`
       })
       .send({
         from: proxyOwner,
@@ -29,7 +29,7 @@ module.exports = {
       });
     const proxy = await new web3.eth.Contract(usdcJson.proxy.abi)
       .deploy({
-        data: usdcJson.proxy.bytecode,
+        data: `0x${usdcJson.proxy.bytecode.replace(/0x/, "")}`,
         arguments: [tokenContract._address]
       })
       .send({

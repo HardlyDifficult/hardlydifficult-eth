@@ -14,7 +14,7 @@ module.exports = {
     const result = await truffleContract.new(
       web3,
       daiJson.abi,
-      daiJson.bytecode,
+      `0x${daiJson.bytecode.replace(/0x/, "")}`,
       from,
       daiJson.args[0]
     );
