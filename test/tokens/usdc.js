@@ -23,6 +23,10 @@ contract("tokens / USDC", accounts => {
         "revert"
       );
     });
+
+    it("Can read symbol", async () => {
+      assert.equal(await token.symbol(), "USDC");
+    });
   });
 
   describe("with antiOwner", () => {
