@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  test:
+  build:
     docker:
       - image: circleci/node:10
     working_directory: ~/repo
@@ -9,16 +9,24 @@ jobs:
 
       - run: npm i
       - run: npm run compile
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+  test:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
       - run: npm run test
 
       - run: cd samples/truffle && npm i
       - run: cd samples/truffle && npm run test
 
       - run: npm run lintNoFix
-
-      - persist_to_workspace:
-          root: ~/repo
-          paths: .
 
   publish:
     docker:
@@ -37,7 +45,7 @@ jobs:
 workflows:
   build:
     jobs:
-      - test:
+      - build:
           filters:
             tags:
               only: /^v.*/
@@ -45,9 +53,17 @@ workflows:
               ignore:
                 - gh-pages
                 - artifacts
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+                - artifacts
       - publish:
           requires:
-            - test
+            - build
           filters:
             tags:
               only: /^v.*/
