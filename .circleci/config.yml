@@ -54,6 +54,8 @@ workflows:
                 - gh-pages
                 - artifacts
       - test:
+          requires:
+            - build
           filters:
             branches:
               ignore:
@@ -61,7 +63,7 @@ workflows:
                 - artifacts
       - publish:
           requires:
-            - test
+            - build
           filters:
             tags:
               only: /^v.*/
