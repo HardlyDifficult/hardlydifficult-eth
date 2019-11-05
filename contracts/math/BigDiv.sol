@@ -127,7 +127,7 @@ library BigDiv
     uint256 _numB,
     uint256 _den,
     bool _roundUp
-  ) external pure
+  ) public pure
     returns(uint256)
   {
     // first get the rounded down result
@@ -173,7 +173,7 @@ library BigDiv
     uint256 _numB,
     uint256 _denA,
     uint256 _denB
-  ) external pure
+  ) public pure
     returns (uint256)
   {
     if(MAX_UINT / _denA >= _denB)
