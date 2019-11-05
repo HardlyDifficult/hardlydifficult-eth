@@ -26,9 +26,6 @@ library BigDiv
   /// @notice A larger error threshold to use when multiple rounding errors may apply
   uint256 constant MAX_ERROR_BEFORE_DIV = MAX_ERROR * 2;
 
-  /// @notice Represents 1 full token (with 18 decimals)
-  uint256 constant DECIMAL_DIGITS = 10 ** 18;
-
   /**
    * @notice Returns the approx result of `a * b / d` so long as the result is <= MAX_UINT
    * @param _numA the first numerator term
