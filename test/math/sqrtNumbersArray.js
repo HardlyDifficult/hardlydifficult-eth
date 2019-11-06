@@ -156,22 +156,6 @@ contract("math / sqrtNumbersArray", () => {
 
   for (let i = numbers.length - 1; i >= 0; i--) {
     const x = numbers[i];
-    let sqrtOfTokensResult = new BigNumber(x)
-      .div(new BigNumber(10).pow(8))
-      .dp(0) // we expect to lose 8 decimals before the sqrt
-      .div(new BigNumber(10).pow(36 - 8))
-      .sqrt()
-      .times(new BigNumber(10).pow(18));
-
-    it(`sqrtOfTokens(${x.toFixed()}) ~= ${sqrtOfTokensResult.toExponential(
-      2
-    )})`, async () => {
-      sqrtOfTokensResult = sqrtOfTokensResult.dp(0);
-      const contractRes = new BigNumber(
-        await contract.sqrtOfTokens(x.toFixed())
-      );
-      checkBounds(sqrtOfTokensResult, contractRes, true);
-    });
 
     let sqrtResult = new BigNumber(x).sqrt();
     it(`sqrt(${x.toFixed()}) ~= ${sqrtResult.toExponential(2)}`, async () => {

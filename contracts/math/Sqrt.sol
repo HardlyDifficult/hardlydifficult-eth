@@ -10,24 +10,6 @@ library Sqrt
   /// @notice The max possible value
   uint256 constant MAX_UINT = 2**256 - 1;
 
-  /**
-   * @notice Calculates sqrt(x/(10^18)^2)*10^18 with 10 decimals of precision.
-   * @dev Assumes 18 decimals (standard for tokens). 10 decimals of precision was choosen to
-   * be on-par with the Vyper implementation.
-   * Returns 0 when x < 10^26.
-   */
-  function sqrtOfTokens(
-    uint x
-  ) public pure
-    returns (uint y)
-  {
-    // Shift by 18 decimals squared, and leave 10 decimals for sqrt precision
-    y = x / 10**(18 + 18 - 10);
-    y = sqrt(y);
-    // Adjust for sqrt(10^10) (5) and *10^18
-    y = y.mul(10**(18-5));
-  }
-
   // Source: https://github.com/ethereum/dapp-bin/pull/50
   function sqrtUint(
     uint x
