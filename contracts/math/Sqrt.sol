@@ -11,7 +11,7 @@ library Sqrt
   uint256 constant MAX_UINT = 2**256 - 1;
 
   // Source: https://github.com/ethereum/dapp-bin/pull/50
-  function sqrt(
+  function sqrtUint(
     uint x
   ) public pure
     returns (uint y)

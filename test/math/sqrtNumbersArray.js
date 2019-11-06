@@ -160,7 +160,7 @@ contract("math / sqrtNumbersArray", () => {
     let sqrtResult = new BigNumber(x).sqrt();
     it(`sqrt(${x.toFixed()}) ~= ${sqrtResult.toExponential(2)}`, async () => {
       sqrtResult = sqrtResult.dp(0);
-      const contractRes = new BigNumber(await contract.sqrt(x.toFixed()));
+      const contractRes = new BigNumber(await contract.sqrtUint(x.toFixed()));
       checkBounds(sqrtResult, contractRes);
     });
   }
