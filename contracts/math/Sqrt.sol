@@ -29,7 +29,7 @@ library Sqrt
   }
 
   // Source: https://github.com/ethereum/dapp-bin/pull/50
-  function sqrt(
+  function sqrtUint(
     uint x
   ) public pure
     returns (uint y)
