@@ -161,14 +161,20 @@ contract("math / bigDivNumbersArray", () => {
       return; // skip test as the result may overflow when in expected range
     }
 
-    const contractRes = new BigNumber(
-      await contract.bigDiv2x1(
-        numA.toFixed(),
-        numB.toFixed(),
-        den.toFixed(),
-        roundUp
-      )
-    );
+    let contractRes;
+    if (roundUp) {
+      contractRes = new BigNumber(
+        await contract.bigDiv2x1RoundUp(
+          numA.toFixed(),
+          numB.toFixed(),
+          den.toFixed()
+        )
+      );
+    } else {
+      contractRes = new BigNumber(
+        await contract.bigDiv2x1(numA.toFixed(), numB.toFixed(), den.toFixed())
+      );
+    }
 
     checkBounds(bnRes, contractRes, roundUp);
   };
