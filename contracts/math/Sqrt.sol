@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 
 import '@openzeppelin/contracts/math/SafeMath.sol';
 
-library Sqrt
+contract Sqrt
 {
   using SafeMath for uint;
 
@@ -11,7 +11,7 @@ library Sqrt
   uint256 constant MAX_UINT = 2**256 - 1;
 
   // Source: https://github.com/ethereum/dapp-bin/pull/50
-  function sqrtUint(
+  function sqrt(
     uint x
   ) public pure
     returns (uint y)
