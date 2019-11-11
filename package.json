@@ -36,7 +36,7 @@
   "dependencies": {
     "@fairmint/c-org-abi": "1.2.5",
     "@openzeppelin/contracts": "2.4.0",
-    "@truffle/contract": "4.0.38",
+    "@truffle/contract": "4.0.39",
     "bignumber.js": "9.0.0",
     "erc1820": "0.0.2",
     "truffle": "5.0.43",
