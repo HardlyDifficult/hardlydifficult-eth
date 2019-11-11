@@ -115,42 +115,37 @@ contract BigDiv
    * @param _numA the first numerator term
    * @param _numB the second numerator term
    * @param _den the denominator
-   * @param _roundUp if true, the math may round the final value up from the exact expected value
    * @return the approx result with up to off by 1 + MAX_ERROR, rounding down if needed
-   * @dev _roundUp is implemented by first rounding down and then adding the max error to the result
+   * @dev roundUp is implemented by first rounding down and then adding the max error to the result
    */
-  function bigDiv2x1(
+  function bigDiv2x1RoundUp(
     uint256 _numA,
     uint256 _numB,
-    uint256 _den,
-    bool _roundUp
+    uint256 _den
   ) public pure
     returns(uint256)
   {
     // first get the rounded down result
     uint256 value = bigDiv2x1(_numA, _numB, _den);
 
-    if(_roundUp)
+    if(value == 0)
     {
-      if(value == 0)
-      {
-        // when the value rounds down to 0, assume up to an off by 1 error
-        return 1;
-      }
-
-      // round down has a max error of MAX_ERROR, add that to the result
-      // for a round up error of <= MAX_ERROR
-      uint256 temp = value - 1;
-      temp /= MAX_ERROR;
-      temp += 1;
-      if(MAX_UINT - value < temp)
-      {
-        // value + error would overflow, return MAX
-        return MAX_UINT;
-      }
-
-      value += temp;
+      // when the value rounds down to 0, assume up to an off by 1 error
+      return 1;
     }
+
+    // round down has a max error of MAX_ERROR, add that to the result
+    // for a round up error of <= MAX_ERROR
+    uint256 temp = value - 1;
+    temp /= MAX_ERROR;
+    temp += 1;
+    if(MAX_UINT - value < temp)
+    {
+      // value + error would overflow, return MAX
+      return MAX_UINT;
+    }
+
+    value += temp;
 
     return value;
   }
