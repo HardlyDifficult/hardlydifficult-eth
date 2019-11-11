@@ -9,7 +9,7 @@ import '@openzeppelin/contracts/math/SafeMath.sol';
  * @notice This effectively allows us to overflow values in the numerator and/or denominator
  * of a fraction, so long as the end result does not overflow as well.
 */
-library BigDiv
+contract BigDiv
 {
   using SafeMath for uint256;
 
