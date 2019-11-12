@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol';
 import '../../interfaces/IUniswapFactory.sol';
 import '../../interfaces/IUniswapExchange.sol';
 import '../../proxies/CallContract.sol';
