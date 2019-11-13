@@ -9,7 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "eth-gas-reporter": "0.2.12",
-    "hardlydifficult-ethereum-contracts": "0.6.8",
+    "hardlydifficult-ethereum-contracts": "0.7.0",
     "truffle": "5.0.44"
   }
 }
