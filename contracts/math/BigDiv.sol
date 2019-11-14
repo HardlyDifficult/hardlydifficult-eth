@@ -14,17 +14,17 @@ contract BigDiv
   using SafeMath for uint256;
 
   /// @notice The max possible value
-  uint256 constant MAX_UINT = 2**256 - 1;
+  uint256 public constant MAX_UINT = 2**256 - 1;
 
   /// @notice When multiplying 2 terms <= this value the result won't overflow
-  uint256 constant MAX_BEFORE_SQUARE = 2**128 - 1;
+  uint256 public constant MAX_BEFORE_SQUARE = 2**128 - 1;
 
   /// @notice The max error target is off by 1 plus up to 0.000001% error
   /// for bigDiv2x1 and that `* 2` for bigDiv2x2
-  uint256 constant MAX_ERROR = 100000000;
+  uint256 public constant MAX_ERROR = 100000000;
 
   /// @notice A larger error threshold to use when multiple rounding errors may apply
-  uint256 constant MAX_ERROR_BEFORE_DIV = MAX_ERROR * 2;
+  uint256 public constant MAX_ERROR_BEFORE_DIV = MAX_ERROR * 2;
 
   /**
    * @notice Returns the approx result of `a * b / d` so long as the result is <= MAX_UINT
