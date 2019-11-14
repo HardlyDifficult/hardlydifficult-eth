@@ -8,7 +8,7 @@
     "test": "truffle test",
     "lint": "solium -d contracts --fix && eslint . --fix",
     "lintNoFix": "solium -d contracts && eslint .",
-    "coverage": "truffle run coverage"
+    "coverage": "truffle run coverage && cat coverage/lcov.info | coveralls"
   },
   "files": [
     "build",
@@ -47,6 +47,7 @@
     "@codechecks/client": "0.1.10",
     "babel-eslint": "10.0.3",
     "chai": "4.2.0",
+    "coveralls": "3.0.7",
     "eslint": "6.6.0",
     "eslint-config-prettier": "6.5.0",
     "eslint-plugin-json": "2.0.1",
