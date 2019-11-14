@@ -1,4 +1,5 @@
 const BigNumber = require("bignumber.js");
+const { constants } = require("../../");
 
 const bigDivArtifact = artifacts.require("BigDiv");
 
@@ -186,5 +187,52 @@ contract("math / bigDiv", () => {
       "1732338333044431510646123721431533388565228352014767025345793580173623296"
     );
     assert.equal(result, 0);
+  });
+
+  it("Round up max result does not overflow", async () => {
+    const roundDownResult = await contract.bigDiv2x1(
+      constants.MAX_UINT,
+      "1",
+      "1"
+    );
+    // Sanity check
+    assert.equal(roundDownResult.toString(), constants.MAX_UINT);
+
+    const roundUpResult = await contract.bigDiv2x1RoundUp(
+      constants.MAX_UINT,
+      "1",
+      "1"
+    );
+    assert.equal(roundUpResult.toString(), constants.MAX_UINT);
+  });
+
+  it.only("2x2 returns the same results if not sorted", async () => {
+    const sortedResult = await contract.bigDiv2x2(
+      maxValue.toFixed(),
+      "99",
+      maxValue.toFixed(),
+      "2"
+    );
+    const unsortedDenResult = await contract.bigDiv2x2(
+      maxValue.toFixed(),
+      "99",
+      "2",
+      maxValue.toFixed()
+    );
+    const unsortedNumResult = await contract.bigDiv2x2(
+      "99",
+      maxValue.toFixed(),
+      maxValue.toFixed(),
+      "2"
+    );
+    const unsortedResult = await contract.bigDiv2x2(
+      "99",
+      maxValue.toFixed(),
+      "2",
+      maxValue.toFixed()
+    );
+    assert.equal(sortedResult.toString(), unsortedDenResult.toString());
+    assert.equal(sortedResult.toString(), unsortedNumResult.toString());
+    assert.equal(sortedResult.toString(), unsortedResult.toString());
   });
 });
