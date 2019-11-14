@@ -27,6 +27,15 @@ jobs:
       - run: cd samples/truffle && npm run test
 
       - run: npm run lintNoFix
+  coverage:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run: npm run coverage
 
   publish:
     docker:
@@ -54,6 +63,14 @@ workflows:
                 - gh-pages
                 - artifacts
       - test:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+                - artifacts
+      - coverage:
           requires:
             - build
           filters:
