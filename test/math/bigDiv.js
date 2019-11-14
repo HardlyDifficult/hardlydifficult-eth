@@ -206,7 +206,7 @@ contract("math / bigDiv", () => {
     assert.equal(roundUpResult.toString(), constants.MAX_UINT);
   });
 
-  it.only("2x2 returns the same results if not sorted", async () => {
+  it("2x2 returns the same results if not sorted", async () => {
     const sortedResult = await contract.bigDiv2x2(
       maxValue.toFixed(),
       "99",
