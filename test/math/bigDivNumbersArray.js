@@ -14,7 +14,7 @@ const numbers = [
   new BigNumber("0"),
   new BigNumber("1"),
   new BigNumber("2"),
-  new BigNumber("3"),
+  // new BigNumber("3"),
   // new BigNumber("97"),
   // MAX_UINT32.div('1009').dp(0),
   // MAX_UINT32.div('10').dp(0),
