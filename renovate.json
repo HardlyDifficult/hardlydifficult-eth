@@ -6,19 +6,17 @@
     ":pinVersions"
   ],
   "timezone": "America/Los_Angeles",
-  "schedule": ["after 2am and before 5am on monday"],
+  "schedule": ["after 2am and before 5am"],
   "separateMinorPatch": true,
   "patch": {
-    "groupName": "all dependencies patch updates",
-    "groupSlug": "all-patch"
+    "groupName": "all patch updates"
   },
   "packageRules": [
     {
       "packageNames": ["hardlydifficult-ethereum-contracts", "@fairmint/c-org-abi"],
       "schedule": ["at any time"],
       "patch": {
-        "groupName": null,
-        "groupSlug": null
+        "groupName": null
       }
     }
   ]
