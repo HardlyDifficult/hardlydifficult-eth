@@ -8,7 +8,7 @@ contract Sqrt
   using SafeMath for uint;
 
   /// @notice The max possible value
-  uint256 public constant MAX_UINT = 2**256 - 1;
+  uint256 private constant MAX_UINT = 2**256 - 1;
 
   // Source: https://github.com/ethereum/dapp-bin/pull/50
   function sqrt(
