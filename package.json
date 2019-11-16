@@ -37,7 +37,7 @@
   "dependencies": {
     "@fairmint/c-org-abi": "1.2.5",
     "@openzeppelin/contracts-ethereum-package": "2.4.0",
-    "@truffle/contract": "4.0.39",
+    "@truffle/contract": "4.1.0",
     "bignumber.js": "9.0.0",
     "erc1820": "0.0.2",
     "unlock-abi-1-1": "1.1.0",
