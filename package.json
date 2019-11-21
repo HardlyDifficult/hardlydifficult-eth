@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-test-helpers#readme",
   "dependencies": {
-    "@fairmint/c-org-abi": "1.2.5",
+    "@fairmint/c-org-abi": "2.0.0",
     "@openzeppelin/contracts-ethereum-package": "2.4.0",
     "@truffle/contract": "4.1.0",
     "bignumber.js": "9.0.0",
