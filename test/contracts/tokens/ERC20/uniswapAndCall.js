@@ -58,8 +58,7 @@ contract("contracts / tokens / ERC20 / uniswapAndCall", accounts => {
       lock.purchaseFor(accounts[2], {
         from: accounts[2],
         value: await exchange.getEthToTokenOutputPrice(keyPrice)
-      }),
-      "revert"
+      })
     );
   });
 
