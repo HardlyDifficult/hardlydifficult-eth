@@ -53,9 +53,17 @@ module.exports = {
         from: callOptions.control,
         gas: constants.MAX_GAS
       });
-    const bigMath = await new web3.eth.Contract(cOrgAbi.bigMath)
+    const bigDiv = await new web3.eth.Contract(cOrgAbi.bigDiv)
       .deploy({
-        data: cOrgStaticBytecode.bigMath
+        data: cOrgStaticBytecode.bigDiv
+      })
+      .send({
+        from: callOptions.control,
+        gas: constants.MAX_GAS
+      });
+    const sqrt = await new web3.eth.Contract(cOrgAbi.sqrt)
+      .deploy({
+        data: cOrgStaticBytecode.sqrt
       })
       .send({
         from: callOptions.control,
@@ -88,6 +96,8 @@ module.exports = {
       callOptions.buySlopeNum,
       callOptions.buySlopeDen,
       callOptions.investmentReserveBasisPoints,
+      callOptions.name,
+      callOptions.symbol,
       { from: callOptions.control }
     );
 
@@ -123,7 +133,8 @@ module.exports = {
     });
 
     await dat.updateConfig(
-      bigMath._address,
+      bigDiv._address,
+      sqrt._address,
       whitelist.address,
       callOptions.beneficiary,
       callOptions.control,
@@ -133,8 +144,6 @@ module.exports = {
       callOptions.revenueCommitmentBasisPoints,
       callOptions.minInvestment,
       callOptions.openUntilAtLeast,
-      callOptions.name,
-      callOptions.symbol,
       {
         from: callOptions.control
       }

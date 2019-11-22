@@ -50,7 +50,7 @@ contract("protocols / c-org", accounts => {
       });
 
       const balance = await contracts.dat.balanceOf(accounts[9]);
-      assert.equal(balance.toString(), "23809500000000");
+      assert.equal(balance.toString(), "23809517060796");
     });
   });
 });
