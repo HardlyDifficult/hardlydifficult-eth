@@ -1,9 +1,9 @@
 const { truffleContract } = require("../helpers");
-const daiJson = require("./dai.json");
+const saiJson = require("./sai.json");
 const utils = require("../utils");
 
 async function getToken(web3, tokenAddress) {
-  return await truffleContract.at(web3, daiJson.abi, tokenAddress);
+  return await truffleContract.at(web3, saiJson.abi, tokenAddress);
 }
 
 module.exports = {
@@ -13,10 +13,10 @@ module.exports = {
   deploy: async (web3, from, useAntiOwner) => {
     const result = await truffleContract.new(
       web3,
-      daiJson.abi,
-      `0x${daiJson.bytecode.replace(/0x/, "")}`,
+      saiJson.abi,
+      `0x${saiJson.bytecode.replace(/0x/, "")}`,
       from,
-      daiJson.args[0]
+      saiJson.args[0]
     );
 
     if (useAntiOwner) {
@@ -24,7 +24,7 @@ module.exports = {
       await result.setOwner(antiOwnerProxy.address, { from });
       result.mint = async (to, amount, options) => {
         const callData = web3.eth.abi.encodeFunctionCall(
-          daiJson.abi.find(e => e.name === "mint"),
+          saiJson.abi.find(e => e.name === "mint"),
           [to, amount]
         );
         await antiOwnerProxy.proxyCall(result.address, callData, options);
