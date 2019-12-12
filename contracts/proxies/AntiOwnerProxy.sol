@@ -9,14 +9,15 @@ import './CallContract.sol';
  * @dev If this contract is the owner / admin account for another, this contract allows
  * anyone to make owner only calls; bypassing the owner requirement.
  */
-contract AntiOwnerProxy is
-  CallContract
+contract AntiOwnerProxy
 {
+  using CallContract for address;
+
   function proxyCall(
     address _contract,
     bytes memory _callData
   ) public
   {
-    _call(_contract, 0, _callData);
+    _contract._call(0, _callData);
   }
 }
