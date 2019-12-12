@@ -2,6 +2,7 @@ const { truffleContract } = require("../helpers");
 const uniswapJson = require("./uniswap.json");
 
 module.exports = {
+  mainnetFactoryAddress: "0xc0a47dfe034b400b47bdad5fecda2621de6c4d95",
   deploy: async (web3, owner) => {
     // Deploy exchange template
     // Deploy factory
@@ -23,6 +24,9 @@ module.exports = {
     });
 
     return factory;
+  },
+  getFactory: async (web3, factoryAddress) => {
+    return await truffleContract.at(web3, uniswapJson.abi, factoryAddress);
   },
   getExchange: async (web3, exchangeAddress) => {
     return await truffleContract.at(
