@@ -1,13 +1,13 @@
 const { tokens } = require("../..");
 const truffleAssertions = require("truffle-assertions");
 
-contract("tokens / DAI", accounts => {
+contract("tokens / SAI", accounts => {
   const tokenOwner = accounts[0];
   let token;
 
   describe("without antiOwner", () => {
     before(async () => {
-      token = await tokens.dai.deploy(web3, tokenOwner, false);
+      token = await tokens.sai.deploy(web3, tokenOwner, false);
     });
 
     it("Can mint from owner account", async () => {
@@ -26,7 +26,7 @@ contract("tokens / DAI", accounts => {
 
   describe("with antiOwner", () => {
     before(async () => {
-      token = await tokens.dai.deploy(web3, tokenOwner, true);
+      token = await tokens.sai.deploy(web3, tokenOwner, true);
     });
 
     it("Can mint from owner account", async () => {
