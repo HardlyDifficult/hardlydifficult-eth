@@ -1,11 +1,11 @@
 const { tokens } = require("hardlydifficult-ethereum-contracts");
 
-contract("tokens / DAI", accounts => {
+contract("tokens / SAI", accounts => {
   const tokenOwner = accounts[0];
   let token;
 
   before(async () => {
-    token = await tokens.dai.deploy(web3, tokenOwner);
+    token = await tokens.sai.deploy(web3, tokenOwner);
   });
 
   it("Can mint from owner account", async () => {
