@@ -9,6 +9,7 @@ async function getToken(web3, tokenAddress) {
 
 module.exports = {
   mainnetAddress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+  decimals: 6,
   /**
    * @param useAntiOwner true to use a proxy contract allowing any account to call `mint`.
    */
