@@ -11,7 +11,7 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
 
   beforeEach(async () => {
     // Token
-    token = await tokens.dai.deploy(web3, owner);
+    token = await tokens.sai.deploy(web3, owner);
     await token.mint(accounts[2], "100000000000000000000", { from: owner });
 
     // Locks priced in ERC-20 tokens
