@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-ethereum-contracts",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "A collection of reusable contracts and Javascript helpers for Ethereum.",
   "scripts": {
     "build": "npm run compile",
@@ -8,7 +8,8 @@
     "test": "truffle test",
     "lint": "solium -d contracts --fix && eslint . --fix",
     "lintNoFix": "solium -d contracts && eslint .",
-    "coverage": "truffle run coverage && cat coverage/lcov.info | coveralls"
+    "coverage": "truffle run coverage && cat coverage/lcov.info | coveralls",
+    "ganache": "ganache-cli -k istanbul"
   },
   "files": [
     "build",
@@ -35,7 +36,7 @@
   },
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-test-helpers#readme",
   "dependencies": {
-    "@fairmint/c-org-abi": "2.0.1",
+    "@fairmint/c-org-abi": "2.0.2",
     "@openzeppelin/contracts-ethereum-package": "2.4.0",
     "@truffle/contract": "4.1.1",
     "bignumber.js": "9.0.0",
@@ -54,6 +55,7 @@
     "eslint-plugin-markdown": "1.0.1",
     "eslint-plugin-prettier": "3.1.1",
     "eth-gas-reporter": "0.2.14",
+    "ganache-cli": "6.8.0-istanbul.0",
     "prettier": "1.19.1",
     "solidity-coverage": "0.7.0-beta.3",
     "solium": "1.2.5",

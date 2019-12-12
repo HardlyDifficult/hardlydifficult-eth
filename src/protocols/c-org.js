@@ -1,6 +1,5 @@
 const cOrgAbi = require("@fairmint/c-org-abi/abi.json");
 const cOrgBytecode = require("@fairmint/c-org-abi/bytecode.json");
-const cOrgStaticBytecode = require("@fairmint/c-org-abi/static_bytecode.json");
 const { truffleContract } = require("../helpers");
 const constants = require("../constants");
 
@@ -15,10 +14,9 @@ async function getWhitelist(web3, whitelistAddress) {
 module.exports = {
   deploy: async (web3, options) => {
     // deploy proxy admin
-    // deploy bigMath
-    // deploy dat
+    // deploy dat template
     // deploy dat proxy(implementation, admin)
-    // deploy whitelist
+    // deploy whitelist template
     // deploy whitelist proxy(implementation, admin)
     // whitelist.initialize
     // dat.initialize
@@ -48,22 +46,6 @@ module.exports = {
     const proxyAdmin = await new web3.eth.Contract(cOrgAbi.proxyAdmin)
       .deploy({
         data: cOrgBytecode.proxyAdmin
-      })
-      .send({
-        from: callOptions.control,
-        gas: constants.MAX_GAS
-      });
-    const bigDiv = await new web3.eth.Contract(cOrgAbi.bigDiv)
-      .deploy({
-        data: cOrgStaticBytecode.bigDiv
-      })
-      .send({
-        from: callOptions.control,
-        gas: constants.MAX_GAS
-      });
-    const sqrt = await new web3.eth.Contract(cOrgAbi.sqrt)
-      .deploy({
-        data: cOrgStaticBytecode.sqrt
       })
       .send({
         from: callOptions.control,
@@ -133,8 +115,6 @@ module.exports = {
     });
 
     await dat.updateConfig(
-      bigDiv._address,
-      sqrt._address,
       whitelist.address,
       callOptions.beneficiary,
       callOptions.control,
