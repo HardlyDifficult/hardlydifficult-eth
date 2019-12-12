@@ -20,7 +20,7 @@ Using these will give you an accurate representation of gas costs, error conditi
 
 ### Tokens
 
- - DAI: ERC-20 with 18 decimals and a mint function
+ - SAI: ERC-20 with 18 decimals and a mint function
  - USDC: an upgradable ERC-20 with 6 decimals and mint and blacklist functions
 
 Usage example: 
@@ -29,11 +29,11 @@ Usage example:
 const { tokens } = require("hardlydifficult-ethereum-contracts");
 const from = accounts[0];
 
-// Deploy a DAI contract for testing
-const dai = await tokens.dai.deploy(web3, from);
+// Deploy a SAI contract for testing
+const sai = await tokens.sai.deploy(web3, from);
 
 // Mint tokens
-await dai.mint(accounts[1], 100, { from });
+await sai.mint(accounts[1], 100, { from });
 ```
 
 ### Protocols 
@@ -43,7 +43,7 @@ await dai.mint(accounts[1], 100, { from });
 [unlock-protocol.com](https://unlock-protocol.com):
 > Unlock is a membership protocol, built on a blockchain. It enables creators to monetize their content or software without relying on a middleman. It lets consumers manage all of their subscriptions in a consistent way, as well as earn discounts when they share the best content and applications they use.
 
-#### Fairmint continous organizations
+#### Fairmint continuous organizations
 
 (not yet launched)
 
@@ -61,7 +61,7 @@ await dai.mint(accounts[1], 100, { from });
 
 Reusable contracts which can be imported into your Solidity contract.
 
- - Intefaces for 3rd party contracts:
+ - Interfaces for 3rd party contracts:
    - Uniswap
  - AntiOwnerProxy: set as the owner of a contract to allow anyone to make an ownerOnly call
 
