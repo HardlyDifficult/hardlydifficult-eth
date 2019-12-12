@@ -7,7 +7,7 @@ contract("protocols / uniswap", accounts => {
 
   before(async () => {
     uniswap = await protocols.uniswap.deploy(web3, protocolOwner);
-    sai = await tokens.sai.deploy(web3, protocolOwner);
+    sai = await tokens.dai.deploy(web3, protocolOwner);
   });
 
   it("Can create an exchange and add liquidity", async () => {
