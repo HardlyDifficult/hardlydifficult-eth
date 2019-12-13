@@ -7,9 +7,10 @@ import '../../proxies/CallContract.sol';
  * @title Approve this contract to spend your ERC-20 tokens, and then
  * you can call various contracts without an additional approval step.
  */
-contract ApproveAndCall is
-  CallContract
+contract ApproveAndCall
 {
+  using CallContract for address;
+
   function approveAndCall(
     address _token,
     uint _amount,
@@ -22,7 +23,7 @@ contract ApproveAndCall is
 
     // Approve spending and call the contract
     IERC20(_token).approve(_contract, _amount);
-    _call(_contract, 0, _callData);
+    _contract._call(0, _callData);
 
     // Check for any unspent tokens, this is only applicable if the _contract is not predictable
     uint balance = IERC20(_token).balanceOf(address(this));

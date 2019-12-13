@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 /**
  * @title Calls an arbitrary contract function.
  */
-contract CallContract
+library CallContract
 {
   function _call(
     address _contract,
