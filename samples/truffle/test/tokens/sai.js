@@ -5,7 +5,7 @@ contract("tokens / SAI", accounts => {
   let token;
 
   before(async () => {
-    token = await tokens.dai.deploy(web3, tokenOwner);
+    token = await tokens.sai.deploy(web3, tokenOwner);
   });
 
   it("Can mint from owner account", async () => {
