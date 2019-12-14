@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 
-import "../math/BigDiv.sol";
+import '../math/BigDiv.sol';
 
 /**
  * @title Used for testing only.
