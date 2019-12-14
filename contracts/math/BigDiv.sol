@@ -1,15 +1,17 @@
 pragma solidity ^0.5.0;
 
 
-import '@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol';
+import "@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 
 /**
  * @title Reduces the size of terms before multiplication, to avoid an overflow, and then
  * restores the proper size after division.
  * @notice This effectively allows us to overflow values in the numerator and/or denominator
  * of a fraction, so long as the end result does not overflow as well.
-*/
-contract BigDiv
+ * @dev Results may be off by 1 + 0.000001% for 2x1 calls and 2 + 0.00001% for 2x2 calls.
+ * Do not use if your contract expects very small result values to be accurate.
+ */
+library BigDiv
 {
   using SafeMath for uint256;
 
@@ -37,7 +39,7 @@ contract BigDiv
     uint256 _numA,
     uint256 _numB,
     uint256 _den
-  ) public pure
+  ) internal pure
     returns(uint256)
   {
     if(_numA == 0 || _numB == 0)
@@ -122,7 +124,7 @@ contract BigDiv
     uint256 _numA,
     uint256 _numB,
     uint256 _den
-  ) public pure
+  ) internal pure
     returns(uint256)
   {
     // first get the rounded down result
@@ -165,7 +167,7 @@ contract BigDiv
     uint256 _numB,
     uint256 _denA,
     uint256 _denB
-  ) public pure
+  ) internal pure
     returns (uint256)
   {
     if(MAX_UINT / _denA >= _denB)
