@@ -143,7 +143,7 @@ const checkBounds = (expectedBN, resultBN, roundUp, allowIncreasedDiff) => {
   );
 };
 
-contract("math / bigDivNumbersArray", () => {
+contract("contracts / math / bigDivNumbersArray", () => {
   let contract;
 
   before(async () => {
