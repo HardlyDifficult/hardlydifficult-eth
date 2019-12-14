@@ -1,8 +1,7 @@
-const sqrtArtifact = artifacts.require("Sqrt");
+const sqrtArtifact = artifacts.require("SqrtMock");
 const BigNumber = require("bignumber.js");
 
-// Goal is up to off by 1 + 0.01% error
-const MAX_DELTA_RATIO_FROM_EXPECTED = 0.0001;
+// Goal is up to off by 1
 const MAX_UINT256 = new BigNumber(2).pow(256).minus(1);
 const MAX_UINT192 = new BigNumber(2).pow(192).minus(1);
 const MAX_UINT128 = new BigNumber(2).pow(128).minus(1);
@@ -112,20 +111,8 @@ const numbers = [
   MAX_UINT256
 ];
 
-const getValue = (expectedBN, squared = false) => {
-  if (squared) {
-    // diff may drop 10^13 decimals
-    expectedBN = new BigNumber(expectedBN)
-      .div(new BigNumber(10).pow(13))
-      .dp(0)
-      .times(new BigNumber(10).pow(13));
-  }
-  let maxDiff = new BigNumber(MAX_DELTA_RATIO_FROM_EXPECTED).times(expectedBN);
-  if (!squared) {
-    maxDiff = maxDiff.plus(1).dp(0);
-  } else {
-    maxDiff = maxDiff.plus(new BigNumber(10).pow(13));
-  }
+const getValue = expectedBN => {
+  let maxDiff = new BigNumber(1);
 
   const minVal = expectedBN.minus(maxDiff);
   const maxVal = expectedBN.plus(maxDiff);
@@ -147,7 +134,7 @@ const checkBounds = (expectedBN, resultBN, squared) => {
   );
 };
 
-contract("math / sqrtNumbersArray", () => {
+contract("contracts / math / sqrtNumbersArray", () => {
   let contract;
 
   before(async () => {
