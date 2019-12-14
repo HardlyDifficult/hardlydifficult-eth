@@ -10,11 +10,20 @@ contract CallContractMock
 {
   using CallContract for address;
 
+  function readUint(
+    address _contract,
+    bytes memory _callData
+  ) public view
+    returns (uint)
+  {
+    return _contract._readUint(_callData);
+  }
+
   function call(
     address _contract,
     bytes memory _callData
   ) public payable
   {
-    _contract._call(msg.value, _callData);
+    _contract._call(_callData, msg.value);
   }
 }

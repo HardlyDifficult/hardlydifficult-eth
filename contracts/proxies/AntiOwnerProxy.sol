@@ -18,6 +18,6 @@ contract AntiOwnerProxy
     bytes memory _callData
   ) public
   {
-    _contract._call(0, _callData);
+    _contract._call(_callData, 0);
   }
 }
