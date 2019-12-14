@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 
 // From https://github.com/optionality/clone-factory/blob/master/contracts/CloneFactory.sol
 // Updated to support Solidity 5
-contract CloneFactory
+library CloneFactory
 {
   /**
    * @notice Uses create to deploy a clone to a nonce-based address.

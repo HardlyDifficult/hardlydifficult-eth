@@ -7,18 +7,19 @@ import '../proxies/Create2Probe.sol';
 
 
 contract CloneFactoryMock is
-  CloneFactory,
-  Clone2Factory,
   Clone2Probe,
   Create2Probe
 {
+  using CloneFactory for address;
+  using Clone2Factory for address;
+
   event CloneCreated(address proxyAddress);
 
   function createClone(
     address target
   ) external
   {
-    address result = _createClone(target);
+    address result = target._createClone();
     emit CloneCreated(result);
   }
 
@@ -27,7 +28,7 @@ contract CloneFactoryMock is
     bytes12 salt
   ) external
   {
-    address result = _createClone2(target, salt);
+    address result = target._createClone2(salt);
     emit CloneCreated(result);
   }
 }
