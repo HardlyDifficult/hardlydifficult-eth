@@ -1,9 +1,9 @@
 const BigNumber = require("bignumber.js");
 const { constants } = require("../../..");
 
-const bigDivArtifact = artifacts.require("BigDiv");
+const bigDivArtifact = artifacts.require("BigDivMock");
 
-contract("contracts / math / bigDiv", () => {
+contract("math / bigDiv", () => {
   let contract;
   const maxValue = new BigNumber(2).pow(256).minus(1);
 
