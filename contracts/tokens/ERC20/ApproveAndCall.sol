@@ -23,7 +23,7 @@ contract ApproveAndCall
 
     // Approve spending and call the contract
     IERC20(_token).approve(_contract, _amount);
-    _contract._call(0, _callData);
+    _contract._call(_callData, 0);
 
     // Check for any unspent tokens, this is only applicable if the _contract is not predictable
     uint balance = IERC20(_token).balanceOf(address(this));
