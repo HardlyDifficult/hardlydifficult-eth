@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 
 // From https://github.com/optionality/clone-factory/blob/master/contracts/CloneFactory.sol
 // Updated to support Solidity 5, switch to `create2` and revert on fail
-contract Clone2Factory
+library Clone2Factory
 {
   /**
    * @notice Uses create2 to deploy a clone to a pre-determined address.
