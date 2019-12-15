@@ -43,14 +43,6 @@ await sai.mint(accounts[1], 100, { from });
 [unlock-protocol.com](https://unlock-protocol.com):
 > Unlock is a membership protocol, built on a blockchain. It enables creators to monetize their content or software without relying on a middleman. It lets consumers manage all of their subscriptions in a consistent way, as well as earn discounts when they share the best content and applications they use.
 
-#### Fairmint continuous organizations
-
-(not yet launched)
-
-[Fairmint.co](https://fairmint.co):
-
-> The continuous financing model enables organizations to finance themselves in a permission-less and non-dilutive way by continuously issuing tokens called FAIR while aligning stakeholders to their financial success.
-
 #### Uniswap DEX
 
 [docs.Uniswap.io](https://docs.uniswap.io/):
