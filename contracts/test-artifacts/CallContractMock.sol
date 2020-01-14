@@ -26,4 +26,14 @@ contract CallContractMock
   {
     _contract._call(_callData, msg.value);
   }
+
+  function callByPosition(
+    address _contract,
+    bytes memory _callData,
+    uint _startPosition,
+    uint _length
+  ) public payable
+  {
+    _contract._callByPosition(_callData, _startPosition, _length, msg.value);
+  }
 }

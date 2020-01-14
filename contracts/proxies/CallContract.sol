@@ -38,4 +38,29 @@ library CallContract
     }
     require(result, 'INTERNAL_CONTRACT_CALL_FAILED');
   }
+
+  function _callByPosition(
+    address _contract,
+    bytes memory _callDataConcat,
+    uint _startPosition,
+    uint _length,
+    uint _ethValue
+  ) internal
+  {
+    bool result;
+    // solium-disable-next-line
+    assembly
+    {
+      result := call(
+        gas,
+        _contract,
+        _ethValue,
+        add(_callDataConcat, add(32, _startPosition)), // Start of callData information
+        _length,
+        0, // Output ignored
+        0 // Output ignored
+      )
+    }
+    require(result, 'INTERNAL_CONTRACT_CALL_FAILED');
+  }
 }
