@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-ethereum-contracts",
-  "version": "0.7.13",
+  "version": "0.8.0",
   "description": "A collection of reusable contracts and Javascript helpers for Ethereum.",
   "scripts": {
     "build": "npm run compile",
