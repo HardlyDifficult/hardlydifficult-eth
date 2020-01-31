@@ -37,7 +37,7 @@
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-ethereum-contracts#readme",
   "dependencies": {
     "@openzeppelin/contracts-ethereum-package": "2.4.0",
-    "@truffle/contract": "4.1.6",
+    "@truffle/contract": "4.1.7",
     "bignumber.js": "9.0.0",
     "erc1820": "0.0.2",
     "unlock-abi-1-1": "1.1.0",
@@ -58,7 +58,7 @@
     "prettier": "1.19.1",
     "solidity-coverage": "0.7.1",
     "solium": "1.2.5",
-    "truffle": "5.1.10",
+    "truffle": "5.1.11",
     "truffle-assertions": "0.9.2"
   }
 }
