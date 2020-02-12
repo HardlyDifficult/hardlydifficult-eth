@@ -6,7 +6,7 @@
     ":pinVersions"
   ],
   "timezone": "America/Los_Angeles",
-  "schedule": ["after 2am and before 5am"],
+  "schedule": ["on sunday"],
   "separateMinorPatch": true,
   "patch": {
     "groupName": "all patch updates"
