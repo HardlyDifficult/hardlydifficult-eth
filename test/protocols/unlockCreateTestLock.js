@@ -1,4 +1,4 @@
-const { protocols } = require("../..");
+const { constants, protocols } = require("../..");
 
 contract("protocols / unlock / createTestLock", accounts => {
   it("Can create a lock and buy a key", async () => {
@@ -11,9 +11,10 @@ contract("protocols / unlock / createTestLock", accounts => {
       }
     );
 
-    await lock.purchaseFor(accounts[2], {
+    const keyPrice = await lock.keyPrice();
+    await lock.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
       from: accounts[2],
-      value: await lock.keyPrice()
+      value: keyPrice
     });
 
     const hasKey = await lock.getHasValidKey(accounts[2]);
