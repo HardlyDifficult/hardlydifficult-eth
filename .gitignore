@@ -5,3 +5,4 @@ build/
 /.coverage_artifacts/
 /.coverage_contracts/
 coverage.json
+yarn.lock
