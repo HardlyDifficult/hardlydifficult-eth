@@ -33,7 +33,7 @@ contract("contracts / proxies / cloneFactory", () => {
     it("Should fail if there's not enough gas to deploy", async () => {
       await truffleAssert.fails(
         cloneFactory.createClone(helloWorldTemplate.address, {
-          gas: 65000 // should be just shy of what we need
+          gas: 60000 // should be just shy of what we need
         }),
         "out of gas"
       );
