@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-ethereum-contracts",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "A collection of reusable contracts and Javascript helpers for Ethereum.",
   "scripts": {
     "build": "npm run compile",
@@ -36,7 +36,10 @@
   },
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-ethereum-contracts#readme",
   "dependencies": {
+    "@openzeppelin/contracts": "^2.5.0",
     "@openzeppelin/contracts-ethereum-package": "2.4.0",
+    "@openzeppelin/test-environment": "0.1.2",
+    "@openzeppelin/test-helpers": "0.5.4",
     "@truffle/contract": "4.1.8",
     "bignumber.js": "9.0.0",
     "erc1820": "0.0.2",
