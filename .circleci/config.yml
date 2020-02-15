@@ -16,7 +16,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:10
-      - image: trufflesuite/ganache-cli:v6.8.3-beta.0
+      - image: trufflesuite/ganache-cli:v6.9.1
         command: ganache-cli -k istanbul
     working_directory: ~/repo
     steps:
