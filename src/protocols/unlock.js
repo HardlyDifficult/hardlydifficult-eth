@@ -11,6 +11,7 @@ const deploy = async (web3, owner) => {
   // Deploy proxyAdmin
   // proxy.initialize(address _owner)
   // proxy.configUnlock(template, symbol, url)
+
   await erc1820.deploy(web3);
   const unlockContract = await new web3.eth.Contract(unlockAbi.Unlock.abi)
     .deploy({
