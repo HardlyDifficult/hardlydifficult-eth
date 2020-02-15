@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-ethereum-contracts",
-  "version": "0.7.14",
+  "version": "0.8.0",
   "description": "A collection of reusable contracts and Javascript helpers for Ethereum.",
   "scripts": {
     "build": "npm run compile",
@@ -43,8 +43,8 @@
     "@truffle/contract": "4.1.8",
     "bignumber.js": "9.0.0",
     "erc1820": "0.0.2",
-    "unlock-abi-1-1": "1.1.0",
-    "web3-utils": "1.2.6"
+    "web3-utils": "1.2.6",
+    "unlock-abi-1-3": "1.0.1"
   },
   "devDependencies": {
     "@codechecks/client": "0.1.10",

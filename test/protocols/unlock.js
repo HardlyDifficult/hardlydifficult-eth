@@ -1,4 +1,4 @@
-const { protocols } = require("../..");
+const { constants, protocols } = require("../..");
 
 contract("protocols / unlock", accounts => {
   const unlockOwner = accounts[0];
@@ -11,10 +11,11 @@ contract("protocols / unlock", accounts => {
   it("Can create a lock and buy a key", async () => {
     const tx = await unlockProtocol.createLock(
       60 * 60 * 24, // expirationDuration (in seconds) of 1 day
-      web3.utils.padLeft(0, 40), // tokenAddress for ETH
+      constants.ZERO_ADDRESS, // tokenAddress for ETH
       web3.utils.toWei("0.01", "ether"), // keyPrice
       100, // maxNumberOfKeys
       "Test Lock", // lockName
+      web3.utils.randomHex(12), // salt
       {
         from: accounts[1]
       }
@@ -24,10 +25,10 @@ contract("protocols / unlock", accounts => {
       web3,
       tx.logs[1].args.newLockAddress
     );
-
-    await lock.purchaseFor(accounts[2], {
+    const keyPrice = await lock.keyPrice();
+    await lock.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
       from: accounts[2],
-      value: await lock.keyPrice()
+      value: keyPrice
     });
 
     const hasKey = await lock.getHasValidKey(accounts[2]);

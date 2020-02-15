@@ -1,4 +1,4 @@
-const { protocols, tokens } = require("../../../..");
+const { constants, protocols, tokens } = require("../../../..");
 const ApproveAndCall = artifacts.require("ApproveAndCall.sol");
 
 contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
@@ -40,8 +40,9 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
 
   it("Sanity check: Can approve & purchase directly", async () => {
     await token.approve(lock1.address, keyPrice, { from: accounts[2] });
-    await lock1.purchaseFor(accounts[2], {
-      from: accounts[2]
+    await lock1.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
+      from: accounts[2],
+      value: keyPrice
     });
   });
 
@@ -60,8 +61,8 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
 
     it("Can purchase keys with via ApproveAndCall", async () => {
       const callData = web3.eth.abi.encodeFunctionCall(
-        lock1.abi.find(e => e.name === "purchaseFor"),
-        [accounts[2]]
+        lock1.abi.find(e => e.name === "purchase"),
+        [keyPrice, accounts[2], constants.ZERO_ADDRESS, []]
       );
       await approveAndCall.approveAndCall(
         token.address,
@@ -79,8 +80,8 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
 
     it("And from Lock2 without an additional approval", async () => {
       const callData = web3.eth.abi.encodeFunctionCall(
-        lock2.abi.find(e => e.name === "purchaseFor"),
-        [accounts[2]]
+        lock2.abi.find(e => e.name === "purchase"),
+        [keyPrice, accounts[2], constants.ZERO_ADDRESS, []]
       );
       await approveAndCall.approveAndCall(
         token.address,
