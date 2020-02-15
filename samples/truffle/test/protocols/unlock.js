@@ -15,6 +15,7 @@ contract("protocols / unlock", accounts => {
       web3.utils.toWei("0.01", "ether"), // keyPrice
       100, // maxNumberOfKeys
       "Test Lock", // lockName
+      web3.utils.randomHex(12), // salt
       {
         from: accounts[1]
       }
