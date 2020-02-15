@@ -1,4 +1,4 @@
-const { protocols } = require("hardlydifficult-ethereum-contracts");
+const { constants, protocols } = require("hardlydifficult-ethereum-contracts");
 
 contract("protocols / unlock", accounts => {
   const unlockOwner = accounts[0];
@@ -15,6 +15,7 @@ contract("protocols / unlock", accounts => {
       web3.utils.toWei("0.01", "ether"), // keyPrice
       100, // maxNumberOfKeys
       "Test Lock", // lockName
+      web3.utils.randomHex(12), // salt
       {
         from: accounts[1]
       }
@@ -25,9 +26,10 @@ contract("protocols / unlock", accounts => {
       tx.logs[1].args.newLockAddress
     );
 
-    await lock.purchaseFor(accounts[2], {
+    const keyPrice = await lock.keyPrice();
+    await lock.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
       from: accounts[2],
-      value: await lock.keyPrice()
+      value: keyPrice
     });
 
     const hasKey = await lock.getHasValidKey(accounts[2]);
