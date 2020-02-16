@@ -2,6 +2,7 @@ const { accounts, contract } = require("@openzeppelin/test-environment");
 const { expectEvent, expectRevert } = require("@openzeppelin/test-helpers");
 const { expect } = require("chai");
 const StoppableMock = contract.fromArtifact("StoppableMock");
+const { reverts } = require("truffle-assertions");
 
 /**
  * Original source: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/test/lifecycle/Pausable.test.js
@@ -11,6 +12,14 @@ describe("Stop", function() {
 
   beforeEach(async function() {
     this.stoppable = await StoppableMock.new({ from: stopper });
+    await this.stoppable.initialize({ from: stopper });
+  });
+
+  it("cannot initialize again", async function() {
+    await reverts(
+      this.stoppable.initialize({ from: stopper }),
+      "Contract instance has already been initialized"
+    );
   });
 
   context("when unstopped", function() {
