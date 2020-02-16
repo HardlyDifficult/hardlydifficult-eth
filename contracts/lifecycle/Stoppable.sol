@@ -1,14 +1,14 @@
 pragma solidity ^0.5.0;
 
-import '@openzeppelin/contracts/access/roles/PauserRole.sol';
+import '../access/roles/AdminRole.sol';
 
 /**
- * @notice Allows an operator (the `PauserRole`) to `stop` a contract.
+ * @notice Allows an operator (the `AdminRole`) to `stop` a contract.
  * Once it's been stopped, it cannot be started again.
  *
  * Original source: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/lifecycle/Pausable.sol
  */
-contract Stoppable is PauserRole
+contract Stoppable is AdminRole
 {
   /**
    * @notice Emitted when the stop is triggered by a stopper (`account`).
@@ -55,9 +55,9 @@ contract Stoppable is PauserRole
   /**
     * @notice Called by a stopper to stop, triggers stopped state.
     */
-  function stop() public onlyPauser whenNotStopped
+  function stop() public onlyAdmin whenNotStopped
   {
     _stopped = true;
-    emit Stopped(_msgSender());
+    emit Stopped(msg.sender);
   }
 }
