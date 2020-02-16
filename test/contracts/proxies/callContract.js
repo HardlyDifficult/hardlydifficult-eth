@@ -8,14 +8,10 @@ contract("contracts / proxies / callContract", accounts => {
   beforeEach(async () => {
     callContract = await CallContractMock.new();
     returnValueContract = await TestReturnValue.new();
-    lock = await protocols.unlock.createTestLock(
-      web3,
-      accounts[9], // Unlock Protocol owner
-      accounts[1], // Lock owner
-      {
-        keyPrice: web3.utils.toWei("0.01", "ether")
-      }
-    );
+    lock = await protocols.unlock.createTestLock(web3, {
+      keyPrice: web3.utils.toWei("0.01", "ether"),
+      from: accounts[1]
+    });
   });
 
   it("Can read uint", async () => {

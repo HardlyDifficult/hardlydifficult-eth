@@ -80,9 +80,12 @@ module.exports = {
    *  - maxNumberOfKeys | default of infinite
    *  - lockName | default of 'Test Lock'
    */
-  createTestLock: async (web3, unlockOwner, lockOwner, lockOptions) => {
-    const unlockProtocol = await deploy(web3, unlockOwner);
-    lockOptions = Object.assign(
+  createTestLock: async (web3, options) => {
+    if (!options.from) throw new Error("`options.from` is required");
+
+    // using the lock owner as the protocol owner as well, to simplify the api
+    const unlockProtocol = await deploy(web3, options.from);
+    options = Object.assign(
       {
         expirationDuration: 60 * 60 * 24, // 1 day
         tokenAddress: web3.utils.padLeft(0, 40), // ether
@@ -90,17 +93,17 @@ module.exports = {
         maxNumberOfKeys: -1, // infinite
         lockName: "Test Lock"
       },
-      lockOptions
+      options
     );
     const tx = await unlockProtocol.createLock(
-      lockOptions.expirationDuration,
-      lockOptions.tokenAddress,
-      lockOptions.keyPrice,
-      lockOptions.maxNumberOfKeys,
-      lockOptions.lockName,
+      options.expirationDuration,
+      options.tokenAddress,
+      options.keyPrice,
+      options.maxNumberOfKeys,
+      options.lockName,
       web3.utils.randomHex(12), // salt
       {
-        from: lockOwner
+        from: options.from
       }
     );
 

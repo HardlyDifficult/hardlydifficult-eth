@@ -15,24 +15,16 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
     await token.mint(accounts[2], "100000000000000000000", { from: owner });
 
     // Locks priced in ERC-20 tokens
-    lock1 = await protocols.unlock.createTestLock(
-      web3,
-      accounts[9], // Unlock Protocol owner
-      accounts[1], // Lock owner
-      {
-        tokenAddress: token.address,
-        keyPrice
-      }
-    );
-    lock2 = await protocols.unlock.createTestLock(
-      web3,
-      accounts[9], // Unlock Protocol owner
-      accounts[1], // Lock owner
-      {
-        tokenAddress: token.address,
-        keyPrice
-      }
-    );
+    lock1 = await protocols.unlock.createTestLock(web3, {
+      tokenAddress: token.address,
+      keyPrice,
+      from: accounts[1]
+    });
+    lock2 = await protocols.unlock.createTestLock(web3, {
+      tokenAddress: token.address,
+      keyPrice,
+      from: accounts[1]
+    });
 
     // ApproveAndCall
     approveAndCall = await ApproveAndCall.new();
