@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import '@openzeppelin/contracts/access/Roles.sol';
+import '@openzeppelin/contracts-ethereum-package/contracts/access/Roles.sol';
 
 /**
  * @title AdminRole
@@ -16,7 +16,7 @@ contract AdminRole
 
   Roles.Role private _admins;
 
-  constructor () internal
+  function _initializeAdminRole() internal
   {
     _addAdmin(msg.sender);
   }

@@ -18,15 +18,6 @@ contract Stoppable is AdminRole
   bool public _stopped;
 
   /**
-   * @dev Initializes the contract in running state. Assigns the Pauser role
-   * to the deployer.
-   */
-  constructor () internal
-  {
-    _stopped = false;
-  }
-
-  /**
    * @notice Returns true if the contract is stopped, and false otherwise.
    */
   function stopped() public view returns (bool)
