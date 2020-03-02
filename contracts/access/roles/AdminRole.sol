@@ -17,7 +17,7 @@ contract AdminRole is Initializable
 
   Roles.Role private _admins;
 
-  function _initializeAdminRole(address _admin) internal
+  function _initializeAdminRole(address _admin) internal initializer()
   {
     _addAdmin(_admin);
   }
