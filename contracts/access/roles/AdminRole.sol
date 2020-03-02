@@ -1,5 +1,6 @@
 pragma solidity ^0.5.0;
 
+import '@openzeppelin/upgrades/contracts/Initializable.sol';
 import '@openzeppelin/contracts-ethereum-package/contracts/access/Roles.sol';
 
 /**
@@ -7,7 +8,7 @@ import '@openzeppelin/contracts-ethereum-package/contracts/access/Roles.sol';
  * @notice A copy of one of the OpenZeppelin roles with a more general purpose name.
  * Original source: https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/access
  */
-contract AdminRole
+contract AdminRole is Initializable
 {
   using Roles for Roles.Role;
 
@@ -16,9 +17,9 @@ contract AdminRole
 
   Roles.Role private _admins;
 
-  function _initializeAdminRole() internal
+  function _initializeAdminRole(address _admin) internal initializer()
   {
-    _addAdmin(msg.sender);
+    _addAdmin(_admin);
   }
 
   modifier onlyAdmin()
@@ -27,9 +28,11 @@ contract AdminRole
     _;
   }
 
-  function isAdmin(address account) public view returns (bool)
+  function isAdmin(
+    address _account
+  ) public view returns (bool)
   {
-    return _admins.has(account);
+    return _admins.has(_account);
   }
 
   function addAdmin(address account) public onlyAdmin
