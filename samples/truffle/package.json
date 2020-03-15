@@ -11,6 +11,6 @@
   "dependencies": {
     "eth-gas-reporter": "0.2.15",
     "hardlydifficult-ethereum-contracts": "0.9.3",
-    "truffle": "5.1.16"
+    "truffle": "5.1.17"
   }
 }
