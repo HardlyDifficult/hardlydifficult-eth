@@ -18,6 +18,13 @@
       "patch": {
         "groupName": null
       }
+    },
+    {
+      "packagePatterns": ["hardlydifficult", "fairmint", "unlock"],
+      "schedule": ["at any time"],
+      "patch": {
+        "groupName": null
+      }
     }
   ]
 }
