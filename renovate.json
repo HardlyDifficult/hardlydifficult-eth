@@ -13,7 +13,7 @@
   },
   "packageRules": [
     {
-      "packageNames": ["hardlydifficult-ethereum-contracts", "@fairmint/c-org-abi"],
+      "packagePatterns": ["hardlydifficult", "fairmint", "unlock"],
       "schedule": ["at any time"],
       "patch": {
         "groupName": null
