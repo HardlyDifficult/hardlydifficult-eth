@@ -1,5 +1,5 @@
 const { truffleContract } = require("../helpers");
-const unlockAbi = require("unlock-abi-1-3");
+const unlockAbi = require("unlock-abi-7");
 const unlockJson = require("./unlock.json");
 const constants = require("../constants");
 const erc1820 = require("erc1820");
