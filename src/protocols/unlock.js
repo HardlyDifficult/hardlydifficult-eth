@@ -1,18 +1,15 @@
 const { truffleContract } = require("../helpers");
-const unlockAbi = require("unlock-abi-1-3");
+const unlockAbi = require("unlock-abi-7");
 const unlockJson = require("./unlock.json");
 const constants = require("../constants");
-const erc1820 = require("erc1820");
 
 const deploy = async (web3, owner) => {
-  // Deploy erc-1820
   // Deploy contract template
   // Deploy proxy(address _implementation)
   // Deploy proxyAdmin
   // proxy.initialize(address _owner)
   // proxy.configUnlock(template, symbol, url)
 
-  await erc1820.deploy(web3);
   const unlockContract = await new web3.eth.Contract(unlockAbi.Unlock.abi)
     .deploy({
       data: `0x${unlockAbi.Unlock.bytecode.replace(/0x/, "")}`
@@ -53,12 +50,12 @@ const deploy = async (web3, owner) => {
       from: owner,
       gas: constants.MAX_GAS
     });
-  await contractInstance.configUnlock(
-    lockTemplate._address,
-    "TLK",
-    "http://192.168.0.1/",
-    { from: owner }
-  );
+  await contractInstance.configUnlock("TLK", "http://192.168.0.1/", {
+    from: owner
+  });
+  await contractInstance.setLockTemplate(lockTemplate._address, {
+    from: owner
+  });
 
   return contractInstance;
 };
@@ -107,6 +104,6 @@ module.exports = {
       }
     );
 
-    return await getLock(web3, tx.logs[1].args.newLockAddress);
+    return await getLock(web3, tx.logs[0].args.newLockAddress);
   }
 };
