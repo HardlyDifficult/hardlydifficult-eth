@@ -53,12 +53,12 @@ const deploy = async (web3, owner) => {
       from: owner,
       gas: constants.MAX_GAS
     });
-  await contractInstance.configUnlock(
-    lockTemplate._address,
-    "TLK",
-    "http://192.168.0.1/",
-    { from: owner }
-  );
+  await contractInstance.configUnlock("TLK", "http://192.168.0.1/", {
+    from: owner
+  });
+  await contractInstance.setLockTemplate(lockTemplate._address, {
+    from: owner
+  });
 
   return contractInstance;
 };
@@ -107,6 +107,6 @@ module.exports = {
       }
     );
 
-    return await getLock(web3, tx.logs[1].args.newLockAddress);
+    return await getLock(web3, tx.logs[0].args.newLockAddress);
   }
 };

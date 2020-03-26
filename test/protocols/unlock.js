@@ -23,7 +23,7 @@ contract("protocols / unlock", accounts => {
 
     const lock = await protocols.unlock.getLock(
       web3,
-      tx.logs[1].args.newLockAddress
+      tx.logs[0].args.newLockAddress
     );
     const keyPrice = await lock.keyPrice();
     await lock.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
