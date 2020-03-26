@@ -3,7 +3,7 @@ const Web3Utils = require("web3-utils");
 
 function buildCreate2Address(factoryAddress, saltHex, byteCodeHash) {
   const seed = ["ff", factoryAddress, saltHex, byteCodeHash]
-    .map(x => x.replace(/0x/, ""))
+    .map((x) => x.replace(/0x/, ""))
     .join("");
   let address = Web3Utils.keccak256(`0x${seed}`).slice(-40);
   address = Web3Utils.toChecksumAddress(`0x${address}`);
@@ -36,5 +36,5 @@ module.exports = {
     saltHex = saltHex.toString(16);
     saltHex = `${account}${"0".repeat(24 - saltHex.length)}${saltHex}`;
     return buildCreate2Address(creatorAddress, saltHex, byteCodeHash);
-  }
+  },
 };

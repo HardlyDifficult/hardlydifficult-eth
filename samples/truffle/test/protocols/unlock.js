@@ -1,6 +1,6 @@
 const { constants, protocols } = require("hardlydifficult-ethereum-contracts");
 
-contract("protocols / unlock", accounts => {
+contract("protocols / unlock", (accounts) => {
   const unlockOwner = accounts[0];
   let unlockProtocol;
 
@@ -17,7 +17,7 @@ contract("protocols / unlock", accounts => {
       "Test Lock", // lockName
       web3.utils.randomHex(12), // salt
       {
-        from: accounts[1]
+        from: accounts[1],
       }
     );
 
@@ -29,7 +29,7 @@ contract("protocols / unlock", accounts => {
     const keyPrice = await lock.keyPrice();
     await lock.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
       from: accounts[2],
-      value: keyPrice
+      value: keyPrice,
     });
 
     const hasKey = await lock.getHasValidKey(accounts[2]);

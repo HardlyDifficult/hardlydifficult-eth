@@ -16,13 +16,9 @@ const numbers = [
   new BigNumber("97"),
   MAX_UINT32.div("1009").dp(0),
   MAX_UINT32.div("10").dp(0),
-  MAX_UINT32.div("2")
-    .dp(0)
-    .minus("1"),
+  MAX_UINT32.div("2").dp(0).minus("1"),
   MAX_UINT32.div("2").dp(0),
-  MAX_UINT32.div("2")
-    .dp(0)
-    .plus("1"),
+  MAX_UINT32.div("2").dp(0).plus("1"),
   MAX_UINT32.minus("1"),
   MAX_UINT32,
   MAX_UINT32.plus("1"),
@@ -33,13 +29,9 @@ const numbers = [
   MAX_UINT32.times("1009"),
   MAX_UINT64.div("1009").dp(0),
   MAX_UINT64.div("10").dp(0),
-  MAX_UINT64.div("2")
-    .dp(0)
-    .minus("1"),
+  MAX_UINT64.div("2").dp(0).minus("1"),
   MAX_UINT64.div("2").dp(0),
-  MAX_UINT64.div("2")
-    .dp(0)
-    .plus("1"),
+  MAX_UINT64.div("2").dp(0).plus("1"),
   MAX_UINT64.minus("1"),
   MAX_UINT64,
   MAX_UINT64.plus("1"),
@@ -54,13 +46,9 @@ const numbers = [
   new BigNumber("34028236692093842568444274447460650188"),
   MAX_UINT128.div("1009").dp(0),
   MAX_UINT128.div("10").dp(0),
-  MAX_UINT128.div("2")
-    .dp(0)
-    .minus("1"),
+  MAX_UINT128.div("2").dp(0).minus("1"),
   MAX_UINT128.div("2").dp(0),
-  MAX_UINT128.div("2")
-    .dp(0)
-    .plus("1"),
+  MAX_UINT128.div("2").dp(0).plus("1"),
   MAX_UINT128.minus("2"),
   MAX_UINT128.minus("1"),
   MAX_UINT128,
@@ -82,13 +70,9 @@ const numbers = [
   ),
   MAX_UINT192.div("1009").dp(0),
   MAX_UINT192.div("10").dp(0),
-  MAX_UINT192.div("2")
-    .dp(0)
-    .minus("1"),
+  MAX_UINT192.div("2").dp(0).minus("1"),
   MAX_UINT192.div("2").dp(0),
-  MAX_UINT192.div("2")
-    .dp(0)
-    .plus("1"),
+  MAX_UINT192.div("2").dp(0).plus("1"),
   MAX_UINT192.minus("1"),
   MAX_UINT192,
   MAX_UINT192.plus("1"),
@@ -99,19 +83,15 @@ const numbers = [
   MAX_UINT192.times("1009"),
   MAX_UINT256.div("1009").dp(0),
   MAX_UINT256.div("10").dp(0),
-  MAX_UINT256.div("2")
-    .dp(0)
-    .minus("1"),
+  MAX_UINT256.div("2").dp(0).minus("1"),
   MAX_UINT256.div("2").dp(0),
-  MAX_UINT256.div("2")
-    .dp(0)
-    .plus("1"),
+  MAX_UINT256.div("2").dp(0).plus("1"),
   MAX_UINT256.minus("2"),
   MAX_UINT256.minus("1"),
-  MAX_UINT256
+  MAX_UINT256,
 ];
 
-const getValue = expectedBN => {
+const getValue = (expectedBN) => {
   let maxDiff = new BigNumber(1);
 
   const minVal = expectedBN.minus(maxDiff);

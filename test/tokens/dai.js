@@ -1,7 +1,7 @@
 const { tokens } = require("../..");
 const truffleAssertions = require("truffle-assertions");
 
-contract("tokens / DAI", accounts => {
+contract("tokens / DAI", (accounts) => {
   const tokenOwner = accounts[0];
   let token;
 

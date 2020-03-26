@@ -26,7 +26,7 @@ module.exports = {
       await result.setOwner(antiOwnerProxy.address, { from });
       result.mint = async (to, amount, options) => {
         const callData = web3.eth.abi.encodeFunctionCall(
-          saiJson.abi.find(e => e.name === "mint"),
+          saiJson.abi.find((e) => e.name === "mint"),
           [to, amount]
         );
         await antiOwnerProxy.proxyCall(result.address, callData, options);
@@ -35,5 +35,5 @@ module.exports = {
 
     return result;
   },
-  getToken
+  getToken,
 };

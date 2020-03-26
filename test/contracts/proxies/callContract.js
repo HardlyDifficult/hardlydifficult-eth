@@ -4,19 +4,19 @@ const { constants, protocols } = require("../../..");
 
 let callContract, returnValueContract, lock;
 
-contract("contracts / proxies / callContract", accounts => {
+contract("contracts / proxies / callContract", (accounts) => {
   beforeEach(async () => {
     callContract = await CallContractMock.new();
     returnValueContract = await TestReturnValue.new();
     lock = await protocols.unlock.createTestLock(web3, {
       keyPrice: web3.utils.toWei("0.01", "ether"),
-      from: accounts[1]
+      from: accounts[1],
     });
   });
 
   it("Can read uint", async () => {
     const callData = web3.eth.abi.encodeFunctionCall(
-      returnValueContract.abi.find(e => e.name === "return42"),
+      returnValueContract.abi.find((e) => e.name === "return42"),
       []
     );
     const result = await callContract.readUint(
@@ -30,14 +30,14 @@ contract("contracts / proxies / callContract", accounts => {
     const keyPrice = await lock.keyPrice();
     await lock.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
       from: accounts[2],
-      value: keyPrice
+      value: keyPrice,
     });
     const callData = web3.eth.abi.encodeFunctionCall(
-      lock.abi.find(e => e.name === "purchase"),
+      lock.abi.find((e) => e.name === "purchase"),
       [keyPrice.toString(), accounts[2], constants.ZERO_ADDRESS, []]
     );
     await callContract.call(lock.address, callData, {
-      value: keyPrice
+      value: keyPrice,
     });
 
     const hasKey = await lock.getHasValidKey(accounts[2]);
@@ -48,10 +48,10 @@ contract("contracts / proxies / callContract", accounts => {
     const keyPrice = await lock.keyPrice();
     await lock.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
       from: accounts[2],
-      value: keyPrice
+      value: keyPrice,
     });
     const callData = web3.eth.abi.encodeFunctionCall(
-      lock.abi.find(e => e.name === "purchase"),
+      lock.abi.find((e) => e.name === "purchase"),
       [keyPrice.toString(), accounts[2], constants.ZERO_ADDRESS, []]
     );
     await callContract.callByPosition(
@@ -60,7 +60,7 @@ contract("contracts / proxies / callContract", accounts => {
       0,
       callData.length,
       {
-        value: keyPrice
+        value: keyPrice,
       }
     );
 
@@ -72,10 +72,10 @@ contract("contracts / proxies / callContract", accounts => {
     const keyPrice = await lock.keyPrice();
     await lock.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
       from: accounts[2],
-      value: keyPrice
+      value: keyPrice,
     });
     let callData = web3.eth.abi.encodeFunctionCall(
-      lock.abi.find(e => e.name === "purchase"),
+      lock.abi.find((e) => e.name === "purchase"),
       [keyPrice.toString(), accounts[2], constants.ZERO_ADDRESS, []]
     );
     const originalLength = callData.length;
@@ -88,7 +88,7 @@ contract("contracts / proxies / callContract", accounts => {
       prefix.length / 2,
       originalLength / 2,
       {
-        value: keyPrice
+        value: keyPrice,
       }
     );
 

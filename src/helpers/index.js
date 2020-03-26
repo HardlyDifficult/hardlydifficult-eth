@@ -1,3 +1,3 @@
 module.exports = {
-  truffleContract: require("./truffleContract")
+  truffleContract: require("./truffleContract"),
 };

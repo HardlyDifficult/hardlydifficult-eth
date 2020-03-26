@@ -1,4 +1,4 @@
-const { constants, tokens } = require("../..");
+const { tokens } = require("../..");
 const truffleAssertions = require("truffle-assertions");
 
 contract("tokens / USDC", accounts => {

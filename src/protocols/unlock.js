@@ -12,28 +12,28 @@ const deploy = async (web3, owner) => {
 
   const unlockContract = await new web3.eth.Contract(unlockAbi.Unlock.abi)
     .deploy({
-      data: `0x${unlockAbi.Unlock.bytecode.replace(/0x/, "")}`
+      data: `0x${unlockAbi.Unlock.bytecode.replace(/0x/, "")}`,
     })
     .send({
       from: owner,
-      gas: constants.MAX_GAS
+      gas: constants.MAX_GAS,
     });
   const proxyAdmin = await new web3.eth.Contract(unlockJson.proxyAdmin.abi)
     .deploy({
-      data: `0x${unlockJson.proxyAdmin.bytecode.replace(/0x/, "")}`
+      data: `0x${unlockJson.proxyAdmin.bytecode.replace(/0x/, "")}`,
     })
     .send({
       from: owner,
-      gas: constants.MAX_GAS
+      gas: constants.MAX_GAS,
     });
   const proxy = await new web3.eth.Contract(unlockJson.proxy.abi)
     .deploy({
       data: `0x${unlockJson.proxy.bytecode.replace(/0x/, "")}`,
-      arguments: [unlockContract._address, proxyAdmin._address, "0x"]
+      arguments: [unlockContract._address, proxyAdmin._address, "0x"],
     })
     .send({
       from: owner,
-      gas: constants.MAX_GAS
+      gas: constants.MAX_GAS,
     });
 
   const contractInstance = await truffleContract.at(
@@ -44,17 +44,17 @@ const deploy = async (web3, owner) => {
   await contractInstance.initialize(owner, { from: owner });
   const lockTemplate = await new web3.eth.Contract(unlockAbi.PublicLock.abi)
     .deploy({
-      data: `0x${unlockAbi.PublicLock.bytecode.replace(/0x/, "")}`
+      data: `0x${unlockAbi.PublicLock.bytecode.replace(/0x/, "")}`,
     })
     .send({
       from: owner,
-      gas: constants.MAX_GAS
+      gas: constants.MAX_GAS,
     });
   await contractInstance.configUnlock("TLK", "http://192.168.0.1/", {
-    from: owner
+    from: owner,
   });
   await contractInstance.setLockTemplate(lockTemplate._address, {
-    from: owner
+    from: owner,
   });
 
   return contractInstance;
@@ -88,7 +88,7 @@ module.exports = {
         tokenAddress: web3.utils.padLeft(0, 40), // ether
         keyPrice: 0, // free
         maxNumberOfKeys: -1, // infinite
-        lockName: "Test Lock"
+        lockName: "Test Lock",
       },
       options
     );
@@ -100,10 +100,10 @@ module.exports = {
       options.lockName,
       web3.utils.randomHex(12), // salt
       {
-        from: options.from
+        from: options.from,
       }
     );
 
     return await getLock(web3, tx.logs[0].args.newLockAddress);
-  }
+  },
 };

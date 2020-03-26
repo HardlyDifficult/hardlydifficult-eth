@@ -20,7 +20,7 @@ module.exports = {
       owner
     );
     await factory.initializeFactory(exchangeTemplate.address, {
-      from: owner
+      from: owner,
     });
 
     return factory;
@@ -34,5 +34,5 @@ module.exports = {
       uniswapJson.exchange.abi,
       exchangeAddress
     );
-  }
+  },
 };

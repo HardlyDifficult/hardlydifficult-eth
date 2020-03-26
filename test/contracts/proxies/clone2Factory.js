@@ -1,7 +1,6 @@
 const CloneFactoryMock = artifacts.require("CloneFactoryMock.sol");
 const HelloWorld = artifacts.require("HelloWorld.sol");
 const truffleAssert = require("truffle-assertions");
-const BigNumber = require("bignumber.js");
 const { utils } = require("../../../");
 
 contract("contracts / proxies / clone2Factory", accounts => {
