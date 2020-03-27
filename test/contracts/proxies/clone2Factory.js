@@ -3,7 +3,7 @@ const HelloWorld = artifacts.require("HelloWorld.sol");
 const truffleAssert = require("truffle-assertions");
 const { utils } = require("../../../");
 
-contract("contracts / proxies / clone2Factory", accounts => {
+contract("contracts / proxies / clone2Factory", (accounts) => {
   const expectedMessage = "Hello World o/";
   let cloneFactory;
   let helloWorldTemplate;
@@ -27,7 +27,7 @@ contract("contracts / proxies / clone2Factory", accounts => {
       "0xefffffffffffffffffffffff",
       "0xdfffffffffffffffffffffff",
       web3.utils.randomHex(12),
-      web3.utils.randomHex(12)
+      web3.utils.randomHex(12),
     ];
     for (let i = 0; i < testSalts.length; i++) {
       const salt = testSalts[i];
@@ -53,7 +53,7 @@ contract("contracts / proxies / clone2Factory", accounts => {
               salt
             );
             helloWorld = await HelloWorld.at(
-              tx.logs.find(l => l.event === "CloneCreated").args.proxyAddress
+              tx.logs.find((l) => l.event === "CloneCreated").args.proxyAddress
             );
           });
 
