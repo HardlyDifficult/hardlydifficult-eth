@@ -23,20 +23,20 @@ module.exports = {
 
     const tokenContract = await new web3.eth.Contract(usdcJson.abi)
       .deploy({
-        data: `0x${usdcJson.bytecode.replace(/0x/, "")}`
+        data: `0x${usdcJson.bytecode.replace(/0x/, "")}`,
       })
       .send({
         from: proxyOwner,
-        gas: constants.MAX_GAS
+        gas: constants.MAX_GAS,
       });
     const proxy = await new web3.eth.Contract(usdcJson.proxy.abi)
       .deploy({
         data: `0x${usdcJson.proxy.bytecode.replace(/0x/, "")}`,
-        arguments: [tokenContract._address]
+        arguments: [tokenContract._address],
       })
       .send({
         from: proxyOwner,
-        gas: constants.MAX_GAS
+        gas: constants.MAX_GAS,
       });
     const token = new web3.eth.Contract(usdcJson.abi, proxy._address);
     await token.methods
@@ -52,7 +52,7 @@ module.exports = {
       )
       .send({
         from: tokenOwner,
-        gas: constants.MAX_GAS
+        gas: constants.MAX_GAS,
       });
     await token.methods
       .configureMinter(tokenOwner, -1)
@@ -66,21 +66,21 @@ module.exports = {
         tokenOwner
       );
       await result.configureMinter(antiOwnerProxy.address, -1, {
-        from: tokenOwner
+        from: tokenOwner,
       });
       await result.updateMasterMinter(antiOwnerProxy.address, {
-        from: tokenOwner
+        from: tokenOwner,
       });
       await result.updatePauser(antiOwnerProxy.address, { from: tokenOwner });
       await result.updateBlacklister(antiOwnerProxy.address, {
-        from: tokenOwner
+        from: tokenOwner,
       });
       await result.transferOwnership(antiOwnerProxy.address, {
-        from: tokenOwner
+        from: tokenOwner,
       });
       result.mint = async (to, amount, options) => {
         const callData = web3.eth.abi.encodeFunctionCall(
-          usdcJson.abi.find(e => e.name === "mint"),
+          usdcJson.abi.find((e) => e.name === "mint"),
           [to, amount]
         );
         await antiOwnerProxy.proxyCall(result.address, callData, options);
@@ -89,5 +89,5 @@ module.exports = {
 
     return result;
   },
-  getToken
+  getToken,
 };

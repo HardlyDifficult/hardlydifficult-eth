@@ -1,7 +1,7 @@
 const { constants, protocols, tokens } = require("../../../..");
 const ApproveAndCall = artifacts.require("ApproveAndCall.sol");
 
-contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
+contract("contracts / tokens / ERC20 / approveAndCall", (accounts) => {
   const owner = accounts[0];
   const keyPrice = web3.utils.toWei("0.00042", "ether");
   let token;
@@ -18,12 +18,12 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
     lock1 = await protocols.unlock.createTestLock(web3, {
       tokenAddress: token.address,
       keyPrice,
-      from: accounts[1]
+      from: accounts[1],
     });
     lock2 = await protocols.unlock.createTestLock(web3, {
       tokenAddress: token.address,
       keyPrice,
-      from: accounts[1]
+      from: accounts[1],
     });
 
     // ApproveAndCall
@@ -34,7 +34,7 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
     await token.approve(lock1.address, keyPrice, { from: accounts[2] });
     await lock1.purchase(keyPrice, accounts[2], constants.ZERO_ADDRESS, [], {
       from: accounts[2],
-      value: keyPrice
+      value: keyPrice,
     });
   });
 
@@ -53,7 +53,7 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
 
     it("Can purchase keys with via ApproveAndCall", async () => {
       const callData = web3.eth.abi.encodeFunctionCall(
-        lock1.abi.find(e => e.name === "purchase"),
+        lock1.abi.find((e) => e.name === "purchase"),
         [keyPrice, accounts[2], constants.ZERO_ADDRESS, []]
       );
       await approveAndCall.approveAndCall(
@@ -62,7 +62,7 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
         lock1.address,
         callData,
         {
-          from: accounts[2]
+          from: accounts[2],
         }
       );
 
@@ -72,7 +72,7 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
 
     it("And from Lock2 without an additional approval", async () => {
       const callData = web3.eth.abi.encodeFunctionCall(
-        lock2.abi.find(e => e.name === "purchase"),
+        lock2.abi.find((e) => e.name === "purchase"),
         [keyPrice, accounts[2], constants.ZERO_ADDRESS, []]
       );
       await approveAndCall.approveAndCall(
@@ -81,7 +81,7 @@ contract("contracts / tokens / ERC20 / approveAndCall", accounts => {
         lock2.address,
         callData,
         {
-          from: accounts[2]
+          from: accounts[2],
         }
       );
 

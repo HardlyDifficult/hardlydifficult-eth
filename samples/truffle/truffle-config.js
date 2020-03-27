@@ -40,8 +40,8 @@ module.exports = {
       gas: 6721974,
       host: "127.0.0.1",
       port: 8545,
-      network_id: "*"
-    }
+      network_id: "*",
+    },
   },
 
   // Configure your compilers
@@ -53,11 +53,11 @@ module.exports = {
         // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
           enabled: true,
-          runs: 2000000
-        }
+          runs: 2000000,
+        },
         //  evmVersion: "byzantium"
-      }
-    }
+      },
+    },
   },
   mocha: {
     reporter: "eth-gas-reporter",
@@ -65,7 +65,7 @@ module.exports = {
     reporterOptions: {
       currency: "USD",
       excludeContracts: ["Migrations"],
-      gasPrice: 5
-    }
-  }
+      gasPrice: 5,
+    },
+  },
 };

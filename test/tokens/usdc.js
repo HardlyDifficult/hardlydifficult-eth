@@ -1,7 +1,7 @@
-const { constants, tokens } = require("../..");
+const { tokens } = require("../..");
 const truffleAssertions = require("truffle-assertions");
 
-contract("tokens / USDC", accounts => {
+contract("tokens / USDC", (accounts) => {
   const tokenOwner = accounts[0];
   const proxyOwner = accounts[9];
   let token;

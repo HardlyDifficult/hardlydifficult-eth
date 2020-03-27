@@ -1,6 +1,6 @@
 const { tokens } = require("hardlydifficult-ethereum-contracts");
 
-contract("tokens / USDC", accounts => {
+contract("tokens / USDC", (accounts) => {
   const proxyOwner = accounts[9]; // must be different from the tokenOwner
   const tokenOwner = accounts[0];
   let token;

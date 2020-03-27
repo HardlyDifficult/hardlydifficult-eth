@@ -3,5 +3,5 @@ module.exports = {
   helpers: require("./src/helpers"),
   tokens: require("./src/tokens"),
   protocols: require("./src/protocols"),
-  utils: require("./src/utils")
+  utils: require("./src/utils"),
 };

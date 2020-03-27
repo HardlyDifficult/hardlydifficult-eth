@@ -3,7 +3,7 @@ const truffleContract = require("@truffle/contract");
 module.exports = {
   at: async (web3, abi, address) => {
     const contract = truffleContract({
-      abi
+      abi,
     });
     contract.setProvider(web3.currentProvider);
     return await contract.at(address);
@@ -11,9 +11,9 @@ module.exports = {
   new: async (web3, abi, bytecode, from, ...args) => {
     const contract = truffleContract({
       abi,
-      bytecode
+      bytecode,
     });
     contract.setProvider(web3.currentProvider);
     return await contract.new(...args, { from });
-  }
+  },
 };

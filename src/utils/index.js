@@ -1,4 +1,4 @@
 module.exports = {
   antiOwnerProxy: require("./antiOwnerProxy"),
-  create2: require("./create2")
+  create2: require("./create2"),
 };
