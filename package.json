@@ -58,7 +58,7 @@
     "eslint-plugin-prettier": "3.1.2",
     "eth-gas-reporter": "0.2.16",
     "ganache-cli": "6.9.1",
-    "prettier": "2.0.2",
+    "prettier": "2.0.3",
     "solidity-coverage": "0.7.2",
     "solium": "1.2.5",
     "truffle": "5.1.20",
