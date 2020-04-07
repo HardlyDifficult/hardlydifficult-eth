@@ -2,12 +2,12 @@ pragma solidity ^0.5.0;
 
 
 // https://github.com/OpenZeppelin/openzeppelin-sdk/blob/master/packages/lib/contracts/upgradeability/ProxyFactory.sol
-contract Clone2Probe
+library Clone2Probe
 {
   function getClone2Address(
     address target,
     bytes32 salt
-  ) public view
+  ) internal view
     returns (address cloneAddress)
   {
     // solium-disable-next-line

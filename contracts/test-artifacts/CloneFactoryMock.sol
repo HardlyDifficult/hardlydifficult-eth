@@ -6,12 +6,12 @@ import '../proxies/Clone2Probe.sol';
 import '../proxies/Create2Probe.sol';
 
 
-contract CloneFactoryMock is
-  Clone2Probe,
-  Create2Probe
+contract CloneFactoryMock
 {
   using CloneFactory for address;
   using Clone2Factory for address;
+  using Clone2Probe for address;
+  using Create2Probe for address;
 
   event CloneCreated(address proxyAddress);
 
