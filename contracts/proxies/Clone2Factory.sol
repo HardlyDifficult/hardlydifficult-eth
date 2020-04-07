@@ -10,13 +10,15 @@ library Clone2Factory
    * @param target the address of the template contract, containing the logic for this contract.
    * @param salt a salt used to determine the contract address before the transaction is mined,
    * may be random or sequential.
+   * The salt to use with the create2 call can be `msg.sender+salt` in order to
+   * prevent an attacker from front-running another user's deployment.
    * @return proxyAddress the address of the newly deployed contract.
    * @dev Using `bytes12` for the salt saves 6 gas over using `uint96` (requires another shift).
    * Will revert on fail.
    */
-  function _createClone2(
+  function createClone2(
     address target,
-    bytes12 salt
+    bytes32 salt
   ) internal
     returns (address proxyAddress)
   {
@@ -39,10 +41,7 @@ library Clone2Factory
       let contractCodeHash := keccak256(pointer, 0x37)
 
       // salt: 0x100
-      // The salt to use with the create2 call is `msg.sender+salt`
-      // this prevents at attacker from front-running another user's deployment
-      mstore(add(pointer, 0x100), shl(96, caller))
-      mstore(add(pointer, 0x114), salt)
+      mstore(add(pointer, 0x100), salt)
 
       // addressSeed: 0x40
       // 0xff

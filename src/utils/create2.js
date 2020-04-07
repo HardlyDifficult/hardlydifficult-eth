@@ -1,4 +1,3 @@
-const BigNumber = require("bignumber.js");
 const Web3Utils = require("web3-utils");
 
 function buildCreate2Address(factoryAddress, saltHex, byteCodeHash) {
@@ -23,18 +22,14 @@ module.exports = {
   /**
    * @notice Returns the address for a create2 deployment of a minimal proxy contract
    * (EIP-1167) without calling a node (JS only).
-   * @param salt A value <= 12 bytes which will be appended to the account's address
-   * for the `create2` call.
+   * @param salt A value <= 32 bytes and may include the msg.sender's address to prevent frontrunning.
    */
-  buildClone2Address: (creatorAddress, templateAddress, account, salt) => {
+  buildClone2Address: (creatorAddress, templateAddress, salt) => {
     const byteCode = `0x3d602d80600a3d3981f3363d3d373d3d3d363d73${templateAddress.replace(
       /0x/,
       ""
     )}5af43d82803e903d91602b57fd5bf3`;
     const byteCodeHash = Web3Utils.keccak256(byteCode);
-    let saltHex = new BigNumber(salt);
-    saltHex = saltHex.toString(16);
-    saltHex = `${account}${"0".repeat(24 - saltHex.length)}${saltHex}`;
-    return buildCreate2Address(creatorAddress, saltHex, byteCodeHash);
+    return buildCreate2Address(creatorAddress, salt, byteCodeHash);
   },
 };

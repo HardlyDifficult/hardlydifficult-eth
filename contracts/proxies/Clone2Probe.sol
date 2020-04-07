@@ -6,7 +6,7 @@ contract Clone2Probe
 {
   function getClone2Address(
     address target,
-    bytes12 salt
+    bytes32 salt
   ) public view
     returns (address cloneAddress)
   {
@@ -25,12 +25,12 @@ contract Clone2Probe
 
       // 0xff
       mstore(pointer, 0xff00000000000000000000000000000000000000000000000000000000000000)
-      // this
+      // this (byte 1 - 21)
       mstore(add(pointer, 0x1), shl(96, address))
+
       // salt
-      mstore(add(pointer, 0x40), shl(96, caller))
-      mstore(add(pointer, 0x54), salt)
-      mstore(add(pointer, 0x15), mload(add(pointer, 0x40)))
+      mstore(add(pointer, 0x15), salt)
+
       // hash
       mstore(add(pointer, 0x35), contractCodeHash)
 

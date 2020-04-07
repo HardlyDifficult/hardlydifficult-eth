@@ -19,16 +19,16 @@ contract CloneFactoryMock is
     address target
   ) external
   {
-    address result = target._createClone();
+    address result = target.createClone();
     emit CloneCreated(result);
   }
 
   function createClone2(
     address target,
-    bytes12 salt
+    bytes32 salt
   ) external
   {
-    address result = target._createClone2(salt);
+    address result = target.createClone2(salt);
     emit CloneCreated(result);
   }
 }
