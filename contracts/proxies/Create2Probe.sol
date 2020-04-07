@@ -2,11 +2,11 @@ pragma solidity ^0.5.0;
 
 
 // https://github.com/OpenZeppelin/openzeppelin-sdk/blob/master/packages/lib/contracts/upgradeability/ProxyFactory.sol
-contract Create2Probe
+library Create2Probe
 {
   function isAddressAvailable(
     address contractAddress
-  ) public view
+  ) internal view
     returns (bool)
   {
     if(contractAddress == address(0))

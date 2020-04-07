@@ -6,12 +6,12 @@ import '../proxies/Clone2Probe.sol';
 import '../proxies/Create2Probe.sol';
 
 
-contract CloneFactoryMock is
-  Clone2Probe,
-  Create2Probe
+contract CloneFactoryMock
 {
   using CloneFactory for address;
   using Clone2Factory for address;
+  using Clone2Probe for address;
+  using Create2Probe for address;
 
   event CloneCreated(address proxyAddress);
 
@@ -30,5 +30,22 @@ contract CloneFactoryMock is
   {
     address result = target.createClone2(salt);
     emit CloneCreated(result);
+  }
+
+  function isAddressAvailable(
+    address contractAddress
+  ) public view
+    returns (bool)
+  {
+    return contractAddress.isAddressAvailable();
+  }
+
+  function getClone2Address(
+    address target,
+    bytes32 salt
+  ) public view
+    returns (address cloneAddress)
+  {
+    return target.getClone2Address(salt);
   }
 }
