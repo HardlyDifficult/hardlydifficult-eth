@@ -10,7 +10,7 @@ library CloneFactory
    * @param target the address of the template contract, containing the logic for this contract.
    * @return result the address of the newly deployed contract.
    */
-  function _createClone(
+  function createClone(
     address target
   ) internal
     returns (address result)
