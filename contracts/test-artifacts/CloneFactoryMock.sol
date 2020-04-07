@@ -31,4 +31,21 @@ contract CloneFactoryMock
     address result = target.createClone2(salt);
     emit CloneCreated(result);
   }
+
+  function isAddressAvailable(
+    address contractAddress
+  ) public view
+    returns (bool)
+  {
+    return contractAddress.isAddressAvailable();
+  }
+
+  function getClone2Address(
+    address target,
+    bytes32 salt
+  ) public view
+    returns (address cloneAddress)
+  {
+    return target.getClone2Address(salt);
+  }
 }
