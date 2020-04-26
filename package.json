@@ -50,7 +50,7 @@
     "@codechecks/client": "0.1.10",
     "babel-eslint": "10.1.0",
     "chai": "4.2.0",
-    "coveralls": "3.0.11",
+    "coveralls": "3.1.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-json": "2.1.1",
