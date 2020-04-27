@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 
 // From https://github.com/optionality/clone-factory/blob/master/contracts/CloneFactory.sol
@@ -47,7 +47,7 @@ library Clone2Factory
       // 0xff
       mstore(add(pointer, 0x40), 0xff00000000000000000000000000000000000000000000000000000000000000)
       // this
-      mstore(add(pointer, 0x41), shl(96, address))
+      mstore(add(pointer, 0x41), shl(96, address()))
       // salt
       mstore(add(pointer, 0x55), mload(add(pointer, 0x100)))
       // hash
