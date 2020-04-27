@@ -5,7 +5,7 @@ A collection of reusable contracts and Javascript helpers for Ethereum.
 Usage:
 
 ```bash
-npm i hardlydifficult-ethereum-contracts
+npm i hardlydifficult-eth
 ```
 
 ## Javascript Helpers
@@ -26,7 +26,7 @@ Using these will give you an accurate representation of gas costs, error conditi
 Usage example: 
 
 ```javascript
-const { tokens } = require("hardlydifficult-ethereum-contracts");
+const { tokens } = require("hardlydifficult-eth");
 const from = accounts[0];
 
 // Deploy a SAI contract for testing

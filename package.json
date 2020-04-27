@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HardlyDifficult/hardlydifficult-ethereum-contracts.git"
+    "url": "git+https://github.com/HardlyDifficult/hardlydifficult-eth.git"
   },
   "keywords": [
     "Solidity",
@@ -32,9 +32,9 @@
   "author": "HardlyDifficult",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HardlyDifficult/hardlydifficult-ethereum-contracts/issues"
+    "url": "https://github.com/HardlyDifficult/hardlydifficult-eth/issues"
   },
-  "homepage": "https://github.com/HardlyDifficult/hardlydifficult-ethereum-contracts#readme",
+  "homepage": "https://github.com/HardlyDifficult/hardlydifficult-eth#readme",
   "dependencies": {
     "@openzeppelin/contracts": "3.0.0",
     "@openzeppelin/test-environment": "0.1.4",

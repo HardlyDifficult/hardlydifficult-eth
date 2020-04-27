@@ -1,4 +1,4 @@
-const { tokens } = require("hardlydifficult-ethereum-contracts");
+const { tokens } = require("hardlydifficult-eth");
 
 contract("tokens / USDC", (accounts) => {
   const proxyOwner = accounts[9]; // must be different from the tokenOwner

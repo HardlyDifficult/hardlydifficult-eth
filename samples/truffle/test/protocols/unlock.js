@@ -1,4 +1,4 @@
-const { constants, protocols } = require("hardlydifficult-ethereum-contracts");
+const { constants, protocols } = require("hardlydifficult-eth");
 
 contract("protocols / unlock", (accounts) => {
   const unlockOwner = accounts[0];
