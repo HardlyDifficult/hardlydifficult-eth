@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 
 // Source: https://github.com/Uniswap/contracts-vyper/blob/master/contracts/uniswap_factory.vy

@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 import '../proxies/CloneFactory.sol';
 import '../proxies/Clone2Factory.sol';

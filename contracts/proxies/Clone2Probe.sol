@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 
 // https://github.com/OpenZeppelin/openzeppelin-sdk/blob/master/packages/lib/contracts/upgradeability/ProxyFactory.sol
@@ -26,7 +26,7 @@ library Clone2Probe
       // 0xff
       mstore(pointer, 0xff00000000000000000000000000000000000000000000000000000000000000)
       // this (byte 1 - 21)
-      mstore(add(pointer, 0x1), shl(96, address))
+      mstore(add(pointer, 0x1), shl(96, address()))
 
       // salt
       mstore(add(pointer, 0x15), salt)

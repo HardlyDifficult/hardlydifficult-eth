@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 /**
  * @title Calls an arbitrary contract function.
@@ -27,7 +27,7 @@ library CallContract
     assembly
     {
       result := call(
-        gas,
+        gas(),
         _contract,
         _ethValue,
         add(_callData, 32), // Start of callData information
@@ -52,7 +52,7 @@ library CallContract
     assembly
     {
       result := call(
-        gas,
+        gas(),
         _contract,
         _ethValue,
         add(_callDataConcat, add(32, _startPosition)), // Start of callData information

@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-ethereum-contracts",
-  "version": "0.11.1",
+  "version": "1.0.0",
   "description": "A collection of reusable contracts and Javascript helpers for Ethereum.",
   "scripts": {
     "build": "npm run compile",
@@ -9,7 +9,7 @@
     "lint": "solium -d contracts --fix && eslint . --fix",
     "lintNoFix": "solium -d contracts && eslint .",
     "coverage": "truffle run coverage && cat coverage/lcov.info | coveralls",
-    "ganache": "ganache-cli -k istanbul"
+    "ganache": "ganache-cli"
   },
   "files": [
     "build",
@@ -37,10 +37,8 @@
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-ethereum-contracts#readme",
   "dependencies": {
     "@openzeppelin/contracts": "3.0.0",
-    "@openzeppelin/contracts-ethereum-package": "2.5.0",
     "@openzeppelin/test-environment": "0.1.4",
     "@openzeppelin/test-helpers": "0.5.5",
-    "@openzeppelin/upgrades": "2.8.0",
     "@truffle/contract": "4.2.2",
     "bignumber.js": "9.0.0",
     "unlock-abi-7": "1.0.2",
