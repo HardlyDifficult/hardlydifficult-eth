@@ -1,4 +1,4 @@
-const { tokens } = require("hardlydifficult-ethereum-contracts");
+const { tokens } = require("hardlydifficult-eth");
 
 contract("tokens / SAI", (accounts) => {
   const tokenOwner = accounts[0];

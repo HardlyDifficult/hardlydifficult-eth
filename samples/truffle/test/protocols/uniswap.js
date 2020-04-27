@@ -1,4 +1,4 @@
-const { tokens, protocols } = require("hardlydifficult-ethereum-contracts");
+const { tokens, protocols } = require("hardlydifficult-eth");
 
 contract("protocols / uniswap", (accounts) => {
   const protocolOwner = accounts[0];
