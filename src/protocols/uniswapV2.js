@@ -8,7 +8,7 @@ module.exports = {
    * Deploys the Uniswap factory and router.
    * @param feeSetter allows a fee to be enabled. May be address(0)
    * @param wethAddress the address of the WETH token (used by the router)
-   * @returns the Uniswap router as truffleContract objects
+   * @returns the Uniswap router as a truffleContract object
    * This is useful for testing on Ganache
    */
   deploy: async (web3, owner, feeSetter, wethAddress) => {
