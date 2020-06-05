@@ -1,4 +1,5 @@
 module.exports = {
   unlock: require("./unlock"),
-  uniswap: require("./uniswap"),
+  uniswapV1: require("./uniswapV1"),
+  uniswapV2: require("./uniswapV2"),
 };

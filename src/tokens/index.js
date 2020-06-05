@@ -3,4 +3,5 @@ module.exports = {
   dai: require("./dai"),
   sai: require("./sai"),
   usdc: require("./usdc"),
+  weth: require("./weth"),
 };

@@ -1,6 +1,6 @@
 {
   "name": "hardlydifficult-eth",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A collection of reusable contracts and Javascript helpers for Ethereum.",
   "scripts": {
     "build": "npm run compile",
@@ -9,7 +9,7 @@
     "lint": "solium -d contracts --fix && eslint . --fix",
     "lintNoFix": "solium -d contracts && eslint .",
     "coverage": "truffle run coverage && cat coverage/lcov.info | coveralls",
-    "ganache": "ganache-cli"
+    "ganache": "ganache-cli -e 10000000000"
   },
   "files": [
     "build",
@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@codechecks/client": "0.1.10",
+    "@openzeppelin/test-helpers": "0.5.6",
     "coveralls": "3.1.0",
     "eslint": "7.1.0",
     "eslint-config-prettier": "6.11.0",
