@@ -20,7 +20,6 @@ module.exports = {
       feeSetter
     );
 
-    // WETH
     const router = await truffleContract.new(
       web3,
       uniswapJson.router.abi,
