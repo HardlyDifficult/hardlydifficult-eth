@@ -1,5 +1,5 @@
 const { truffleContract } = require("../helpers");
-const uniswapJson = require("./uniswap.json");
+const uniswapJson = require("./uniswapV1.json");
 
 module.exports = {
   mainnetFactoryAddress: "0xc0a47dfe034b400b47bdad5fecda2621de6c4d95",

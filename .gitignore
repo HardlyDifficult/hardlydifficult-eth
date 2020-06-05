@@ -6,3 +6,5 @@ build/
 /.coverage_contracts/
 coverage.json
 yarn.lock
+
+tenderly.yaml
