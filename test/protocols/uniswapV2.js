@@ -1,11 +1,12 @@
 const { constants, tokens, protocols } = require("../..");
+const { time } = require("@openzeppelin/test-helpers");
 
 contract("protocols / uniswapV2", (accounts) => {
   const protocolOwner = accounts[9];
   let uniswapRouter;
   let dai, weth;
 
-  before(async () => {
+  beforeEach(async () => {
     dai = await tokens.dai.deploy(web3, protocolOwner);
     weth = await tokens.weth.deploy(web3, protocolOwner);
     uniswapRouter = await protocols.uniswapV2.deploy(
@@ -19,7 +20,7 @@ contract("protocols / uniswapV2", (accounts) => {
   describe("create a pair", () => {
     const liquidityOwner = accounts[1];
 
-    before(async () => {
+    beforeEach(async () => {
       await dai.mint(liquidityOwner, web3.utils.toWei("100000", "ether"), {
         from: protocolOwner,
       });
@@ -51,7 +52,10 @@ contract("protocols / uniswapV2", (accounts) => {
     describe("swap tokens", () => {
       const trader = accounts[2];
 
-      before(async () => {
+      beforeEach(async () => {
+        // Advancing time to avoid an intermittent test fail
+        await time.increase(time.duration.hours(1));
+
         await uniswapRouter.swapExactETHForTokens(
           1,
           [weth.address, dai.address],
