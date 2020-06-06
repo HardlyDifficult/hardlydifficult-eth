@@ -1,12 +1,12 @@
 const { tokens, protocols } = require("hardlydifficult-eth");
 
-contract("protocols / uniswap", (accounts) => {
+contract("protocols / uniswapV1", (accounts) => {
   const protocolOwner = accounts[0];
   let uniswap;
   let sai;
 
   before(async () => {
-    uniswap = await protocols.uniswap.deploy(web3, protocolOwner);
+    uniswap = await protocols.uniswapV1.deploy(web3, protocolOwner);
     sai = await tokens.sai.deploy(web3, protocolOwner);
   });
 
@@ -14,7 +14,7 @@ contract("protocols / uniswap", (accounts) => {
     const tx = await uniswap.createExchange(sai.address, {
       from: protocolOwner,
     });
-    const exchange = await protocols.uniswap.getExchange(
+    const exchange = await protocols.uniswapV1.getExchange(
       web3,
       tx.logs[0].args.exchange
     );
