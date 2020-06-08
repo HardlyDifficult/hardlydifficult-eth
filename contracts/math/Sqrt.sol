@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
 
@@ -7,7 +8,7 @@ pragma solidity ^0.6.0;
  */
 library Sqrt
 {
-  /// @notice The max possible value
+  /// @dev The max possible value
   uint256 private constant MAX_UINT = 2**256 - 1;
 
   // Source: https://github.com/ethereum/dapp-bin/pull/50
