@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
 
@@ -15,17 +16,17 @@ library BigDiv
 {
   using SafeMath for uint256;
 
-  /// @notice The max possible value
+  /// @dev The max possible value
   uint256 private constant MAX_UINT = 2**256 - 1;
 
-  /// @notice When multiplying 2 terms <= this value the result won't overflow
+  /// @dev When multiplying 2 terms <= this value the result won't overflow
   uint256 private constant MAX_BEFORE_SQUARE = 2**128 - 1;
 
-  /// @notice The max error target is off by 1 plus up to 0.000001% error
+  /// @dev The max error target is off by 1 plus up to 0.000001% error
   /// for bigDiv2x1 and that `* 2` for bigDiv2x2
   uint256 private constant MAX_ERROR = 100000000;
 
-  /// @notice A larger error threshold to use when multiple rounding errors may apply
+  /// @dev A larger error threshold to use when multiple rounding errors may apply
   uint256 private constant MAX_ERROR_BEFORE_DIV = MAX_ERROR * 2;
 
   /**
