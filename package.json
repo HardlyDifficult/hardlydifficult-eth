@@ -7,7 +7,7 @@
     "compile": "truffle compile",
     "test": "truffle test",
     "lint": "eslint . --fix && solium -d contracts --fix",
-    "lintNoFix": "solium -d contracts && eslint .",
+    "lintNoFix": "eslint .",
     "coverage": "truffle run coverage && cat coverage/lcov.info | coveralls",
     "ganache": "ganache-cli -e 10000000000"
   },
