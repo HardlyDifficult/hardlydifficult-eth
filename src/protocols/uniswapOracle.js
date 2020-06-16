@@ -11,7 +11,7 @@ module.exports = {
     const oracle = await truffleContract.new(
       web3,
       uniswapOracleJson.abi,
-      `0x${uniswapOracleJson.bytecode.replace(/0x/, "")}`,
+      uniswapOracleJson.bytecode,
       owner,
       uniswapFactory
     );
