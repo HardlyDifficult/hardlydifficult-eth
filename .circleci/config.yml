@@ -72,14 +72,14 @@ workflows:
               ignore:
                 - gh-pages
                 - artifacts
-      #- coverage:
-      #    requires:
-      #      - build
-      #    filters:
-      #      branches:
-      #        ignore:
-      #          - gh-pages
-      #          - artifacts
+      - coverage:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+                - artifacts
       - publish:
           requires:
             - build
