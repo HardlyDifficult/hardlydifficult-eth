@@ -43,12 +43,16 @@ contract("contracts / tokens / ERC20 / approveAndCall", (accounts) => {
   });
 
   it("Gas check: approve unlimited", async () => {
-    await token.approve(approveAndCall.address, -1, { from: accounts[2] });
+    await token.approve(approveAndCall.address, constants.MAX_UINT, {
+      from: accounts[2],
+    });
   });
 
   describe("After approving the ApproveAndCall contract", async () => {
     beforeEach(async () => {
-      await token.approve(approveAndCall.address, -1, { from: accounts[2] });
+      await token.approve(approveAndCall.address, constants.MAX_UINT, {
+        from: accounts[2],
+      });
     });
 
     it("Can purchase keys with via ApproveAndCall", async () => {

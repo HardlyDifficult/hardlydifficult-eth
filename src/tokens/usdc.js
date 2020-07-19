@@ -55,7 +55,7 @@ module.exports = {
         gas: constants.MAX_GAS,
       });
     await token.methods
-      .configureMinter(tokenOwner, -1)
+      .configureMinter(tokenOwner, constants.MAX_UINT)
       .send({ from: tokenOwner });
 
     const result = await getToken(web3, token._address);
@@ -65,7 +65,7 @@ module.exports = {
         web3,
         tokenOwner
       );
-      await result.configureMinter(antiOwnerProxy.address, -1, {
+      await result.configureMinter(antiOwnerProxy.address, constants.MAX_UINT, {
         from: tokenOwner,
       });
       await result.updateMasterMinter(antiOwnerProxy.address, {

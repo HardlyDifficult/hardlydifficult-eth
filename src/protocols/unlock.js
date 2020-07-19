@@ -87,7 +87,7 @@ module.exports = {
         expirationDuration: 60 * 60 * 24, // 1 day
         tokenAddress: web3.utils.padLeft(0, 40), // ether
         keyPrice: 0, // free
-        maxNumberOfKeys: -1, // infinite
+        maxNumberOfKeys: constants.MAX_UINT,
         lockName: "Test Lock",
       },
       options

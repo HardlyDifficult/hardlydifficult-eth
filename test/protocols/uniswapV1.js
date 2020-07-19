@@ -1,4 +1,4 @@
-const { tokens, protocols } = require("../..");
+const { tokens, protocols, constants } = require("../..");
 
 contract("protocols / uniswapV1", (accounts) => {
   const protocolOwner = accounts[0];
@@ -19,7 +19,9 @@ contract("protocols / uniswapV1", (accounts) => {
       tx.logs[0].args.exchange
     );
     await sai.mint(protocolOwner, "10000000000", { from: protocolOwner });
-    await sai.approve(exchange.address, -1, { from: protocolOwner });
+    await sai.approve(exchange.address, constants.MAX_UINT, {
+      from: protocolOwner,
+    });
     await exchange.addLiquidity(
       "1",
       "10000000000",
