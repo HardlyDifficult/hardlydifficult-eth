@@ -55,7 +55,7 @@
     "eslint-plugin-markdown": "1.0.2",
     "eslint-plugin-prettier": "3.1.4",
     "eth-gas-reporter": "0.2.17",
-    "ganache-cli": "6.10.2",
+    "ganache-cli": "6.11.0",
     "prettier": "2.1.2",
     "solidity-coverage": "0.7.10",
     "solium": "1.2.5",
