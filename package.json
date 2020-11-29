@@ -59,7 +59,7 @@
     "prettier": "2.2.1",
     "solidity-coverage": "0.7.12",
     "solium": "1.2.5",
-    "truffle": "5.1.54",
+    "truffle": "5.1.55",
     "truffle-assertions": "0.9.2"
   }
 }
