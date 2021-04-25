@@ -50,7 +50,7 @@
     "@openzeppelin/test-helpers": "0.5.10",
     "coveralls": "3.1.0",
     "eslint": "7.25.0",
-    "eslint-config-prettier": "8.2.0",
+    "eslint-config-prettier": "8.3.0",
     "eslint-plugin-json": "2.1.2",
     "eslint-plugin-markdown": "2.0.1",
     "eslint-plugin-prettier": "3.4.0",
