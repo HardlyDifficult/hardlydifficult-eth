@@ -37,17 +37,17 @@
   "homepage": "https://github.com/HardlyDifficult/hardlydifficult-eth#readme",
   "dependencies": {
     "@openzeppelin/contracts": "3.4.1",
-    "@truffle/contract": "4.3.29",
+    "@truffle/contract": "4.3.30",
     "@uniswap/lib": "2.1.0",
     "@uniswap/v2-core": "1.0.1",
     "@uniswap/v2-periphery": "1.1.0-beta.0",
     "bignumber.js": "9.0.1",
     "unlock-abi-7": "1.0.3",
-    "web3-utils": "1.5.1"
+    "web3-utils": "1.5.2"
   },
   "devDependencies": {
     "@codechecks/client": "0.1.11",
-    "@openzeppelin/test-helpers": "0.5.12",
+    "@openzeppelin/test-helpers": "0.5.13",
     "coveralls": "3.1.1",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
@@ -59,7 +59,7 @@
     "prettier": "2.3.2",
     "solidity-coverage": "0.7.16",
     "solium": "1.2.5",
-    "truffle": "5.4.5",
+    "truffle": "5.4.6",
     "truffle-assertions": "0.9.2"
   }
 }
