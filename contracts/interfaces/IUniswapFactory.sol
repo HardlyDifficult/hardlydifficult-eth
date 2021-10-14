@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.2;
 
 
 // Source: https://github.com/Uniswap/contracts-vyper/blob/master/contracts/uniswap_factory.vy
