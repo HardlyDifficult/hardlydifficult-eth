@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: GPL-3.0
 // Original source: https://github.com/Uniswap/uniswap-v2-periphery/blob/master/contracts/examples
 // Modified to unpin solidity version and to support multiple pairs
-pragma solidity ^0.6.6;
+pragma solidity ^0.8.2;
 
 import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
 import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
 import '@uniswap/lib/contracts/libraries/FixedPoint.sol';
-import '@openzeppelin/contracts/math/SafeMath.sol';
+import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 import '@uniswap/v2-periphery/contracts/libraries/UniswapV2OracleLibrary.sol';
 import './UniswapV2Library.sol';
 import './IUniswapOracle.sol';
