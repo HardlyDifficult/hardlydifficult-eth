@@ -9,8 +9,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "eth-gas-reporter": "0.2.24",
+    "eth-gas-reporter": "0.2.25",
     "hardlydifficult-eth": "1.1.4",
-    "truffle": "5.4.28"
+    "truffle": "5.4.33"
   }
 }
